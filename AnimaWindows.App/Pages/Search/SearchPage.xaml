@@ -9,7 +9,6 @@
     xmlns:toolkit="using:CommunityToolkit.WinUI.Controls">
 
     <Grid
-        MaxWidth="{StaticResource PageMaxWidth}"
         Padding="{StaticResource PagePadding}"
         RowSpacing="12">
         <Grid.RowDefinitions>

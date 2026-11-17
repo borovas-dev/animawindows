@@ -36,7 +36,7 @@ public sealed partial class HomePage : Page
         _cts = null;
     }
 
-    private void OnSearchClick(object sender, RoutedEventArgs e) => ViewModel.GoToSearch();
+    private void OnSearchClick(object sender, RoutedEventArgs e) => AppServices.Get<ShellChrome>().RequestSearch();
 
     private void OnContinueInvoked(ItemsView sender, ItemsViewItemInvokedEventArgs args)
     {

@@ -26,7 +26,23 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-        UnhandledException += (_, e) => System.Diagnostics.Debug.WriteLine($"Unhandled: {e.Exception}");
+        UnhandledException += (_, e) => WriteCrashLog(e.Exception);
+        AppDomain.CurrentDomain.UnhandledException += (_, e) => WriteCrashLog(e.ExceptionObject as Exception);
+    }
+
+    /// <summary>Appends the exception to crash.log in the app's local folder, so users can attach it to a bug report.</summary>
+    private static void WriteCrashLog(Exception? error)
+    {
+        System.Diagnostics.Debug.WriteLine($"Unhandled: {error}");
+        try
+        {
+            var path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "crash.log");
+            File.AppendAllText(path, $"[{DateTimeOffset.Now:O}] {AppVersion.Current}{Environment.NewLine}{error}{Environment.NewLine}{Environment.NewLine}");
+        }
+        catch (Exception)
+        {
+            // Never throw from the crash handler.
+        }
     }
 
     protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)

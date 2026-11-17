@@ -62,6 +62,8 @@ public sealed partial class MainWindow : Window
         ApplyTheme(_settings.Current.ThemeMode);
 
         RegisterAccelerators();
+        RootGrid.SizeChanged += (_, e) => SizeSearchBox(e.NewSize.Width);
+        _chrome.SearchRequested += (_, _) => GoToSearch();
         RootGrid.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(OnPointerPressed), true);
 
         _ = AppServices.Get<SearchViewModel>().RunRecentsAsync(CancellationToken.None);
@@ -121,8 +123,12 @@ public sealed partial class MainWindow : Window
     private void ApplyChrome()
     {
         var immersive = _chrome.IsImmersive;
-        var hideTitleBar = immersive || _chrome.IsFullScreen || _chrome.IsCompactOverlay;
+        var overlay = _chrome.IsCompactOverlay;
+        var hideTitleBar = !overlay && (immersive || _chrome.IsFullScreen);
         AppTitleBar.Visibility = hideTitleBar ? Visibility.Collapsed : Visibility.Visible;
+        GlobalSearch.Visibility = overlay || immersive ? Visibility.Collapsed : Visibility.Visible;
+        AppTitleBar.IsPaneToggleButtonVisible = !overlay && !immersive;
+        AppTitleBar.IsBackButtonVisible = !overlay && !immersive && ContentFrame.CanGoBack;
         NavView.IsPaneVisible = !immersive && !_chrome.IsCompactOverlay;
     }
 
@@ -153,7 +159,7 @@ public sealed partial class MainWindow : Window
 
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
-        AppTitleBar.IsBackButtonVisible = ContentFrame.CanGoBack;
+        AppTitleBar.IsBackButtonVisible = ContentFrame.CanGoBack && !_chrome.IsImmersive && !_chrome.IsCompactOverlay;
 
         var page = e.SourcePageType;
         var isPlayer = page.Namespace == PlayerNamespace;
@@ -203,6 +209,23 @@ public sealed partial class MainWindow : Window
     private void OnUpdateBarClosed(InfoBar sender, InfoBarClosedEventArgs args) => ViewModel.DismissUpdate();
 
     // ---- global search ----
+
+    /// <summary>Search box takes about a third of the window, within Fluent's 320-560 px range for a title-bar search.</summary>
+    private void SizeSearchBox(double windowWidth)
+    {
+        GlobalSearch.Width = Math.Clamp(windowWidth * 0.36, 200, 560);
+    }
+
+    /// <summary>Opens Search through the navigation pane (same path as the menu item) and focuses the box.</summary>
+    private void GoToSearch()
+    {
+        if (!ReferenceEquals(NavView.SelectedItem, SearchItem))
+        {
+            NavView.SelectedItem = SearchItem;
+        }
+
+        GlobalSearch.Focus(FocusState.Programmatic);
+    }
 
     private void OnSearchTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {

@@ -29,6 +29,11 @@ public sealed class ShellChrome : IShellChrome
     /// <summary>Raised (UI thread) when immersive, fullscreen or compact-overlay state changed.</summary>
     public event EventHandler? StateChanged;
 
+    /// <summary>Raised when a page asks the shell to open Search and focus the title-bar box.</summary>
+    public event EventHandler? SearchRequested;
+
+    public void RequestSearch() => SearchRequested?.Invoke(this, EventArgs.Empty);
+
     public Window Window => _window ?? throw new InvalidOperationException("ShellChrome is not attached to a window yet.");
 
     public XamlRoot? XamlRoot => _window?.Content?.XamlRoot;

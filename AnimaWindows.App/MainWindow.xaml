@@ -29,7 +29,7 @@
                 <AutoSuggestBox
                     x:Name="GlobalSearch"
                     x:Uid="Shell_Search"
-                    MaxWidth="{StaticResource SearchBoxMaxWidth}"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     AutomationProperties.AutomationId="GlobalSearchBox"
                     GotFocus="OnSearchGotFocus"

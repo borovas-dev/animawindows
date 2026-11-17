@@ -10,7 +10,6 @@
 
     <ListView
         x:Name="EpisodesList"
-        MaxWidth="{StaticResource PageMaxWidth}"
         Padding="{StaticResource PagePadding}"
         AutomationProperties.AutomationId="EpisodesList"
         IsItemClickEnabled="True"
@@ -28,11 +27,12 @@
 
                 <!-- Hero: cover as blurred backdrop (in-app acrylic over the image) -->
                 <Grid CornerRadius="{StaticResource OverlayCornerRadius}">
-                    <Image
-                        AutomationProperties.AccessibilityView="Raw"
-                        Opacity="0.55"
-                        Source="{x:Bind conv:Fx.Image(ViewModel.CoverUrl, 640), Mode=OneWay}"
-                        Stretch="UniformToFill" />
+                    <Grid.Background>
+                        <ImageBrush
+                            ImageSource="{x:Bind conv:Fx.Image(ViewModel.CoverUrl, 640), Mode=OneWay}"
+                            Opacity="0.55"
+                            Stretch="UniformToFill" />
+                    </Grid.Background>
                     <Rectangle AutomationProperties.AccessibilityView="Raw" Fill="{ThemeResource AcrylicInAppFillColorDefaultBrush}" />
                     <Grid Padding="24" ColumnSpacing="24">
                         <Grid.ColumnDefinitions>

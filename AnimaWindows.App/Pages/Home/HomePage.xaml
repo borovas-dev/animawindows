@@ -10,7 +10,6 @@
 
     <ScrollViewer>
         <StackPanel
-            MaxWidth="{StaticResource PageMaxWidth}"
             Padding="{StaticResource PagePadding}"
             Spacing="{StaticResource SectionSpacing}">
 
