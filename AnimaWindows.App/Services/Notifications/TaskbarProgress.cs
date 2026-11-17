@@ -70,7 +70,7 @@ internal sealed class TaskbarProgress
         {
             if (_list is null)
             {
-                var list = (ITaskbarList3)new TaskbarListCoClass();
+                var list = (ITaskbarList3)(object)new TaskbarListCoClass();
                 list.HrInit();
                 _list = list;
             }

@@ -47,23 +47,9 @@
     <Content Include="..\config\providers.json" Link="Assets\providers.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
-  <!-- Generates Composition/TrackerIds constants from the AniListClientId / MalClientId MSBuild properties. -->
-  <Target Name="GenerateTrackerIds" BeforeTargets="CoreCompile">
-    <PropertyGroup>
-      <TrackerIdsFile>$(IntermediateOutputPath)TrackerIds.g.cs</TrackerIdsFile>
-    </PropertyGroup>
-    <ItemGroup>
-      <TrackerIdsLine Include="// &lt;auto-generated /&gt;" />
-      <TrackerIdsLine Include="namespace AnimaWindows.App.Composition%3B" />
-      <TrackerIdsLine Include="internal static class TrackerIds" />
-      <TrackerIdsLine Include="{" />
-      <TrackerIdsLine Include="    public const string AniListClientId = &quot;$(AniListClientId)&quot;%3B" />
-      <TrackerIdsLine Include="    public const string MalClientId = &quot;$(MalClientId)&quot;%3B" />
-      <TrackerIdsLine Include="}" />
-    </ItemGroup>
-    <WriteLinesToFile File="$(TrackerIdsFile)" Lines="@(TrackerIdsLine)" Overwrite="true" WriteOnlyWhenDifferent="true" />
-    <ItemGroup>
-      <Compile Include="$(TrackerIdsFile)" />
-    </ItemGroup>
-  </Target>
+  <!-- Tracker client ids from the AniListClientId / MalClientId MSBuild properties, read at runtime by Composition/TrackerIds. -->
+  <ItemGroup>
+    <AssemblyMetadata Include="AniListClientId" Value="$(AniListClientId)" />
+    <AssemblyMetadata Include="MalClientId" Value="$(MalClientId)" />
+  </ItemGroup>
 </Project>

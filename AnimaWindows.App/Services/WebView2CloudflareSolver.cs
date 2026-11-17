@@ -166,7 +166,7 @@ public sealed class WebView2CloudflareSolver : ICloudflareSolver
                 };
                 if (!c.IsSession)
                 {
-                    cookie.Expires = c.Expires;
+                    cookie.Expires = DateTimeOffset.FromUnixTimeMilliseconds((long)(c.Expires * 1000)).UtcDateTime;
                 }
 
                 _cookies.Add(cookie);
