@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="AnimaWindows.Core/AnimaWindows.Core.csproj" />
+    <Project Path="AnimaWindows.Providers/AnimaWindows.Providers.csproj" />
+    <Project Path="AnimaWindows.Data/AnimaWindows.Data.csproj" />
+    <Project Path="AnimaWindows.App/AnimaWindows.App.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AnimaWindows.Core.Tests/AnimaWindows.Core.Tests.csproj" />
+    <Project Path="tests/AnimaWindows.Providers.Tests/AnimaWindows.Providers.Tests.csproj" />
+    <Project Path="tests/AnimaWindows.Data.Tests/AnimaWindows.Data.Tests.csproj" />
+  </Folder>
+</Solution>

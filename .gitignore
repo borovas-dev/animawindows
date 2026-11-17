@@ -1,0 +1,11 @@
+# Reference checkouts (each is its own git repository)
+/src/
+
+bin/
+obj/
+AppPackages/
+BundleArtifacts/
+.vs/
+*.user
+*.binlog
+TestResults/

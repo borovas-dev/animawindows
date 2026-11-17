@@ -1,0 +1,62 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 11.0.x
+          # .NET 11 is GA; this keeps working if a newer preview band is ever pinned in global.json.
+          dotnet-quality: ga
+      - name: Test Core
+        run: dotnet test tests/AnimaWindows.Core.Tests -c Release --filter "Category!=Live"
+      - name: Test Providers
+        run: dotnet test tests/AnimaWindows.Providers.Tests -c Release --filter "Category!=Live"
+      - name: Test Data
+        run: dotnet test tests/AnimaWindows.Data.Tests -c Release --filter "Category!=Live"
+
+  app:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [x64, ARM64]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 11.0.x
+          dotnet-quality: ga
+
+      # ------------------------------------------------------------------
+      # PLACEHOLDER (owned by the playback work package): fetch libmpv for
+      # ${{ matrix.platform }} (libmpv-2.dll) into AnimaWindows.App/Native/<rid>/
+      # before the build so it is packaged into the MSIX. Add the step here.
+      # ------------------------------------------------------------------
+
+      - name: Restore
+        run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }}
+      - name: Build unsigned MSIX
+        run: >
+          dotnet build AnimaWindows.App/AnimaWindows.App.csproj -c Release --no-restore
+          -p:Platform=${{ matrix.platform }}
+          -p:GenerateAppxPackageOnBuild=true
+          -p:AppxPackageSigningEnabled=false
+      - uses: actions/upload-artifact@v7
+        with:
+          name: animawindows-msix-${{ matrix.platform }}
+          if-no-files-found: error
+          path: |
+            AnimaWindows.App/AppPackages/**
+            AnimaWindows.App/bin/${{ matrix.platform }}/Release/**/AppPackages/**
