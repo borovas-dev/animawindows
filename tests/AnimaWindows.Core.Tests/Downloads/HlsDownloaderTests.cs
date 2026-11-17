@@ -213,8 +213,8 @@ public sealed class HlsDownloaderTests : IDisposable
 
         Assert.Equal(60, result.Bytes);
         Assert.Equal(media[..10], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "init0.mp4")));
-        Assert.Equal(media[10..30], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "seg00000.ts")));
-        Assert.Equal(media[30..60], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "seg00001.ts")));
+        Assert.Equal(media[10..30], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "seg00000.mp4")));
+        Assert.Equal(media[30..60], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "seg00001.mp4")));
         Assert.Contains(_cdn.Requests, r => r.Range == "bytes=30-59");
         Assert.DoesNotContain("BYTERANGE", await File.ReadAllTextAsync(result.PlaylistPath));
     }
@@ -229,7 +229,7 @@ public sealed class HlsDownloaderTests : IDisposable
 
         await Downloader().DownloadAsync(PlaylistUrl, _dir.Path, "main", _headers);
 
-        Assert.Equal(media[10..30], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "seg00000.ts")));
+        Assert.Equal(media[10..30], await File.ReadAllBytesAsync(Path.Combine(_dir.Path, "main", "seg00000.mp4")));
     }
 
     [Fact]
