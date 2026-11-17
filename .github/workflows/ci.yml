@@ -166,7 +166,7 @@ jobs:
           $m.Save((Resolve-Path $path))
 
       - name: Restore
-        run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }}
+        run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }} -p:WindowsAppSDKSelfContained=true
       - name: Build Store upload
         run: >
           dotnet build AnimaWindows.App/AnimaWindows.App.csproj -c Release --no-restore
@@ -175,6 +175,17 @@ jobs:
           -p:UapAppxPackageBuildMode=StoreUpload
           -p:AppxPackageSigningEnabled=false
           -p:AppxSymbolPackageEnabled=false
+          -p:WindowsAppSDKSelfContained=true
+      - name: Check no experimental framework dependency
+        shell: pwsh
+        run: |
+          $u = Get-ChildItem AnimaWindows.App -Recurse -Filter *.msixupload | Select-Object -First 1
+          Expand-Archive $u.FullName up -Force
+          Get-ChildItem up -Filter *.msixbundle | ForEach-Object { Expand-Archive ($_.FullName) -DestinationPath b -Force } 2>$null
+          Get-ChildItem up,b -Recurse -Filter *.msix | Select-Object -First 1 | ForEach-Object { Copy-Item $_.FullName p.zip; Expand-Archive p.zip pk -Force }
+          $deps = Select-String -Path pk/AppxManifest.xml -Pattern 'PackageDependency.*'
+          $deps | ForEach-Object { Write-Host $_.Line.Trim() }
+          if ($deps -match 'WindowsAppRuntime') { throw 'Store package still depends on the Windows App Runtime framework' }
       - uses: actions/upload-artifact@v7
         with:
           name: animawindows-store-${{ matrix.platform }}
