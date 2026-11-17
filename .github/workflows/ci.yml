@@ -59,13 +59,14 @@ jobs:
           Copy-Item $dll.FullName $dest
 
       - name: Restore
-        run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }}
+        run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }} -p:WindowsAppSDKSelfContained=true
       - name: Build MSIX
         run: >
           dotnet build AnimaWindows.App/AnimaWindows.App.csproj -c Release --no-restore
           -p:Platform=${{ matrix.platform }}
           -p:GenerateAppxPackageOnBuild=true
           -p:AppxPackageSigningEnabled=false
+          -p:WindowsAppSDKSelfContained=true
       - name: Sign MSIX
         shell: pwsh
         env:
