@@ -89,8 +89,13 @@ public static class ServiceRegistration
         services.AddSingleton<IAnimeProvider>(sp => new HianimeProvider(sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<IProviderConfig>()));
         services.AddSingleton<IAnimeProvider>(sp => new KickAssAnimeProvider(sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<IProviderConfig>()));
         services.AddSingleton<IAnimeProvider>(sp => new AnimeParadiseProvider(sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<IProviderConfig>()));
+        // shinden.pl answers .NET's HTTP client with 403 ("update your browser") but serves Edge: route it through WebView2.
+        services.AddSingleton<WebView2Fetcher>();
         services.AddSingleton<IAnimeProvider>(sp => ShindenProvider.Create(
-            sp.GetRequiredService<HttpClient>(),
+            new HttpClient(new BrowserRoutingHandler(sp.GetRequiredService<WebView2Fetcher>(), sp.GetRequiredService<HttpClient>(), "shinden.pl"))
+            {
+                Timeout = TimeSpan.FromSeconds(60),
+            },
             sp.GetRequiredService<IProviderConfig>(),
             sp.GetRequiredService<NoRedirectHttpClient>().Client));
         services.AddSingleton<IAnimeProvider>(sp => new AniLibriaProvider(sp.GetRequiredService<HttpClient>(), sp.GetRequiredService<IProviderConfig>()));
