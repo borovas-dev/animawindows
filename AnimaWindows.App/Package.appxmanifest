@@ -48,7 +48,7 @@
         </uap:Extension>
         <uap5:Extension Category="windows.appExecutionAlias" Executable="$targetnametoken$.exe" EntryPoint="Windows.FullTrustApplication">
           <uap5:AppExecutionAlias>
-            <desktop:ExecutionAlias Alias="animawindows.exe" />
+            <uap5:ExecutionAlias Alias="animawindows.exe" />
           </uap5:AppExecutionAlias>
         </uap5:Extension>
       </Extensions>
