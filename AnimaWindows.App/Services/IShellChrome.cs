@@ -1,0 +1,98 @@
+using Microsoft.UI.Windowing;
+using Microsoft.UI.Xaml;
+
+namespace AnimaWindows.App.Services;
+
+/// <summary>Window chrome control for pages (notably the player): immersive mode, fullscreen, compact overlay.</summary>
+public interface IShellChrome
+{
+    /// <summary>Hides the title bar and navigation pane (player page).</summary>
+    bool IsImmersive { get; set; }
+
+    bool IsFullScreen { get; set; }
+
+    void EnterCompactOverlay();
+
+    void ExitCompactOverlay();
+
+    nint WindowHandle { get; }
+
+    AppWindow AppWindow { get; }
+}
+
+public sealed class ShellChrome : IShellChrome
+{
+    private Window? _window;
+    private AppWindow? _appWindow;
+    private bool _isImmersive;
+
+    /// <summary>Raised (UI thread) when immersive, fullscreen or compact-overlay state changed.</summary>
+    public event EventHandler? StateChanged;
+
+    public Window Window => _window ?? throw new InvalidOperationException("ShellChrome is not attached to a window yet.");
+
+    public XamlRoot? XamlRoot => _window?.Content?.XamlRoot;
+
+    public nint WindowHandle { get; private set; }
+
+    public AppWindow AppWindow => _appWindow ?? throw new InvalidOperationException("ShellChrome is not attached to a window yet.");
+
+    public bool IsAttached => _window is not null;
+
+    public bool IsCompactOverlay => _appWindow?.Presenter.Kind == AppWindowPresenterKind.CompactOverlay;
+
+    public void Attach(Window window)
+    {
+        _window = window;
+        _appWindow = window.AppWindow;
+        WindowHandle = WinRT.Interop.WindowNative.GetWindowHandle(window);
+        _appWindow.Changed += OnAppWindowChanged;
+    }
+
+    public bool IsImmersive
+    {
+        get => _isImmersive;
+        set
+        {
+            if (_isImmersive == value)
+            {
+                return;
+            }
+
+            _isImmersive = value;
+            StateChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public bool IsFullScreen
+    {
+        get => _appWindow?.Presenter.Kind == AppWindowPresenterKind.FullScreen;
+        set
+        {
+            if (_appWindow is null || IsFullScreen == value)
+            {
+                return;
+            }
+
+            _appWindow.SetPresenter(value ? AppWindowPresenterKind.FullScreen : AppWindowPresenterKind.Default);
+        }
+    }
+
+    public void EnterCompactOverlay() => _appWindow?.SetPresenter(AppWindowPresenterKind.CompactOverlay);
+
+    public void ExitCompactOverlay()
+    {
+        if (IsCompactOverlay)
+        {
+            _appWindow?.SetPresenter(AppWindowPresenterKind.Default);
+        }
+    }
+
+    private void OnAppWindowChanged(AppWindow sender, AppWindowChangedEventArgs args)
+    {
+        if (args.DidPresenterChange)
+        {
+            StateChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+}

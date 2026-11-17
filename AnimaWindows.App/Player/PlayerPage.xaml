@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AnimaWindows.App.Player.PlayerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    NavigationCacheMode="Disabled"
+    IsTabStop="True"
+    UseSystemFocusVisuals="False"
+    PreviewKeyDown="OnPreviewKeyDown"
+    Loaded="OnLoaded"
+    Unloaded="OnUnloaded">
+
+    <Page.Resources>
+        <Style x:Key="TransportButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="MinWidth" Value="40" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Padding" Value="8" />
+        </Style>
+    </Page.Resources>
+
+    <Grid x:Name="Root" RequestedTheme="Dark" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Slim bar shown instead of the overlay transport bar while mpv draws its own controls over the video. -->
+        <Grid
+            x:Name="EmbeddedBar"
+            Grid.Row="0"
+            Padding="8,4"
+            ColumnSpacing="8"
+            Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+            Visibility="{x:Bind ViewModel.IsEmbeddedUi, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="EmbeddedBackButton" AutomationProperties.AutomationId="Player.Embedded.Back" Style="{StaticResource TransportButtonStyle}" Click="OnBackClick">
+                <FontIcon Glyph="&#xE72B;" />
+            </Button>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{StaticResource BodyStrongTextBlockStyle}" Text="{x:Bind ViewModel.Title, Mode=OneWay}" />
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind ViewModel.SourceLabel, Mode=OneWay}" />
+            <Button x:Name="EmbeddedEngineButton" Grid.Column="3" AutomationProperties.AutomationId="Player.Embedded.Engine" Style="{StaticResource TransportButtonStyle}">
+                <FontIcon Glyph="&#xE9D9;" />
+                <Button.Flyout>
+                    <MenuFlyout x:Name="EmbeddedEngineMenu" Placement="BottomEdgeAlignedRight" Opening="OnEngineMenuOpening" Opened="OnMenuOpened" Closed="OnMenuClosed" />
+                </Button.Flyout>
+            </Button>
+            <Button x:Name="EmbeddedFullscreenButton" Grid.Column="4" AutomationProperties.AutomationId="Player.Embedded.Fullscreen" Style="{StaticResource TransportButtonStyle}" Click="OnFullscreenClick">
+                <FontIcon Glyph="{x:Bind ViewModel.FullScreenGlyph, Mode=OneWay}" />
+            </Button>
+        </Grid>
+
+        <Grid x:Name="Stage" Grid.Row="1" Background="Transparent" PointerMoved="OnStagePointerMoved" PointerExited="OnStagePointerExited" PointerWheelChanged="OnStageWheel">
+            <!-- Video surface of the active engine; taps toggle playback, double tap toggles fullscreen. -->
+            <Grid x:Name="VideoHost" Background="Transparent" Tapped="OnVideoTapped" DoubleTapped="OnVideoDoubleTapped" />
+
+            <!-- Subtitle overlay (native engine only): bottom-centred, outlined text built in code. -->
+            <Grid x:Name="SubtitlePanel" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="{x:Bind ViewModel.IsNativeUi, Mode=OneWay}" />
+
+            <ProgressRing x:Name="BufferingRing" Width="56" Height="56" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" IsActive="False" Visibility="Collapsed" />
+
+            <StackPanel
+                x:Name="ErrorPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                MaxWidth="480"
+                Spacing="12"
+                Padding="24"
+                CornerRadius="8"
+                Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                Visibility="{x:Bind ViewModel.HasError, Mode=OneWay}">
+                <FontIcon Glyph="&#xE783;" FontSize="32" HorizontalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" />
+                <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                    <Button x:Name="RetryButton" AutomationProperties.AutomationId="Player.Retry" Style="{StaticResource AccentButtonStyle}" Click="OnRetryClick" />
+                    <Button x:Name="ErrorBackButton" AutomationProperties.AutomationId="Player.Error.Back" Click="OnBackClick" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Non-blocking notice. -->
+            <Border
+                x:Name="NoticeBar"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,72,0,0"
+                Padding="16,8"
+                CornerRadius="4"
+                IsHitTestVisible="False"
+                Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                Visibility="{x:Bind ViewModel.HasNotice, Mode=OneWay}">
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.Notice, Mode=OneWay}" />
+            </Border>
+
+            <!-- Skip intro/outro button and the 5 s undo prompt. -->
+            <StackPanel x:Name="SkipPanel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,24,112" Spacing="8" Visibility="{x:Bind ViewModel.IsNativeUi, Mode=OneWay}">
+                <Button
+                    x:Name="SkipButton"
+                    HorizontalAlignment="Right"
+                    AutomationProperties.AutomationId="Player.Skip"
+                    Style="{StaticResource AccentButtonStyle}"
+                    Visibility="{x:Bind ViewModel.IsSkipButtonVisible, Mode=OneWay}"
+                    Click="OnSkipClick">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon Glyph="&#xE893;" FontSize="16" />
+                        <TextBlock Text="{x:Bind ViewModel.SkipButtonText, Mode=OneWay}" />
+                    </StackPanel>
+                </Button>
+                <Border
+                    x:Name="UndoPanel"
+                    HorizontalAlignment="Right"
+                    Padding="12,4,4,4"
+                    CornerRadius="4"
+                    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
+                    Visibility="{x:Bind ViewModel.IsUndoVisible, Mode=OneWay}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock VerticalAlignment="Center" Text="{x:Bind ViewModel.UndoText, Mode=OneWay}" />
+                        <Button x:Name="UndoButton" AutomationProperties.AutomationId="Player.UndoSkip" Click="OnUndoClick" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- Fluent transport controls over the native engine. -->
+            <Grid x:Name="Controls" Opacity="1" Visibility="{x:Bind ViewModel.IsNativeUi, Mode=OneWay}">
+                <Grid.OpacityTransition>
+                    <ScalarTransition />
+                </Grid.OpacityTransition>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid x:Name="ControlsTop" Grid.Row="0" PointerEntered="OnControlsPointerEntered" PointerExited="OnControlsPointerExited">
+                    <Rectangle Fill="{ThemeResource SolidBackgroundFillColorBaseBrush}" Opacity="0.7" />
+                    <Grid Padding="12,8" ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BackButton" AutomationProperties.AutomationId="Player.Back" Style="{StaticResource TransportButtonStyle}" Click="OnBackClick">
+                            <FontIcon Glyph="&#xE72B;" />
+                        </Button>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{StaticResource SubtitleTextBlockStyle}" Text="{x:Bind ViewModel.Title, Mode=OneWay}" />
+                        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="{x:Bind ViewModel.SourceLabel, Mode=OneWay}" />
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="ControlsBottom" Grid.Row="2" PointerEntered="OnControlsPointerEntered" PointerExited="OnControlsPointerExited">
+                    <Rectangle Fill="{ThemeResource SolidBackgroundFillColorBaseBrush}" Opacity="0.7" />
+                    <StackPanel Padding="12,8,12,12" Spacing="4">
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center" MinWidth="48" TextAlignment="Right" Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind ViewModel.PositionText, Mode=OneWay}" />
+                            <Grid Grid.Column="1" VerticalAlignment="Center">
+                                <Grid x:Name="SkipMarks" Height="4" Margin="10,0" VerticalAlignment="Center" IsHitTestVisible="False" />
+                                <Slider
+                                    x:Name="SeekSlider"
+                                    AutomationProperties.AutomationId="Player.Seek"
+                                    Minimum="0"
+                                    Maximum="1"
+                                    StepFrequency="0.1"
+                                    IsThumbToolTipEnabled="False"
+                                    ValueChanged="OnSeekValueChanged" />
+                            </Grid>
+                            <TextBlock Grid.Column="2" VerticalAlignment="Center" MinWidth="48" Style="{StaticResource CaptionTextBlockStyle}" Text="{x:Bind ViewModel.DurationText, Mode=OneWay}" />
+                        </Grid>
+
+                        <Grid ColumnSpacing="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="PreviousButton" AutomationProperties.AutomationId="Player.Previous" Style="{StaticResource TransportButtonStyle}" IsEnabled="{x:Bind ViewModel.HasPrevious, Mode=OneWay}" Click="OnPreviousClick">
+                                <FontIcon Glyph="&#xE892;" />
+                            </Button>
+                            <Button x:Name="PlayPauseButton" Grid.Column="1" AutomationProperties.AutomationId="Player.PlayPause" Style="{StaticResource TransportButtonStyle}" Click="OnPlayPauseClick">
+                                <FontIcon Glyph="{x:Bind ViewModel.PlayGlyph, Mode=OneWay}" />
+                            </Button>
+                            <Button x:Name="NextButton" Grid.Column="2" AutomationProperties.AutomationId="Player.Next" Style="{StaticResource TransportButtonStyle}" IsEnabled="{x:Bind ViewModel.HasNext, Mode=OneWay}" Click="OnNextClick">
+                                <FontIcon Glyph="&#xE893;" />
+                            </Button>
+                            <Button x:Name="MuteButton" Grid.Column="3" AutomationProperties.AutomationId="Player.Mute" Style="{StaticResource TransportButtonStyle}" Click="OnMuteClick">
+                                <FontIcon Glyph="{x:Bind ViewModel.VolumeGlyph, Mode=OneWay}" />
+                            </Button>
+                            <Slider
+                                x:Name="VolumeSlider"
+                                Grid.Column="4"
+                                Width="100"
+                                VerticalAlignment="Center"
+                                AutomationProperties.AutomationId="Player.Volume"
+                                Minimum="0"
+                                Maximum="100"
+                                StepFrequency="1"
+                                ValueChanged="OnVolumeValueChanged" />
+
+                            <Button x:Name="SpeedButton" Grid.Column="6" AutomationProperties.AutomationId="Player.Speed" Style="{StaticResource TransportButtonStyle}">
+                                <TextBlock Text="{x:Bind ViewModel.SpeedText, Mode=OneWay}" />
+                                <Button.Flyout>
+                                    <MenuFlyout x:Name="SpeedMenu" Placement="TopEdgeAlignedRight" Opening="OnSpeedMenuOpening" Opened="OnMenuOpened" Closed="OnMenuClosed" />
+                                </Button.Flyout>
+                            </Button>
+                            <Button x:Name="SubtitlesButton" Grid.Column="7" AutomationProperties.AutomationId="Player.Subtitles" Style="{StaticResource TransportButtonStyle}">
+                                <FontIcon Glyph="&#xED1E;" />
+                                <Button.Flyout>
+                                    <MenuFlyout x:Name="SubtitleMenu" Placement="TopEdgeAlignedRight" Opening="OnSubtitleMenuOpening" Opened="OnMenuOpened" Closed="OnMenuClosed" />
+                                </Button.Flyout>
+                            </Button>
+                            <Button x:Name="QualityButton" Grid.Column="8" AutomationProperties.AutomationId="Player.Quality" Style="{StaticResource TransportButtonStyle}">
+                                <FontIcon Glyph="&#xE713;" />
+                                <Button.Flyout>
+                                    <MenuFlyout x:Name="QualityMenu" Placement="TopEdgeAlignedRight" Opening="OnQualityMenuOpening" Opened="OnMenuOpened" Closed="OnMenuClosed" />
+                                </Button.Flyout>
+                            </Button>
+                            <Button x:Name="EngineButton" Grid.Column="9" AutomationProperties.AutomationId="Player.Engine" Style="{StaticResource TransportButtonStyle}">
+                                <FontIcon Glyph="&#xE9D9;" />
+                                <Button.Flyout>
+                                    <MenuFlyout x:Name="EngineMenu" Placement="TopEdgeAlignedRight" Opening="OnEngineMenuOpening" Opened="OnMenuOpened" Closed="OnMenuClosed" />
+                                </Button.Flyout>
+                            </Button>
+                            <Button x:Name="PipButton" Grid.Column="10" AutomationProperties.AutomationId="Player.CompactOverlay" Style="{StaticResource TransportButtonStyle}" Click="OnPipClick">
+                                <FontIcon Glyph="&#xEE49;" />
+                            </Button>
+                            <Button x:Name="FullscreenButton" Grid.Column="11" AutomationProperties.AutomationId="Player.Fullscreen" Style="{StaticResource TransportButtonStyle}" Click="OnFullscreenClick">
+                                <FontIcon Glyph="{x:Bind ViewModel.FullScreenGlyph, Mode=OneWay}" />
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

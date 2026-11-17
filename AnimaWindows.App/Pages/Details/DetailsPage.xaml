@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AnimaWindows.App.Pages.Details.DetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AnimaWindows.App.Controls"
+    xmlns:conv="using:AnimaWindows.App.Converters"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls"
+    xmlns:vm="using:AnimaWindows.App.ViewModels">
+
+    <ListView
+        x:Name="EpisodesList"
+        MaxWidth="{StaticResource PageMaxWidth}"
+        Padding="{StaticResource PagePadding}"
+        AutomationProperties.AutomationId="EpisodesList"
+        IsItemClickEnabled="True"
+        ItemClick="OnEpisodeClick"
+        ItemsSource="{x:Bind ViewModel.Episodes}"
+        SelectionMode="None">
+        <ListView.ItemContainerStyle>
+            <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+        </ListView.ItemContainerStyle>
+
+        <ListView.Header>
+            <StackPanel Margin="0,0,0,16" Spacing="16">
+
+                <!-- Hero: cover as blurred backdrop (in-app acrylic over the image) -->
+                <Grid CornerRadius="{StaticResource OverlayCornerRadius}">
+                    <Image
+                        AutomationProperties.AccessibilityView="Raw"
+                        Opacity="0.55"
+                        Source="{x:Bind conv:Fx.Image(ViewModel.CoverUrl, 640), Mode=OneWay}"
+                        Stretch="UniformToFill" />
+                    <Rectangle AutomationProperties.AccessibilityView="Raw" Fill="{ThemeResource AcrylicInAppFillColorDefaultBrush}" />
+                    <Grid Padding="24" ColumnSpacing="24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="HeroPoster"
+                            Width="{StaticResource HeroPosterWidth}"
+                            Height="{StaticResource HeroPosterHeight}"
+                            VerticalAlignment="Top"
+                            Background="{ThemeResource ControlFillColorSecondaryBrush}"
+                            CornerRadius="{StaticResource ControlCornerRadius}">
+                            <Image
+                                AutomationProperties.AccessibilityView="Raw"
+                                Source="{x:Bind conv:Fx.Image(ViewModel.CoverUrl, 320), Mode=OneWay}"
+                                Stretch="UniformToFill" />
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Spacing="8">
+                            <TextBlock
+                                IsTextSelectionEnabled="True"
+                                Style="{StaticResource TitleTextBlockStyle}"
+                                Text="{x:Bind ViewModel.Title, Mode=OneWay}"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Style="{StaticResource BodyTextBlockStyle}"
+                                Text="{x:Bind ViewModel.CountsText, Mode=OneWay}"
+                                Visibility="{x:Bind conv:Fx.VisibleIfText(ViewModel.CountsText), Mode=OneWay}" />
+                            <TextBlock Style="{StaticResource SecondaryTextStyle}" Text="{x:Bind ViewModel.ProviderName, Mode=OneWay}" />
+
+                            <toolkit:Segmented
+                                HorizontalAlignment="Left"
+                                AutomationProperties.AutomationId="DetailsModeSegmented"
+                                SelectedIndex="{x:Bind ViewModel.ModeIndex, Mode=TwoWay}"
+                                Visibility="{x:Bind conv:Fx.Visible(ViewModel.ShowModeToggle), Mode=OneWay}">
+                                <toolkit:SegmentedItem x:Uid="Details_ModeSub" AutomationProperties.AutomationId="DetailsModeSub" />
+                                <toolkit:SegmentedItem x:Uid="Details_ModeDub" AutomationProperties.AutomationId="DetailsModeDub" />
+                            </toolkit:Segmented>
+
+                            <StackPanel Visibility="{x:Bind conv:Fx.Visible(ViewModel.HasSynopsis), Mode=OneWay}">
+                                <TextBlock
+                                    MaxLines="{x:Bind ViewModel.SynopsisMaxLines, Mode=OneWay}"
+                                    Style="{StaticResource BodyTextBlockStyle}"
+                                    Text="{x:Bind ViewModel.Synopsis, Mode=OneWay}"
+                                    TextTrimming="CharacterEllipsis"
+                                    TextWrapping="Wrap" />
+                                <HyperlinkButton
+                                    Padding="0"
+                                    AutomationProperties.AutomationId="DetailsSynopsisToggle"
+                                    Command="{x:Bind ViewModel.ToggleSynopsisCommand}"
+                                    Content="{x:Bind ViewModel.SynopsisToggleText, Mode=OneWay}"
+                                    Visibility="{x:Bind conv:Fx.Visible(ViewModel.CanExpandSynopsis), Mode=OneWay}" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0,8,0,0" Orientation="Horizontal" Spacing="8">
+                                <Button
+                                    AutomationProperties.AutomationId="DetailsPlayButton"
+                                    Command="{x:Bind ViewModel.PlayCommand}"
+                                    IsEnabled="{x:Bind ViewModel.CanPlay, Mode=OneWay}"
+                                    Style="{StaticResource AccentButtonStyle}">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <FontIcon FontSize="16" Glyph="&#xE768;" />
+                                        <TextBlock Text="{x:Bind ViewModel.PlayLabel, Mode=OneWay}" />
+                                    </StackPanel>
+                                </Button>
+                                <Button
+                                    AutomationProperties.AutomationId="DetailsFavoriteButton"
+                                    AutomationProperties.Name="{x:Bind ViewModel.FavoriteTip, Mode=OneWay}"
+                                    Command="{x:Bind ViewModel.ToggleFavoriteCommand}"
+                                    ToolTipService.ToolTip="{x:Bind ViewModel.FavoriteTip, Mode=OneWay}">
+                                    <FontIcon Glyph="{x:Bind ViewModel.FavoriteGlyph, Mode=OneWay}" />
+                                </Button>
+                                <Button
+                                    x:Uid="Details_DownloadRange"
+                                    AutomationProperties.AutomationId="DetailsDownloadRangeButton"
+                                    Click="OnDownloadRangeClick"
+                                    IsEnabled="{x:Bind ViewModel.ShowEpisodes, Mode=OneWay}">
+                                    <FontIcon Glyph="&#xE896;" />
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <InfoBar
+                    IsClosable="False"
+                    IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
+                    Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                    Severity="Error">
+                    <StackPanel Margin="0,0,0,8" Orientation="Horizontal" Spacing="8">
+                        <Button
+                            x:Uid="Search_Verify"
+                            AutomationProperties.AutomationId="DetailsVerifyButton"
+                            Command="{x:Bind ViewModel.VerifyCommand}"
+                            Visibility="{x:Bind conv:Fx.Visible(ViewModel.NeedsVerification), Mode=OneWay}" />
+                        <Button
+                            x:Uid="Common_Retry"
+                            AutomationProperties.AutomationId="DetailsRetryButton"
+                            Command="{x:Bind ViewModel.ReloadCommand}" />
+                    </StackPanel>
+                </InfoBar>
+
+                <ProgressRing
+                    x:Uid="Details_Progress"
+                    Width="40"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                    Visibility="{x:Bind conv:Fx.Visible(ViewModel.IsLoading), Mode=OneWay}" />
+
+                <controls:EmptyState
+                    x:Uid="Details_Empty"
+                    Body="{x:Bind ViewModel.EmptyBody, Mode=OneWay}"
+                    Glyph="&#xE8B2;"
+                    Visibility="{x:Bind conv:Fx.Visible(ViewModel.ShowEmpty), Mode=OneWay}" />
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="{x:Bind ViewModel.EpisodesHeader, Mode=OneWay}"
+                    Visibility="{x:Bind conv:Fx.Visible(ViewModel.ShowEpisodes), Mode=OneWay}" />
+            </StackPanel>
+        </ListView.Header>
+
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="vm:EpisodeRowViewModel">
+                <Grid MinHeight="48" Padding="0,8" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center" Spacing="2">
+                        <TextBlock
+                            Style="{StaticResource BodyStrongTextBlockStyle}"
+                            Text="{x:Bind DisplayTitle, Mode=OneWay}"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            Style="{StaticResource SecondaryTextStyle}"
+                            Text="{x:Bind ProgressText, Mode=OneWay}"
+                            Visibility="{x:Bind conv:Fx.Visible(ShowProgressText), Mode=OneWay}" />
+                        <ProgressBar
+                            Maximum="100"
+                            Value="{x:Bind DownloadPercent, Mode=OneWay}"
+                            IsIndeterminate="{x:Bind IsDownloadIndeterminate, Mode=OneWay}"
+                            Visibility="{x:Bind conv:Fx.Visible(ShowDownloadProgress), Mode=OneWay}" />
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal"
+                        Spacing="8">
+                        <ProgressBar
+                            Width="{StaticResource EpisodeProgressWidth}"
+                            VerticalAlignment="Center"
+                            AutomationProperties.AccessibilityView="Raw"
+                            Maximum="100"
+                            Value="{x:Bind PercentValue, Mode=OneWay}"
+                            Visibility="{x:Bind conv:Fx.Visible(HasPartialProgress), Mode=OneWay}" />
+                        <FontIcon
+                            AutomationProperties.AccessibilityView="Raw"
+                            Foreground="{ThemeResource SystemFillColorSuccessBrush}"
+                            Glyph="&#xE73E;"
+                            Visibility="{x:Bind conv:Fx.Visible(IsWatched), Mode=OneWay}" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        AutomationProperties.Name="{x:Bind DownloadTip, Mode=OneWay}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="OnEpisodeDownloadClick"
+                        IsEnabled="{x:Bind CanDownloadAction, Mode=OneWay}"
+                        Tag="{x:Bind}"
+                        ToolTipService.ToolTip="{x:Bind DownloadTip, Mode=OneWay}">
+                        <FontIcon Glyph="{x:Bind DownloadGlyph, Mode=OneWay}" />
+                    </Button>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</Page>

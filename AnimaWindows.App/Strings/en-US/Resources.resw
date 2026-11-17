@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppDisplayName" xml:space="preserve"><value>animawindows</value></data>
+  <data name="AppDescription" xml:space="preserve"><value>Watch anime from several sources, with downloads, progress tracking and skip-intro.</value></data>
+  <data name="Nav_Home.Content" xml:space="preserve"><value>Home</value></data>
+  <data name="Nav_Search.Content" xml:space="preserve"><value>Search</value></data>
+  <data name="Nav_Downloads.Content" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Shell_Search.PlaceholderText" xml:space="preserve"><value>Search anime</value></data>
+  <data name="Shell_Search.AutomationProperties.Name" xml:space="preserve"><value>Search anime</value></data>
+  <data name="Update_Changelog.Content" xml:space="preserve"><value>What's new</value></data>
+  <data name="Update_Available" xml:space="preserve"><value>Update available: {0}</value></data>
+  <data name="Update_Checking" xml:space="preserve"><value>Checking for updates…</value></data>
+  <data name="Update_UpToDate" xml:space="preserve"><value>You are up to date</value></data>
+  <data name="Update_Failed" xml:space="preserve"><value>Update check failed: {0}</value></data>
+  <data name="Cloudflare_VerifyTitle" xml:space="preserve"><value>Verify you are human</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_Download" xml:space="preserve"><value>Download</value></data>
+  <data name="Common_Off" xml:space="preserve"><value>Off</value></data>
+  <data name="Common_Retry.Content" xml:space="preserve"><value>Retry</value></data>
+  <data name="Error_Default" xml:space="preserve"><value>Something went wrong</value></data>
+  <data name="Error_Cloudflare" xml:space="preserve"><value>Cloudflare is asking for a browser check.</value></data>
+  <data name="Error_NoProvider" xml:space="preserve"><value>No anime provider is available.</value></data>
+  <data name="Search_Failed" xml:space="preserve"><value>Search failed.</value></data>
+  <data name="Details_LoadFailed" xml:space="preserve"><value>Could not load episodes.</value></data>
+  <data name="Audio_Sub" xml:space="preserve"><value>Sub</value></data>
+  <data name="Audio_Dub" xml:space="preserve"><value>Dub</value></data>
+  <data name="Home_Title.Text" xml:space="preserve"><value>Home</value></data>
+  <data name="Home_Empty.Title" xml:space="preserve"><value>Your library is empty</value></data>
+  <data name="Home_Empty.Body" xml:space="preserve"><value>Search for a show and start watching. Progress and favorites will show up here.</value></data>
+  <data name="Home_EmptySearch.Content" xml:space="preserve"><value>Search</value></data>
+  <data name="Home_ContinueHeader.Text" xml:space="preserve"><value>Continue watching</value></data>
+  <data name="Home_FavoritesHeader.Text" xml:space="preserve"><value>Favorites</value></data>
+  <data name="Home_RemoveHistory.Text" xml:space="preserve"><value>Remove from history</value></data>
+  <data name="Library_EpisodeN" xml:space="preserve"><value>Episode {0}</value></data>
+  <data name="Search_Title.Text" xml:space="preserve"><value>Search</value></data>
+  <data name="Search_ModeSub.Content" xml:space="preserve"><value>Sub</value></data>
+  <data name="Search_ModeDub.Content" xml:space="preserve"><value>Dub</value></data>
+  <data name="Search_Verify.Content" xml:space="preserve"><value>Verify in browser</value></data>
+  <data name="Search_Progress.AutomationProperties.Name" xml:space="preserve"><value>Searching</value></data>
+  <data name="Search_NoResults.Title" xml:space="preserve"><value>No results</value></data>
+  <data name="Search_NoResultsBody" xml:space="preserve"><value>Nothing found for "{0}" in {1}. Try the other mode or a different title.</value></data>
+  <data name="Search_Idle.Title" xml:space="preserve"><value>Find your next show</value></data>
+  <data name="Search_Idle.Body" xml:space="preserve"><value>Search by title using the box at the top. Your recent searches show up when you click it.</value></data>
+  <data name="Search_Recent.Text" xml:space="preserve"><value>Recent</value></data>
+  <data name="Search_ClearAll.Content" xml:space="preserve"><value>Clear all</value></data>
+  <data name="Search_RemoveRecent.AutomationProperties.Name" xml:space="preserve"><value>Remove from recent searches</value></data>
+  <data name="Search_RemoveRecent.ToolTipService.ToolTip" xml:space="preserve"><value>Remove from recent searches</value></data>
+  <data name="Details_ModeSub.Content" xml:space="preserve"><value>Sub</value></data>
+  <data name="Details_ModeDub.Content" xml:space="preserve"><value>Dub</value></data>
+  <data name="Details_DownloadRange.AutomationProperties.Name" xml:space="preserve"><value>Download episodes</value></data>
+  <data name="Details_DownloadRange.ToolTipService.ToolTip" xml:space="preserve"><value>Download episodes</value></data>
+  <data name="Details_Progress.AutomationProperties.Name" xml:space="preserve"><value>Loading episodes</value></data>
+  <data name="Details_Empty.Title" xml:space="preserve"><value>No episodes</value></data>
+  <data name="Details_NoEpisodesBody" xml:space="preserve"><value>No {0} episodes were found.</value></data>
+  <data name="Details_DownloadEpisodes" xml:space="preserve"><value>Download episodes</value></data>
+  <data name="Details_RemoveFavorite" xml:space="preserve"><value>Remove from favorites</value></data>
+  <data name="Details_AddFavorite" xml:space="preserve"><value>Add to favorites</value></data>
+  <data name="Details_EpisodesCount" xml:space="preserve"><value>Episodes ({0})</value></data>
+  <data name="Details_RangeBody" xml:space="preserve"><value>Choose a range of the {0} episodes (by position in the list). Already downloaded episodes are skipped.</value></data>
+  <data name="Details_RangeFrom" xml:space="preserve"><value>From</value></data>
+  <data name="Details_RangeTo" xml:space="preserve"><value>To</value></data>
+  <data name="Details_SubEpisodes" xml:space="preserve"><value>SUB: {0} episodes</value></data>
+  <data name="Details_DubEpisodes" xml:space="preserve"><value>DUB: {0} episodes</value></data>
+  <data name="Details_ShowLess" xml:space="preserve"><value>Show less</value></data>
+  <data name="Details_ReadMore" xml:space="preserve"><value>Read more</value></data>
+  <data name="Details_EpisodeN" xml:space="preserve"><value>Episode {0}</value></data>
+  <data name="Details_Watched" xml:space="preserve"><value>Watched</value></data>
+  <data name="Details_PercentWatched" xml:space="preserve"><value>{0}% watched</value></data>
+  <data name="Details_DownloadEpisode" xml:space="preserve"><value>Download episode</value></data>
+  <data name="Details_CancelQueued" xml:space="preserve"><value>Cancel queued download</value></data>
+  <data name="Details_PauseDownload" xml:space="preserve"><value>Pause download</value></data>
+  <data name="Details_ResumeDownload" xml:space="preserve"><value>Resume download</value></data>
+  <data name="Details_Downloaded" xml:space="preserve"><value>Downloaded</value></data>
+  <data name="Details_DownloadFailedRetry" xml:space="preserve"><value>Download failed, retry</value></data>
+  <data name="Details_Play" xml:space="preserve"><value>Play</value></data>
+  <data name="Details_PlayEp" xml:space="preserve"><value>Play Ep {0}</value></data>
+  <data name="Details_ContinueEp" xml:space="preserve"><value>Continue Ep {0}</value></data>
+  <data name="Details_ReplayEp" xml:space="preserve"><value>Replay Ep {0}</value></data>
+  <data name="Quality_Best" xml:space="preserve"><value>Best</value></data>
+  <data name="Quality_Worst" xml:space="preserve"><value>Worst</value></data>
+  <data name="Engine_Auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="Engine_Native" xml:space="preserve"><value>Native player</value></data>
+  <data name="Engine_Mpv" xml:space="preserve"><value>mpv</value></data>
+  <data name="Skip_Auto" xml:space="preserve"><value>Auto skip</value></data>
+  <data name="Skip_Button" xml:space="preserve"><value>Show button</value></data>
+  <data name="Theme_System" xml:space="preserve"><value>System</value></data>
+  <data name="Theme_Light" xml:space="preserve"><value>Light</value></data>
+  <data name="Theme_Dark" xml:space="preserve"><value>Dark</value></data>
+  <data name="Strategy_Reliable" xml:space="preserve"><value>Most reliable (fallback)</value></data>
+  <data name="Strategy_BestQuality" xml:space="preserve"><value>Best quality</value></data>
+  <data name="Language_Auto" xml:space="preserve"><value>Auto</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="Settings_SkipOffset" xml:space="preserve"><value>Offset: {0} s</value></data>
+  <data name="Settings_ProvidersLanguage" xml:space="preserve"><value>Enable, disable and reorder the sources for language: {0}</value></data>
+  <data name="Settings_BackupFileType" xml:space="preserve"><value>animawindows backup</value></data>
+  <data name="Backup_ExportOk" xml:space="preserve"><value>Backup exported</value></data>
+  <data name="Backup_ExportFailed" xml:space="preserve"><value>Export failed: {0}</value></data>
+  <data name="Backup_ImportOk" xml:space="preserve"><value>Imported shows: {0}, progress entries: {1}</value></data>
+  <data name="Backup_ImportFailed" xml:space="preserve"><value>Import failed: {0}</value></data>
+  <data name="Backup_ImportAniCliOk" xml:space="preserve"><value>Imported entries from ani-cli: {0}</value></data>
+  <data name="Settings_MoveUp.AutomationProperties.Name" xml:space="preserve"><value>Move up</value></data>
+  <data name="Settings_MoveUp.ToolTipService.ToolTip" xml:space="preserve"><value>Move up</value></data>
+  <data name="Settings_MoveDown.AutomationProperties.Name" xml:space="preserve"><value>Move down</value></data>
+  <data name="Settings_MoveDown.ToolTipService.ToolTip" xml:space="preserve"><value>Move down</value></data>
+  <data name="Settings_Title.Text" xml:space="preserve"><value>Settings</value></data>
+  <data name="Downloads_Title.Text" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Downloads_EmptyTitle.Text" xml:space="preserve"><value>No downloads yet</value></data>
+  <data name="Downloads_EmptyBody.Text" xml:space="preserve"><value>Download episodes from a show's page to watch them offline.</value></data>
+  <data name="Downloads_WaitingForNetwork.Title" xml:space="preserve"><value>Waiting for unmetered network</value></data>
+  <data name="Downloads_WaitingForNetwork.Message" xml:space="preserve"><value>Downloads will continue when you are on an unmetered connection.</value></data>
+  <data name="Downloads_ErrorBar.Title" xml:space="preserve"><value>Download problem</value></data>
+  <data name="Downloads_DeleteAll.AutomationProperties.Name" xml:space="preserve"><value>Delete all episodes of this show</value></data>
+  <data name="Downloads_DeleteAll.ToolTipService.ToolTip" xml:space="preserve"><value>Delete all episodes of this show</value></data>
+  <data name="Downloads_EpisodeFormat" xml:space="preserve"><value>Episode {0}</value></data>
+  <data name="Downloads_GroupSummary" xml:space="preserve"><value>{0} episodes - {1}</value></data>
+  <data name="Downloads_StatusQueued" xml:space="preserve"><value>Queued</value></data>
+  <data name="Downloads_StatusDownloading" xml:space="preserve"><value>{0} - {1}%</value></data>
+  <data name="Downloads_StatusPaused" xml:space="preserve"><value>Paused</value></data>
+  <data name="Downloads_StatusPausedReason" xml:space="preserve"><value>Paused - {0}</value></data>
+  <data name="Downloads_StatusFailed" xml:space="preserve"><value>Failed</value></data>
+  <data name="Downloads_StatusFailedReason" xml:space="preserve"><value>Failed: {0}</value></data>
+  <data name="Downloads_DeleteTitle" xml:space="preserve"><value>Delete download?</value></data>
+  <data name="Downloads_DeleteEpisodeMessage" xml:space="preserve"><value>Episode {0} will be removed from this device.</value></data>
+  <data name="Downloads_DeleteGroupMessage" xml:space="preserve"><value>All downloaded episodes of {0} will be removed from this device.</value></data>
+  <data name="Downloads_DeleteConfirm" xml:space="preserve"><value>Delete</value></data>
+  <data name="Downloads_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Downloads_ToastDownloading" xml:space="preserve"><value>Downloading</value></data>
+  <data name="Downloads_ToastCompleted" xml:space="preserve"><value>Download complete</value></data>
+  <data name="Downloads_ToastFailed" xml:space="preserve"><value>Download failed</value></data>
+  <data name="Downloads_ToastOpen" xml:space="preserve"><value>Open</value></data>
+  <data name="Downloads_ToastRetry" xml:space="preserve"><value>Retry</value></data>
+  <data name="Health_Title.Text" xml:space="preserve"><value>Provider health</value></data>
+  <data name="Health_Intro.Text" xml:space="preserve"><value>Runs a live search, episode list and stream check against every provider.</value></data>
+  <data name="Health_RunAgain.Content" xml:space="preserve"><value>Run again</value></data>
+  <data name="Health_Progress.AutomationProperties.Name" xml:space="preserve"><value>Checking providers</value></data>
+  <data name="Health_Chain" xml:space="preserve"><value>Language: {0}. Chain: {1}</value></data>
+  <data name="Health_StepSearch" xml:space="preserve"><value>Search</value></data>
+  <data name="Health_StepEpisodes" xml:space="preserve"><value>Episodes</value></data>
+  <data name="Health_StepStreams" xml:space="preserve"><value>Streams</value></data>
+  <data name="Health_Disabled" xml:space="preserve"><value>Disabled</value></data>
+  <data name="Health_NotInChain" xml:space="preserve"><value>Not in chain</value></data>
+  <data name="Health_Millis" xml:space="preserve"><value>{0} ms</value></data>
+  <data name="Health_MillisError" xml:space="preserve"><value>{0} ms - {1}</value></data>
+  <data name="Health_StatusOk" xml:space="preserve"><value>OK</value></data>
+  <data name="Health_StatusFailed" xml:space="preserve"><value>Failed</value></data>
+  <data name="Health_StatusSkipped" xml:space="preserve"><value>Skipped</value></data>
+  <data name="Health_StatusPending" xml:space="preserve"><value>Running</value></data>
+  <data name="Tracking_Connect.Content" xml:space="preserve"><value>Connect</value></data>
+  <data name="Tracking_Disconnect.Content" xml:space="preserve"><value>Disconnect</value></data>
+  <data name="Tracking_SyncNow.Header" xml:space="preserve"><value>Sync now</value></data>
+  <data name="Tracking_SyncNowButton.Content" xml:space="preserve"><value>Sync now</value></data>
+  <data name="Tracking_ErrorBar.Title" xml:space="preserve"><value>Sync problem</value></data>
+  <data name="Tracking_NotConfigured" xml:space="preserve"><value>Not configured in this build</value></data>
+  <data name="Tracking_NotConnected" xml:space="preserve"><value>Not connected</value></data>
+  <data name="Tracking_ConnectedAs" xml:space="preserve"><value>Connected as {0}</value></data>
+  <data name="Tracking_Pending" xml:space="preserve"><value>{0} pending</value></data>
+  <data name="Tracking_Error" xml:space="preserve"><value>Last error: {0}</value></data>
+  <data name="Downloads_Play.Text" xml:space="preserve"><value>Play</value></data>
+  <data name="Downloads_Play.AutomationProperties.Name" xml:space="preserve"><value>Play</value></data>
+  <data name="Downloads_Play.ToolTipService.ToolTip" xml:space="preserve"><value>Play</value></data>
+  <data name="Downloads_Pause.Text" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Pause.AutomationProperties.Name" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Pause.ToolTipService.ToolTip" xml:space="preserve"><value>Pause</value></data>
+  <data name="Downloads_Resume.Text" xml:space="preserve"><value>Resume</value></data>
+  <data name="Downloads_Resume.AutomationProperties.Name" xml:space="preserve"><value>Resume</value></data>
+  <data name="Downloads_Resume.ToolTipService.ToolTip" xml:space="preserve"><value>Resume</value></data>
+  <data name="Downloads_Retry.Text" xml:space="preserve"><value>Retry</value></data>
+  <data name="Downloads_Retry.AutomationProperties.Name" xml:space="preserve"><value>Retry</value></data>
+  <data name="Downloads_Retry.ToolTipService.ToolTip" xml:space="preserve"><value>Retry</value></data>
+  <data name="Downloads_OpenFolder.Text" xml:space="preserve"><value>Open folder</value></data>
+  <data name="Downloads_OpenFolder.AutomationProperties.Name" xml:space="preserve"><value>Open folder</value></data>
+  <data name="Downloads_OpenFolder.ToolTipService.ToolTip" xml:space="preserve"><value>Open folder</value></data>
+  <data name="Downloads_Delete.Text" xml:space="preserve"><value>Delete</value></data>
+  <data name="Downloads_Delete.AutomationProperties.Name" xml:space="preserve"><value>Delete</value></data>
+  <data name="Downloads_Delete.ToolTipService.ToolTip" xml:space="preserve"><value>Delete</value></data>
+  <data name="Settings_Group_Playback.Text" xml:space="preserve"><value>Playback</value></data>
+  <data name="Settings_Quality.Header" xml:space="preserve"><value>Preferred quality</value></data>
+  <data name="Settings_Quality_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Preferred quality</value></data>
+  <data name="Settings_Autoplay.Header" xml:space="preserve"><value>Autoplay next episode</value></data>
+  <data name="Settings_Autoplay.Description" xml:space="preserve"><value>Start the next episode when one finishes</value></data>
+  <data name="Settings_Autoplay_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Autoplay next episode</value></data>
+  <data name="Settings_Prefetch.Header" xml:space="preserve"><value>Prefetch next episode</value></data>
+  <data name="Settings_Prefetch.Description" xml:space="preserve"><value>Looks up the next episode near the end of this one so it starts faster. Uses extra data.</value></data>
+  <data name="Settings_Prefetch_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Prefetch next episode</value></data>
+  <data name="Settings_PrefetchMetered.Header" xml:space="preserve"><value>Prefetch on metered networks</value></data>
+  <data name="Settings_PrefetchMetered.Description" xml:space="preserve"><value>Also prefetch on metered connections (uses data)</value></data>
+  <data name="Settings_PrefetchMetered_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Prefetch on metered networks</value></data>
+  <data name="Settings_Engine.Header" xml:space="preserve"><value>Playback engine</value></data>
+  <data name="Settings_Engine.Description" xml:space="preserve"><value>Auto picks the native player or mpv for each stream</value></data>
+  <data name="Settings_Engine_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Playback engine</value></data>
+  <data name="Settings_Audio.Header" xml:space="preserve"><value>Audio</value></data>
+  <data name="Settings_Audio.Description" xml:space="preserve"><value>Subtitled or dubbed episodes</value></data>
+  <data name="Settings_Audio_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Audio</value></data>
+  <data name="Settings_Group_Subtitles.Text" xml:space="preserve"><value>Subtitles</value></data>
+  <data name="Settings_SubtitleLanguage.Header" xml:space="preserve"><value>Subtitle language</value></data>
+  <data name="Settings_SubtitleLanguage_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Subtitle language</value></data>
+  <data name="Settings_Group_AniSkip.Text" xml:space="preserve"><value>Ani-skip</value></data>
+  <data name="Settings_AniSkip.Header" xml:space="preserve"><value>Skip openings &amp; endings</value></data>
+  <data name="Settings_AniSkip.Description" xml:space="preserve"><value>Uses ani-skip timestamps when available</value></data>
+  <data name="Settings_AniSkip_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Skip openings &amp; endings</value></data>
+  <data name="Settings_SkipBehavior.Header" xml:space="preserve"><value>Behavior</value></data>
+  <data name="Settings_SkipBehavior_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Behavior</value></data>
+  <data name="Settings_AutoSkipIntro.Header" xml:space="preserve"><value>Auto-skip intro</value></data>
+  <data name="Settings_AutoSkipIntro.Description" xml:space="preserve"><value>Skips once, with an undo prompt</value></data>
+  <data name="Settings_AutoSkipIntro_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Auto-skip intro</value></data>
+  <data name="Settings_AutoSkipOutro.Header" xml:space="preserve"><value>Auto-skip outro</value></data>
+  <data name="Settings_AutoSkipOutro.Description" xml:space="preserve"><value>Skips once, with an undo prompt</value></data>
+  <data name="Settings_AutoSkipOutro_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Auto-skip outro</value></data>
+  <data name="Settings_SkipOffset_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Skip offset in seconds</value></data>
+  <data name="Settings_Group_Appearance.Text" xml:space="preserve"><value>Appearance</value></data>
+  <data name="Settings_Theme.Header" xml:space="preserve"><value>Theme</value></data>
+  <data name="Settings_Theme.Description" xml:space="preserve"><value>Choose light, dark or follow Windows</value></data>
+  <data name="Settings_Theme_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Theme</value></data>
+  <data name="Settings_Group_Downloads.Text" xml:space="preserve"><value>Downloads</value></data>
+  <data name="Settings_WifiOnly.Header" xml:space="preserve"><value>Download on Wi-Fi only</value></data>
+  <data name="Settings_WifiOnly.Description" xml:space="preserve"><value>Pause downloads on metered connections</value></data>
+  <data name="Settings_WifiOnly_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Download on Wi-Fi only</value></data>
+  <data name="Settings_DownloadFolder.Header" xml:space="preserve"><value>Download folder</value></data>
+  <data name="Settings_ChooseFolder_Btn.Content" xml:space="preserve"><value>Choose folder</value></data>
+  <data name="Settings_ResetFolder_Btn.Content" xml:space="preserve"><value>Default</value></data>
+  <data name="Settings_Group_Advanced.Text" xml:space="preserve"><value>Advanced</value></data>
+  <data name="Settings_ContentLanguage.Header" xml:space="preserve"><value>Content language</value></data>
+  <data name="Settings_ContentLanguage.Description" xml:space="preserve"><value>Picks which sources are used. Auto follows your subtitle language, or your Windows language if subtitles are off.</value></data>
+  <data name="Settings_ContentLanguage_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Content language</value></data>
+  <data name="Settings_Strategy.Header" xml:space="preserve"><value>Source strategy</value></data>
+  <data name="Settings_Strategy_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Source strategy</value></data>
+  <data name="Settings_Providers.Header" xml:space="preserve"><value>Sources</value></data>
+  <data name="Settings_Health.Header" xml:space="preserve"><value>Source health</value></data>
+  <data name="Settings_Health.Description" xml:space="preserve"><value>Check that every source is reachable</value></data>
+  <data name="Settings_CheckUpdates.Header" xml:space="preserve"><value>Check for updates</value></data>
+  <data name="Settings_CheckUpdates.Description" xml:space="preserve"><value>Look for a new release on GitHub at startup.</value></data>
+  <data name="Settings_CheckUpdates_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Check for updates</value></data>
+  <data name="Settings_Prereleases.Header" xml:space="preserve"><value>Include pre-releases</value></data>
+  <data name="Settings_Prereleases.Description" xml:space="preserve"><value>Also offer alpha and beta builds.</value></data>
+  <data name="Settings_Prereleases_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Include pre-releases</value></data>
+  <data name="Settings_Backup.Header" xml:space="preserve"><value>Backup</value></data>
+  <data name="Settings_Backup.Description" xml:space="preserve"><value>Export or import your library, progress and settings</value></data>
+  <data name="Settings_Export.Header" xml:space="preserve"><value>Export</value></data>
+  <data name="Settings_Export.Description" xml:space="preserve"><value>Save a backup file</value></data>
+  <data name="Settings_Import.Header" xml:space="preserve"><value>Import</value></data>
+  <data name="Settings_Import.Description" xml:space="preserve"><value>Restore from a backup file</value></data>
+  <data name="Settings_ImportAniCli.Header" xml:space="preserve"><value>Import ani-cli history</value></data>
+  <data name="Settings_ImportAniCli.Description" xml:space="preserve"><value>Import the ani-hsts file written by ani-cli</value></data>
+  <data name="Settings_Export_Btn.Content" xml:space="preserve"><value>Export</value></data>
+  <data name="Settings_Import_Btn.Content" xml:space="preserve"><value>Import</value></data>
+  <data name="Settings_ImportAniCli_Btn.Content" xml:space="preserve"><value>Import</value></data>
+  <data name="Settings_Group_Tracking.Text" xml:space="preserve"><value>Tracking</value></data>
+  <data name="Settings_Group_About.Text" xml:space="preserve"><value>About</value></data>
+  <data name="Settings_About.Header" xml:space="preserve"><value>animawindows</value></data>
+  <data name="Settings_UpdateStatus.Header" xml:space="preserve"><value>Update status</value></data>
+  <data name="Settings_License.Header" xml:space="preserve"><value>License</value></data>
+  <data name="Settings_License.Description" xml:space="preserve"><value>GNU General Public License v3.0 (GPL-3.0)</value></data>
+  <data name="Settings_Credits.Header" xml:space="preserve"><value>Credits</value></data>
+  <data name="Settings_Credits.Description" xml:space="preserve"><value>A Windows port of animadroid, itself a native port of ani-cli by pystardust and contributors. Skip timestamps come from ani-skip and aniskip.com.</value></data>
+  <data name="Settings_Source.Header" xml:space="preserve"><value>Source code</value></data>
+  <data name="Settings_Source.Description" xml:space="preserve"><value>Source code on GitHub</value></data>
+  <data name="Settings_CheckNow_Btn.Content" xml:space="preserve"><value>Check now</value></data>
+  <data name="Settings_ReleasePage_Link.Content" xml:space="preserve"><value>Release page</value></data>
+  <data name="Settings_AniCli_Link.Content" xml:space="preserve"><value>ani-cli</value></data>
+  <data name="Settings_AniSkip_Link.Content" xml:space="preserve"><value>ani-skip</value></data>
+  <data name="Settings_Animadroid_Link.Content" xml:space="preserve"><value>animadroid</value></data>
+  <data name="Settings_License_Link.Content" xml:space="preserve"><value>GPL-3.0</value></data>
+  <data name="Settings_Source_Link.Content" xml:space="preserve"><value>GitHub</value></data>
+</root>

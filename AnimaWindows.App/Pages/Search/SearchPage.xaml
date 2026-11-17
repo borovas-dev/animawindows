@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AnimaWindows.App.Pages.Search.SearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AnimaWindows.App.Controls"
+    xmlns:conv="using:AnimaWindows.App.Converters"
+    xmlns:models="using:AnimaWindows.Core.Models"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls">
+
+    <Grid
+        MaxWidth="{StaticResource PageMaxWidth}"
+        Padding="{StaticResource PagePadding}"
+        RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" ColumnSpacing="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Uid="Search_Title" Style="{StaticResource TitleTextBlockStyle}" />
+            <toolkit:Segmented
+                x:Name="ModeSegmented"
+                Grid.Column="1"
+                AutomationProperties.AutomationId="SearchModeSegmented"
+                SelectedIndex="{x:Bind ViewModel.ModeIndex, Mode=TwoWay}">
+                <toolkit:SegmentedItem x:Uid="Search_ModeSub" AutomationProperties.AutomationId="SearchModeSub" />
+                <toolkit:SegmentedItem x:Uid="Search_ModeDub" AutomationProperties.AutomationId="SearchModeDub" />
+            </toolkit:Segmented>
+        </Grid>
+
+        <InfoBar
+            x:Name="ErrorBar"
+            Grid.Row="1"
+            IsClosable="False"
+            IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
+            Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+            Severity="Error">
+            <StackPanel Margin="0,0,0,8" Orientation="Horizontal" Spacing="8">
+                <Button
+                    x:Uid="Search_Verify"
+                    AutomationProperties.AutomationId="SearchVerifyButton"
+                    Command="{x:Bind ViewModel.VerifyCommand}"
+                    Visibility="{x:Bind conv:Fx.Visible(ViewModel.NeedsVerification), Mode=OneWay}" />
+                <Button
+                    x:Uid="Common_Retry"
+                    AutomationProperties.AutomationId="SearchRetryButton"
+                    Command="{x:Bind ViewModel.RetryCommand}" />
+            </StackPanel>
+        </InfoBar>
+
+        <Grid Grid.Row="2">
+            <ProgressRing
+                x:Uid="Search_Progress"
+                Width="48"
+                Height="48"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
+                Visibility="{x:Bind conv:Fx.Visible(ViewModel.IsLoading), Mode=OneWay}" />
+
+            <ItemsView
+                x:Name="ResultsView"
+                AutomationProperties.AutomationId="SearchResultsGrid"
+                IsItemInvokedEnabled="True"
+                ItemInvoked="OnResultInvoked"
+                ItemsSource="{x:Bind ViewModel.Results}"
+                SelectionMode="None"
+                Visibility="{x:Bind conv:Fx.Visible(ViewModel.HasResults), Mode=OneWay}">
+                <ItemsView.Layout>
+                    <UniformGridLayout
+                        MinColumnSpacing="8"
+                        MinItemHeight="{StaticResource PosterGridItemHeight}"
+                        MinItemWidth="{StaticResource PosterGridItemWidth}"
+                        MinRowSpacing="8" />
+                </ItemsView.Layout>
+                <ItemsView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Anime">
+                        <ItemContainer AutomationProperties.Name="{x:Bind Title}">
+                            <controls:PosterCard Title="{x:Bind Title}" CoverUrl="{x:Bind CoverUrl}" />
+                        </ItemContainer>
+                    </DataTemplate>
+                </ItemsView.ItemTemplate>
+            </ItemsView>
+
+            <controls:EmptyState
+                x:Uid="Search_NoResults"
+                Body="{x:Bind ViewModel.NoResultsBody, Mode=OneWay}"
+                Glyph="&#xE721;"
+                Visibility="{x:Bind conv:Fx.Visible(ViewModel.IsEmptyResult), Mode=OneWay}" />
+
+            <controls:EmptyState
+                x:Uid="Search_Idle"
+                Glyph="&#xE721;"
+                Visibility="{x:Bind conv:Fx.Visible(ViewModel.ShowIdleHint), Mode=OneWay}" />
+
+            <Grid RowSpacing="8" Visibility="{x:Bind conv:Fx.Visible(ViewModel.ShowRecents), Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Uid="Search_Recent" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <Button
+                        x:Uid="Search_ClearAll"
+                        Grid.Column="1"
+                        AutomationProperties.AutomationId="SearchClearRecentsButton"
+                        Command="{x:Bind ViewModel.ClearRecentsCommand}" />
+                </Grid>
+                <ListView
+                    Grid.Row="1"
+                    AutomationProperties.AutomationId="RecentSearchesList"
+                    ItemsSource="{x:Bind ViewModel.Recents}"
+                    SelectionMode="None">
+                    <ListView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource DefaultListViewItemStyle}" TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Click="OnRecentClick"
+                                    Tag="{x:Bind}">
+                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                        <FontIcon FontSize="16" Glyph="&#xE81C;" />
+                                        <TextBlock Text="{x:Bind}" />
+                                    </StackPanel>
+                                </Button>
+                                <Button
+                                    x:Uid="Search_RemoveRecent"
+                                    Grid.Column="1"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Click="OnRemoveRecentClick"
+                                    Tag="{x:Bind}">
+                                    <FontIcon FontSize="12" Glyph="&#xE711;" />
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

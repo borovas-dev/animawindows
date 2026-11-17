@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AnimaWindows.App.Pages.Home.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AnimaWindows.App.Controls"
+    xmlns:conv="using:AnimaWindows.App.Converters"
+    xmlns:models="using:AnimaWindows.Core.Models"
+    xmlns:vm="using:AnimaWindows.App.ViewModels">
+
+    <ScrollViewer>
+        <StackPanel
+            MaxWidth="{StaticResource PageMaxWidth}"
+            Padding="{StaticResource PagePadding}"
+            Spacing="{StaticResource SectionSpacing}">
+
+            <TextBlock x:Uid="Home_Title" Style="{StaticResource TitleTextBlockStyle}" />
+
+            <!-- Loading skeleton -->
+            <ItemsRepeater
+                AutomationProperties.AccessibilityView="Raw"
+                ItemsSource="{x:Bind SkeletonItems}"
+                Visibility="{x:Bind conv:Fx.Visible(ViewModel.IsLoading), Mode=OneWay}">
+                <ItemsRepeater.Layout>
+                    <StackLayout Orientation="Horizontal" Spacing="12" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="x:Int32">
+                        <Border
+                            Width="{StaticResource PosterCardWidth}"
+                            Height="{StaticResource PosterImageHeight}"
+                            Style="{StaticResource PosterPlaceholderStyle}" />
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+
+            <!-- Empty library -->
+            <controls:EmptyState
+                x:Uid="Home_Empty"
+                Glyph="&#xE8F1;"
+                Visibility="{x:Bind conv:Fx.Visible(ViewModel.IsEmpty), Mode=OneWay}">
+                <controls:EmptyState.ActionContent>
+                    <Button
+                        x:Uid="Home_EmptySearch"
+                        AutomationProperties.AutomationId="HomeEmptySearchButton"
+                        Click="OnSearchClick"
+                        Style="{StaticResource AccentButtonStyle}" />
+                </controls:EmptyState.ActionContent>
+            </controls:EmptyState>
+
+            <!-- Continue watching -->
+            <StackPanel Visibility="{x:Bind conv:Fx.Visible(ViewModel.HasContinue), Mode=OneWay}">
+                <TextBlock x:Uid="Home_ContinueHeader" Style="{StaticResource SectionHeaderStyle}" />
+                <ItemsView
+                    x:Name="ContinueView"
+                    Height="{StaticResource ContinueRowHeight}"
+                    AutomationProperties.AutomationId="ContinueWatchingList"
+                    IsItemInvokedEnabled="True"
+                    ItemInvoked="OnContinueInvoked"
+                    ItemsSource="{x:Bind ViewModel.ContinueWatching}"
+                    SelectionMode="None">
+                    <ItemsView.Layout>
+                        <StackLayout Orientation="Horizontal" Spacing="12" />
+                    </ItemsView.Layout>
+                    <ItemsView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:ContinueCard">
+                            <ItemContainer AutomationProperties.Name="{x:Bind Title}">
+                                <ItemContainer.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem
+                                            x:Uid="Home_RemoveHistory"
+                                            Click="OnRemoveHistoryClick"
+                                            Tag="{x:Bind}">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon Glyph="&#xE74D;" />
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </ItemContainer.ContextFlyout>
+                                <controls:PosterCard
+                                    Title="{x:Bind Title}"
+                                    Caption="{x:Bind EpisodeText}"
+                                    CoverUrl="{x:Bind CoverUrl}"
+                                    Progress="{x:Bind Percent}" />
+                            </ItemContainer>
+                        </DataTemplate>
+                    </ItemsView.ItemTemplate>
+                </ItemsView>
+            </StackPanel>
+
+            <!-- Favourites -->
+            <StackPanel Visibility="{x:Bind conv:Fx.Visible(ViewModel.HasFavorites), Mode=OneWay}">
+                <TextBlock x:Uid="Home_FavoritesHeader" Style="{StaticResource SectionHeaderStyle}" />
+                <ItemsRepeater AutomationProperties.AutomationId="FavoritesGrid" ItemsSource="{x:Bind ViewModel.Favorites}">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout
+                            MinColumnSpacing="8"
+                            MinItemHeight="{StaticResource PosterGridItemHeight}"
+                            MinItemWidth="{StaticResource PosterGridItemWidth}"
+                            MinRowSpacing="8" />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate x:DataType="models:Anime">
+                            <Button
+                                AutomationProperties.Name="{x:Bind Title}"
+                                Click="OnFavoriteClick"
+                                Style="{StaticResource CardButtonStyle}">
+                                <controls:PosterCard Title="{x:Bind Title}" CoverUrl="{x:Bind CoverUrl}" />
+                            </Button>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

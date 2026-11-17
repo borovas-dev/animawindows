@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppDisplayName" xml:space="preserve"><value>animawindows</value></data>
+  <data name="AppDescription" xml:space="preserve"><value>从多个来源观看动漫，支持下载、进度跟踪和跳过片头。</value></data>
+  <data name="Nav_Home.Content" xml:space="preserve"><value>主页</value></data>
+  <data name="Nav_Search.Content" xml:space="preserve"><value>搜索</value></data>
+  <data name="Nav_Downloads.Content" xml:space="preserve"><value>下载</value></data>
+  <data name="Shell_Search.PlaceholderText" xml:space="preserve"><value>搜索动漫</value></data>
+  <data name="Shell_Search.AutomationProperties.Name" xml:space="preserve"><value>搜索动漫</value></data>
+  <data name="Update_Changelog.Content" xml:space="preserve"><value>更新内容</value></data>
+  <data name="Update_Available" xml:space="preserve"><value>有可用更新：{0}</value></data>
+  <data name="Update_Checking" xml:space="preserve"><value>正在检查更新…</value></data>
+  <data name="Update_UpToDate" xml:space="preserve"><value>已是最新版本</value></data>
+  <data name="Update_Failed" xml:space="preserve"><value>检查更新失败：{0}</value></data>
+  <data name="Cloudflare_VerifyTitle" xml:space="preserve"><value>请验证您是真人</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Common_Download" xml:space="preserve"><value>下载</value></data>
+  <data name="Common_Off" xml:space="preserve"><value>关闭</value></data>
+  <data name="Common_Retry.Content" xml:space="preserve"><value>重试</value></data>
+  <data name="Error_Default" xml:space="preserve"><value>出了点问题</value></data>
+  <data name="Error_Cloudflare" xml:space="preserve"><value>Cloudflare 需要进行浏览器验证。</value></data>
+  <data name="Error_NoProvider" xml:space="preserve"><value>没有可用的动漫来源。</value></data>
+  <data name="Search_Failed" xml:space="preserve"><value>搜索失败。</value></data>
+  <data name="Details_LoadFailed" xml:space="preserve"><value>无法加载剧集。</value></data>
+  <data name="Audio_Sub" xml:space="preserve"><value>字幕</value></data>
+  <data name="Audio_Dub" xml:space="preserve"><value>配音</value></data>
+  <data name="Home_Title.Text" xml:space="preserve"><value>主页</value></data>
+  <data name="Home_Empty.Title" xml:space="preserve"><value>您的资料库为空</value></data>
+  <data name="Home_Empty.Body" xml:space="preserve"><value>搜索节目并开始观看。观看进度和收藏会显示在这里。</value></data>
+  <data name="Home_EmptySearch.Content" xml:space="preserve"><value>搜索</value></data>
+  <data name="Home_ContinueHeader.Text" xml:space="preserve"><value>继续观看</value></data>
+  <data name="Home_FavoritesHeader.Text" xml:space="preserve"><value>收藏</value></data>
+  <data name="Home_RemoveHistory.Text" xml:space="preserve"><value>从历史记录中移除</value></data>
+  <data name="Library_EpisodeN" xml:space="preserve"><value>第 {0} 集</value></data>
+  <data name="Search_Title.Text" xml:space="preserve"><value>搜索</value></data>
+  <data name="Search_ModeSub.Content" xml:space="preserve"><value>字幕</value></data>
+  <data name="Search_ModeDub.Content" xml:space="preserve"><value>配音</value></data>
+  <data name="Search_Verify.Content" xml:space="preserve"><value>在浏览器中验证</value></data>
+  <data name="Search_Progress.AutomationProperties.Name" xml:space="preserve"><value>正在搜索</value></data>
+  <data name="Search_NoResults.Title" xml:space="preserve"><value>没有结果</value></data>
+  <data name="Search_NoResultsBody" xml:space="preserve"><value>在{1}中未找到“{0}”。请尝试另一种模式或其他标题。</value></data>
+  <data name="Search_Idle.Title" xml:space="preserve"><value>发现您的下一部作品</value></data>
+  <data name="Search_Idle.Body" xml:space="preserve"><value>使用顶部的搜索框按标题搜索。点击搜索框即可显示最近的搜索。</value></data>
+  <data name="Search_Recent.Text" xml:space="preserve"><value>最近</value></data>
+  <data name="Search_ClearAll.Content" xml:space="preserve"><value>全部清除</value></data>
+  <data name="Search_RemoveRecent.AutomationProperties.Name" xml:space="preserve"><value>从最近搜索中移除</value></data>
+  <data name="Search_RemoveRecent.ToolTipService.ToolTip" xml:space="preserve"><value>从最近搜索中移除</value></data>
+  <data name="Details_ModeSub.Content" xml:space="preserve"><value>字幕</value></data>
+  <data name="Details_ModeDub.Content" xml:space="preserve"><value>配音</value></data>
+  <data name="Details_DownloadRange.AutomationProperties.Name" xml:space="preserve"><value>下载剧集</value></data>
+  <data name="Details_DownloadRange.ToolTipService.ToolTip" xml:space="preserve"><value>下载剧集</value></data>
+  <data name="Details_Progress.AutomationProperties.Name" xml:space="preserve"><value>正在加载剧集</value></data>
+  <data name="Details_Empty.Title" xml:space="preserve"><value>没有剧集</value></data>
+  <data name="Details_NoEpisodesBody" xml:space="preserve"><value>未找到{0}剧集。</value></data>
+  <data name="Details_DownloadEpisodes" xml:space="preserve"><value>下载剧集</value></data>
+  <data name="Details_RemoveFavorite" xml:space="preserve"><value>从收藏中移除</value></data>
+  <data name="Details_AddFavorite" xml:space="preserve"><value>添加到收藏</value></data>
+  <data name="Details_EpisodesCount" xml:space="preserve"><value>剧集（{0}）</value></data>
+  <data name="Details_RangeBody" xml:space="preserve"><value>请在 {0} 集中选择范围（按列表位置）。已下载的剧集将被跳过。</value></data>
+  <data name="Details_RangeFrom" xml:space="preserve"><value>从</value></data>
+  <data name="Details_RangeTo" xml:space="preserve"><value>到</value></data>
+  <data name="Details_SubEpisodes" xml:space="preserve"><value>字幕：{0} 集</value></data>
+  <data name="Details_DubEpisodes" xml:space="preserve"><value>配音：{0} 集</value></data>
+  <data name="Details_ShowLess" xml:space="preserve"><value>收起</value></data>
+  <data name="Details_ReadMore" xml:space="preserve"><value>展开</value></data>
+  <data name="Details_EpisodeN" xml:space="preserve"><value>第 {0} 集</value></data>
+  <data name="Details_Watched" xml:space="preserve"><value>已观看</value></data>
+  <data name="Details_PercentWatched" xml:space="preserve"><value>已观看 {0}%</value></data>
+  <data name="Details_DownloadEpisode" xml:space="preserve"><value>下载剧集</value></data>
+  <data name="Details_CancelQueued" xml:space="preserve"><value>取消排队中的下载</value></data>
+  <data name="Details_PauseDownload" xml:space="preserve"><value>暂停下载</value></data>
+  <data name="Details_ResumeDownload" xml:space="preserve"><value>继续下载</value></data>
+  <data name="Details_Downloaded" xml:space="preserve"><value>已下载</value></data>
+  <data name="Details_DownloadFailedRetry" xml:space="preserve"><value>下载失败，点击重试</value></data>
+  <data name="Details_Play" xml:space="preserve"><value>播放</value></data>
+  <data name="Details_PlayEp" xml:space="preserve"><value>播放第 {0} 集</value></data>
+  <data name="Details_ContinueEp" xml:space="preserve"><value>继续第 {0} 集</value></data>
+  <data name="Details_ReplayEp" xml:space="preserve"><value>重播第 {0} 集</value></data>
+  <data name="Quality_Best" xml:space="preserve"><value>最佳</value></data>
+  <data name="Quality_Worst" xml:space="preserve"><value>最低</value></data>
+  <data name="Engine_Auto" xml:space="preserve"><value>自动</value></data>
+  <data name="Engine_Native" xml:space="preserve"><value>原生播放器</value></data>
+  <data name="Engine_Mpv" xml:space="preserve"><value>mpv</value></data>
+  <data name="Skip_Auto" xml:space="preserve"><value>自动跳过</value></data>
+  <data name="Skip_Button" xml:space="preserve"><value>显示按钮</value></data>
+  <data name="Theme_System" xml:space="preserve"><value>跟随系统</value></data>
+  <data name="Theme_Light" xml:space="preserve"><value>浅色</value></data>
+  <data name="Theme_Dark" xml:space="preserve"><value>深色</value></data>
+  <data name="Strategy_Reliable" xml:space="preserve"><value>最可靠（自动切换）</value></data>
+  <data name="Strategy_BestQuality" xml:space="preserve"><value>最佳画质</value></data>
+  <data name="Language_Auto" xml:space="preserve"><value>自动</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>版本 {0}</value></data>
+  <data name="Settings_SkipOffset" xml:space="preserve"><value>偏移：{0} 秒</value></data>
+  <data name="Settings_ProvidersLanguage" xml:space="preserve"><value>启用、禁用并调整语言“{0}”的来源顺序</value></data>
+  <data name="Settings_BackupFileType" xml:space="preserve"><value>animawindows 备份</value></data>
+  <data name="Backup_ExportOk" xml:space="preserve"><value>备份已导出</value></data>
+  <data name="Backup_ExportFailed" xml:space="preserve"><value>导出失败：{0}</value></data>
+  <data name="Backup_ImportOk" xml:space="preserve"><value>已导入节目：{0}，进度记录：{1}</value></data>
+  <data name="Backup_ImportFailed" xml:space="preserve"><value>导入失败：{0}</value></data>
+  <data name="Backup_ImportAniCliOk" xml:space="preserve"><value>已从 ani-cli 导入条目：{0}</value></data>
+  <data name="Settings_MoveUp.AutomationProperties.Name" xml:space="preserve"><value>上移</value></data>
+  <data name="Settings_MoveUp.ToolTipService.ToolTip" xml:space="preserve"><value>上移</value></data>
+  <data name="Settings_MoveDown.AutomationProperties.Name" xml:space="preserve"><value>下移</value></data>
+  <data name="Settings_MoveDown.ToolTipService.ToolTip" xml:space="preserve"><value>下移</value></data>
+  <data name="Settings_Title.Text" xml:space="preserve"><value>设置</value></data>
+  <data name="Downloads_Title.Text" xml:space="preserve"><value>下载</value></data>
+  <data name="Downloads_EmptyTitle.Text" xml:space="preserve"><value>还没有下载</value></data>
+  <data name="Downloads_EmptyBody.Text" xml:space="preserve"><value>在节目页面下载剧集即可离线观看。</value></data>
+  <data name="Downloads_WaitingForNetwork.Title" xml:space="preserve"><value>正在等待非计量网络</value></data>
+  <data name="Downloads_WaitingForNetwork.Message" xml:space="preserve"><value>连接到非计量网络后将继续下载。</value></data>
+  <data name="Downloads_ErrorBar.Title" xml:space="preserve"><value>下载出现问题</value></data>
+  <data name="Downloads_DeleteAll.AutomationProperties.Name" xml:space="preserve"><value>删除此节目的所有剧集</value></data>
+  <data name="Downloads_DeleteAll.ToolTipService.ToolTip" xml:space="preserve"><value>删除此节目的所有剧集</value></data>
+  <data name="Downloads_EpisodeFormat" xml:space="preserve"><value>第 {0} 集</value></data>
+  <data name="Downloads_GroupSummary" xml:space="preserve"><value>{0} 集 - {1}</value></data>
+  <data name="Downloads_StatusQueued" xml:space="preserve"><value>排队中</value></data>
+  <data name="Downloads_StatusDownloading" xml:space="preserve"><value>{0} - {1}%</value></data>
+  <data name="Downloads_StatusPaused" xml:space="preserve"><value>已暂停</value></data>
+  <data name="Downloads_StatusPausedReason" xml:space="preserve"><value>已暂停 - {0}</value></data>
+  <data name="Downloads_StatusFailed" xml:space="preserve"><value>失败</value></data>
+  <data name="Downloads_StatusFailedReason" xml:space="preserve"><value>失败：{0}</value></data>
+  <data name="Downloads_DeleteTitle" xml:space="preserve"><value>删除下载？</value></data>
+  <data name="Downloads_DeleteEpisodeMessage" xml:space="preserve"><value>第 {0} 集将从此设备中删除。</value></data>
+  <data name="Downloads_DeleteGroupMessage" xml:space="preserve"><value>{0} 的所有已下载剧集将从此设备中删除。</value></data>
+  <data name="Downloads_DeleteConfirm" xml:space="preserve"><value>删除</value></data>
+  <data name="Downloads_Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Downloads_ToastDownloading" xml:space="preserve"><value>正在下载</value></data>
+  <data name="Downloads_ToastCompleted" xml:space="preserve"><value>下载完成</value></data>
+  <data name="Downloads_ToastFailed" xml:space="preserve"><value>下载失败</value></data>
+  <data name="Downloads_ToastOpen" xml:space="preserve"><value>打开</value></data>
+  <data name="Downloads_ToastRetry" xml:space="preserve"><value>重试</value></data>
+  <data name="Health_Title.Text" xml:space="preserve"><value>来源状态</value></data>
+  <data name="Health_Intro.Text" xml:space="preserve"><value>对每个来源实时检查搜索、剧集列表和视频流。</value></data>
+  <data name="Health_RunAgain.Content" xml:space="preserve"><value>重新检查</value></data>
+  <data name="Health_Progress.AutomationProperties.Name" xml:space="preserve"><value>正在检查来源</value></data>
+  <data name="Health_Chain" xml:space="preserve"><value>语言：{0}。顺序：{1}</value></data>
+  <data name="Health_StepSearch" xml:space="preserve"><value>搜索</value></data>
+  <data name="Health_StepEpisodes" xml:space="preserve"><value>剧集</value></data>
+  <data name="Health_StepStreams" xml:space="preserve"><value>视频流</value></data>
+  <data name="Health_Disabled" xml:space="preserve"><value>已禁用</value></data>
+  <data name="Health_NotInChain" xml:space="preserve"><value>不在顺序中</value></data>
+  <data name="Health_Millis" xml:space="preserve"><value>{0} 毫秒</value></data>
+  <data name="Health_MillisError" xml:space="preserve"><value>{0} 毫秒 - {1}</value></data>
+  <data name="Health_StatusOk" xml:space="preserve"><value>正常</value></data>
+  <data name="Health_StatusFailed" xml:space="preserve"><value>失败</value></data>
+  <data name="Health_StatusSkipped" xml:space="preserve"><value>已跳过</value></data>
+  <data name="Health_StatusPending" xml:space="preserve"><value>进行中</value></data>
+  <data name="Tracking_Connect.Content" xml:space="preserve"><value>连接</value></data>
+  <data name="Tracking_Disconnect.Content" xml:space="preserve"><value>断开连接</value></data>
+  <data name="Tracking_SyncNow.Header" xml:space="preserve"><value>立即同步</value></data>
+  <data name="Tracking_SyncNowButton.Content" xml:space="preserve"><value>立即同步</value></data>
+  <data name="Tracking_ErrorBar.Title" xml:space="preserve"><value>同步出现问题</value></data>
+  <data name="Tracking_NotConfigured" xml:space="preserve"><value>此版本未配置</value></data>
+  <data name="Tracking_NotConnected" xml:space="preserve"><value>未连接</value></data>
+  <data name="Tracking_ConnectedAs" xml:space="preserve"><value>已连接为 {0}</value></data>
+  <data name="Tracking_Pending" xml:space="preserve"><value>{0} 项待同步</value></data>
+  <data name="Tracking_Error" xml:space="preserve"><value>上次错误：{0}</value></data>
+  <data name="Downloads_Play.Text" xml:space="preserve"><value>播放</value></data>
+  <data name="Downloads_Play.AutomationProperties.Name" xml:space="preserve"><value>播放</value></data>
+  <data name="Downloads_Play.ToolTipService.ToolTip" xml:space="preserve"><value>播放</value></data>
+  <data name="Downloads_Pause.Text" xml:space="preserve"><value>暂停</value></data>
+  <data name="Downloads_Pause.AutomationProperties.Name" xml:space="preserve"><value>暂停</value></data>
+  <data name="Downloads_Pause.ToolTipService.ToolTip" xml:space="preserve"><value>暂停</value></data>
+  <data name="Downloads_Resume.Text" xml:space="preserve"><value>继续</value></data>
+  <data name="Downloads_Resume.AutomationProperties.Name" xml:space="preserve"><value>继续</value></data>
+  <data name="Downloads_Resume.ToolTipService.ToolTip" xml:space="preserve"><value>继续</value></data>
+  <data name="Downloads_Retry.Text" xml:space="preserve"><value>重试</value></data>
+  <data name="Downloads_Retry.AutomationProperties.Name" xml:space="preserve"><value>重试</value></data>
+  <data name="Downloads_Retry.ToolTipService.ToolTip" xml:space="preserve"><value>重试</value></data>
+  <data name="Downloads_OpenFolder.Text" xml:space="preserve"><value>打开文件夹</value></data>
+  <data name="Downloads_OpenFolder.AutomationProperties.Name" xml:space="preserve"><value>打开文件夹</value></data>
+  <data name="Downloads_OpenFolder.ToolTipService.ToolTip" xml:space="preserve"><value>打开文件夹</value></data>
+  <data name="Downloads_Delete.Text" xml:space="preserve"><value>删除</value></data>
+  <data name="Downloads_Delete.AutomationProperties.Name" xml:space="preserve"><value>删除</value></data>
+  <data name="Downloads_Delete.ToolTipService.ToolTip" xml:space="preserve"><value>删除</value></data>
+  <data name="Settings_Group_Playback.Text" xml:space="preserve"><value>播放</value></data>
+  <data name="Settings_Quality.Header" xml:space="preserve"><value>首选画质</value></data>
+  <data name="Settings_Quality_Ctl.AutomationProperties.Name" xml:space="preserve"><value>首选画质</value></data>
+  <data name="Settings_Autoplay.Header" xml:space="preserve"><value>自动播放下一集</value></data>
+  <data name="Settings_Autoplay.Description" xml:space="preserve"><value>当前剧集播放结束后自动开始下一集</value></data>
+  <data name="Settings_Autoplay_Ctl.AutomationProperties.Name" xml:space="preserve"><value>自动播放下一集</value></data>
+  <data name="Settings_Prefetch.Header" xml:space="preserve"><value>预取下一集</value></data>
+  <data name="Settings_Prefetch.Description" xml:space="preserve"><value>在当前剧集接近结尾时预先查找下一集，使其更快开始播放。会使用额外流量。</value></data>
+  <data name="Settings_Prefetch_Ctl.AutomationProperties.Name" xml:space="preserve"><value>预取下一集</value></data>
+  <data name="Settings_PrefetchMetered.Header" xml:space="preserve"><value>在计量网络上预取</value></data>
+  <data name="Settings_PrefetchMetered.Description" xml:space="preserve"><value>在计量连接上也进行预取（会使用流量）</value></data>
+  <data name="Settings_PrefetchMetered_Ctl.AutomationProperties.Name" xml:space="preserve"><value>在计量网络上预取</value></data>
+  <data name="Settings_Engine.Header" xml:space="preserve"><value>播放引擎</value></data>
+  <data name="Settings_Engine.Description" xml:space="preserve"><value>自动为每个视频流选择原生播放器或 mpv</value></data>
+  <data name="Settings_Engine_Ctl.AutomationProperties.Name" xml:space="preserve"><value>播放引擎</value></data>
+  <data name="Settings_Audio.Header" xml:space="preserve"><value>音频</value></data>
+  <data name="Settings_Audio.Description" xml:space="preserve"><value>字幕或配音剧集</value></data>
+  <data name="Settings_Audio_Ctl.AutomationProperties.Name" xml:space="preserve"><value>音频</value></data>
+  <data name="Settings_Group_Subtitles.Text" xml:space="preserve"><value>字幕</value></data>
+  <data name="Settings_SubtitleLanguage.Header" xml:space="preserve"><value>字幕语言</value></data>
+  <data name="Settings_SubtitleLanguage_Ctl.AutomationProperties.Name" xml:space="preserve"><value>字幕语言</value></data>
+  <data name="Settings_Group_AniSkip.Text" xml:space="preserve"><value>Ani-skip</value></data>
+  <data name="Settings_AniSkip.Header" xml:space="preserve"><value>跳过片头和片尾</value></data>
+  <data name="Settings_AniSkip.Description" xml:space="preserve"><value>在可用时使用 ani-skip 时间标记</value></data>
+  <data name="Settings_AniSkip_Ctl.AutomationProperties.Name" xml:space="preserve"><value>跳过片头和片尾</value></data>
+  <data name="Settings_SkipBehavior.Header" xml:space="preserve"><value>行为</value></data>
+  <data name="Settings_SkipBehavior_Ctl.AutomationProperties.Name" xml:space="preserve"><value>行为</value></data>
+  <data name="Settings_AutoSkipIntro.Header" xml:space="preserve"><value>自动跳过片头</value></data>
+  <data name="Settings_AutoSkipIntro.Description" xml:space="preserve"><value>仅跳过一次，并提供撤销提示</value></data>
+  <data name="Settings_AutoSkipIntro_Ctl.AutomationProperties.Name" xml:space="preserve"><value>自动跳过片头</value></data>
+  <data name="Settings_AutoSkipOutro.Header" xml:space="preserve"><value>自动跳过片尾</value></data>
+  <data name="Settings_AutoSkipOutro.Description" xml:space="preserve"><value>仅跳过一次，并提供撤销提示</value></data>
+  <data name="Settings_AutoSkipOutro_Ctl.AutomationProperties.Name" xml:space="preserve"><value>自动跳过片尾</value></data>
+  <data name="Settings_SkipOffset_Ctl.AutomationProperties.Name" xml:space="preserve"><value>跳过偏移（秒）</value></data>
+  <data name="Settings_Group_Appearance.Text" xml:space="preserve"><value>外观</value></data>
+  <data name="Settings_Theme.Header" xml:space="preserve"><value>主题</value></data>
+  <data name="Settings_Theme.Description" xml:space="preserve"><value>浅色、深色或跟随 Windows</value></data>
+  <data name="Settings_Theme_Ctl.AutomationProperties.Name" xml:space="preserve"><value>主题</value></data>
+  <data name="Settings_Group_Downloads.Text" xml:space="preserve"><value>下载</value></data>
+  <data name="Settings_WifiOnly.Header" xml:space="preserve"><value>仅在 Wi-Fi 下下载</value></data>
+  <data name="Settings_WifiOnly.Description" xml:space="preserve"><value>在计量网络上暂停下载</value></data>
+  <data name="Settings_WifiOnly_Ctl.AutomationProperties.Name" xml:space="preserve"><value>仅在 Wi-Fi 下下载</value></data>
+  <data name="Settings_DownloadFolder.Header" xml:space="preserve"><value>下载文件夹</value></data>
+  <data name="Settings_ChooseFolder_Btn.Content" xml:space="preserve"><value>选择文件夹</value></data>
+  <data name="Settings_ResetFolder_Btn.Content" xml:space="preserve"><value>默认</value></data>
+  <data name="Settings_Group_Advanced.Text" xml:space="preserve"><value>高级</value></data>
+  <data name="Settings_ContentLanguage.Header" xml:space="preserve"><value>内容语言</value></data>
+  <data name="Settings_ContentLanguage.Description" xml:space="preserve"><value>决定使用哪些来源。“自动”会跟随字幕语言；字幕关闭时跟随 Windows 语言。</value></data>
+  <data name="Settings_ContentLanguage_Ctl.AutomationProperties.Name" xml:space="preserve"><value>内容语言</value></data>
+  <data name="Settings_Strategy.Header" xml:space="preserve"><value>来源策略</value></data>
+  <data name="Settings_Strategy_Ctl.AutomationProperties.Name" xml:space="preserve"><value>来源策略</value></data>
+  <data name="Settings_Providers.Header" xml:space="preserve"><value>来源</value></data>
+  <data name="Settings_Health.Header" xml:space="preserve"><value>来源状态</value></data>
+  <data name="Settings_Health.Description" xml:space="preserve"><value>检查每个来源是否可用</value></data>
+  <data name="Settings_CheckUpdates.Header" xml:space="preserve"><value>检查更新</value></data>
+  <data name="Settings_CheckUpdates.Description" xml:space="preserve"><value>启动时在 GitHub 上检查新版本。</value></data>
+  <data name="Settings_CheckUpdates_Ctl.AutomationProperties.Name" xml:space="preserve"><value>检查更新</value></data>
+  <data name="Settings_Prereleases.Header" xml:space="preserve"><value>包含预发布版本</value></data>
+  <data name="Settings_Prereleases.Description" xml:space="preserve"><value>同时提供 alpha 和 beta 版本。</value></data>
+  <data name="Settings_Prereleases_Ctl.AutomationProperties.Name" xml:space="preserve"><value>包含预发布版本</value></data>
+  <data name="Settings_Backup.Header" xml:space="preserve"><value>备份</value></data>
+  <data name="Settings_Backup.Description" xml:space="preserve"><value>导出或导入您的资料库、进度和设置</value></data>
+  <data name="Settings_Export.Header" xml:space="preserve"><value>导出</value></data>
+  <data name="Settings_Export.Description" xml:space="preserve"><value>保存备份文件</value></data>
+  <data name="Settings_Import.Header" xml:space="preserve"><value>导入</value></data>
+  <data name="Settings_Import.Description" xml:space="preserve"><value>从备份文件还原</value></data>
+  <data name="Settings_ImportAniCli.Header" xml:space="preserve"><value>导入 ani-cli 历史记录</value></data>
+  <data name="Settings_ImportAniCli.Description" xml:space="preserve"><value>导入 ani-cli 生成的 ani-hsts 文件</value></data>
+  <data name="Settings_Export_Btn.Content" xml:space="preserve"><value>导出</value></data>
+  <data name="Settings_Import_Btn.Content" xml:space="preserve"><value>导入</value></data>
+  <data name="Settings_ImportAniCli_Btn.Content" xml:space="preserve"><value>导入</value></data>
+  <data name="Settings_Group_Tracking.Text" xml:space="preserve"><value>跟踪</value></data>
+  <data name="Settings_Group_About.Text" xml:space="preserve"><value>关于</value></data>
+  <data name="Settings_About.Header" xml:space="preserve"><value>animawindows</value></data>
+  <data name="Settings_UpdateStatus.Header" xml:space="preserve"><value>更新状态</value></data>
+  <data name="Settings_License.Header" xml:space="preserve"><value>许可证</value></data>
+  <data name="Settings_License.Description" xml:space="preserve"><value>GNU 通用公共许可证 v3.0 (GPL-3.0)</value></data>
+  <data name="Settings_Credits.Header" xml:space="preserve"><value>致谢</value></data>
+  <data name="Settings_Credits.Description" xml:space="preserve"><value>animadroid 的 Windows 移植版，而 animadroid 本身是 pystardust 及贡献者所作 ani-cli 的原生移植。跳过时间标记来自 ani-skip 和 aniskip.com。</value></data>
+  <data name="Settings_Source.Header" xml:space="preserve"><value>源代码</value></data>
+  <data name="Settings_Source.Description" xml:space="preserve"><value>GitHub 上的源代码</value></data>
+  <data name="Settings_CheckNow_Btn.Content" xml:space="preserve"><value>立即检查</value></data>
+  <data name="Settings_ReleasePage_Link.Content" xml:space="preserve"><value>发布页面</value></data>
+  <data name="Settings_AniCli_Link.Content" xml:space="preserve"><value>ani-cli</value></data>
+  <data name="Settings_AniSkip_Link.Content" xml:space="preserve"><value>ani-skip</value></data>
+  <data name="Settings_Animadroid_Link.Content" xml:space="preserve"><value>animadroid</value></data>
+  <data name="Settings_License_Link.Content" xml:space="preserve"><value>GPL-3.0</value></data>
+  <data name="Settings_Source_Link.Content" xml:space="preserve"><value>GitHub</value></data>
+</root>

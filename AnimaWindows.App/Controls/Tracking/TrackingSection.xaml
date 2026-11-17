@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="AnimaWindows.App.Controls.Tracking.TrackingSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls"
+    xmlns:local="using:AnimaWindows.App.Controls.Tracking">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="TrackerTemplate" x:DataType="local:TrackerViewModel">
+            <tk:SettingsCard
+                Description="{x:Bind StatusText, Mode=OneWay}"
+                Header="{x:Bind Name}"
+                IsEnabled="{x:Bind IsConfigured, Mode=OneWay}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button
+                        x:Uid="Tracking_Connect"
+                        AutomationProperties.AutomationId="TrackingConnectButton"
+                        Command="{x:Bind ConnectCommand}"
+                        Visibility="{x:Bind CanConnect, Mode=OneWay}" />
+                    <Button
+                        x:Uid="Tracking_Disconnect"
+                        AutomationProperties.AutomationId="TrackingDisconnectButton"
+                        Command="{x:Bind DisconnectCommand}"
+                        Visibility="{x:Bind IsConnected, Mode=OneWay}" />
+                </StackPanel>
+            </tk:SettingsCard>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <StackPanel Spacing="4">
+        <ContentControl
+            Content="{x:Bind ViewModel.AniList}"
+            ContentTemplate="{StaticResource TrackerTemplate}"
+            HorizontalContentAlignment="Stretch" />
+        <ContentControl
+            Content="{x:Bind ViewModel.Mal}"
+            ContentTemplate="{StaticResource TrackerTemplate}"
+            HorizontalContentAlignment="Stretch" />
+        <tk:SettingsCard
+            x:Uid="Tracking_SyncNow"
+            Description="{x:Bind ViewModel.PendingText, Mode=OneWay}">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ProgressRing
+                    Width="20"
+                    Height="20"
+                    IsActive="{x:Bind ViewModel.IsSyncing, Mode=OneWay}"
+                    IsIndeterminate="True" />
+                <Button
+                    x:Uid="Tracking_SyncNowButton"
+                    AutomationProperties.AutomationId="TrackingSyncNowButton"
+                    Command="{x:Bind ViewModel.SyncNowCommand}" />
+            </StackPanel>
+        </tk:SettingsCard>
+        <InfoBar
+            x:Uid="Tracking_ErrorBar"
+            AutomationProperties.AutomationId="TrackingErrorInfoBar"
+            IsClosable="False"
+            IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
+            Message="{x:Bind ViewModel.ErrorText, Mode=OneWay}"
+            Severity="Error" />
+    </StackPanel>
+</UserControl>

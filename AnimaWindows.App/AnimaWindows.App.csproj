@@ -13,6 +13,13 @@
     <WindowsPackageType>MSIX</WindowsPackageType>
     <DefaultLanguage>en-US</DefaultLanguage>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <!-- We provide Program.Main (single-instance redirection) in Shell/Program.cs. -->
+    <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+    <!-- The WinUI/XAML toolchain emits warnings we cannot control; the libraries keep warnings-as-errors. -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- Tracker OAuth client ids; blank disables the tracker. Pass /p:AniListClientId=... /p:MalClientId=... -->
+    <AniListClientId Condition="'$(AniListClientId)' == ''"></AniListClientId>
+    <MalClientId Condition="'$(MalClientId)' == ''"></MalClientId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,4 +46,24 @@
   <ItemGroup>
     <Content Include="..\config\providers.json" Link="Assets\providers.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
+  <!-- Generates Composition/TrackerIds constants from the AniListClientId / MalClientId MSBuild properties. -->
+  <Target Name="GenerateTrackerIds" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <TrackerIdsFile>$(IntermediateOutputPath)TrackerIds.g.cs</TrackerIdsFile>
+    </PropertyGroup>
+    <ItemGroup>
+      <TrackerIdsLine Include="// &lt;auto-generated /&gt;" />
+      <TrackerIdsLine Include="namespace AnimaWindows.App.Composition%3B" />
+      <TrackerIdsLine Include="internal static class TrackerIds" />
+      <TrackerIdsLine Include="{" />
+      <TrackerIdsLine Include="    public const string AniListClientId = &quot;$(AniListClientId)&quot;%3B" />
+      <TrackerIdsLine Include="    public const string MalClientId = &quot;$(MalClientId)&quot;%3B" />
+      <TrackerIdsLine Include="}" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(TrackerIdsFile)" Lines="@(TrackerIdsLine)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ItemGroup>
+      <Compile Include="$(TrackerIdsFile)" />
+    </ItemGroup>
+  </Target>
 </Project>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AppDisplayName" xml:space="preserve"><value>animawindows</value></data>
+  <data name="AppDescription" xml:space="preserve"><value>Oglądaj anime z wielu źródeł, z pobieraniem, śledzeniem postępów i pomijaniem openingów.</value></data>
+  <data name="Nav_Home.Content" xml:space="preserve"><value>Start</value></data>
+  <data name="Nav_Search.Content" xml:space="preserve"><value>Szukaj</value></data>
+  <data name="Nav_Downloads.Content" xml:space="preserve"><value>Pobrane</value></data>
+  <data name="Shell_Search.PlaceholderText" xml:space="preserve"><value>Szukaj anime</value></data>
+  <data name="Shell_Search.AutomationProperties.Name" xml:space="preserve"><value>Szukaj anime</value></data>
+  <data name="Update_Changelog.Content" xml:space="preserve"><value>Co nowego</value></data>
+  <data name="Update_Available" xml:space="preserve"><value>Dostępna aktualizacja: {0}</value></data>
+  <data name="Update_Checking" xml:space="preserve"><value>Sprawdzanie aktualizacji…</value></data>
+  <data name="Update_UpToDate" xml:space="preserve"><value>Masz najnowszą wersję</value></data>
+  <data name="Update_Failed" xml:space="preserve"><value>Sprawdzanie aktualizacji nie powiodło się: {0}</value></data>
+  <data name="Cloudflare_VerifyTitle" xml:space="preserve"><value>Potwierdź, że jesteś człowiekiem</value></data>
+  <data name="Common_Cancel" xml:space="preserve"><value>Anuluj</value></data>
+  <data name="Common_Download" xml:space="preserve"><value>Pobierz</value></data>
+  <data name="Common_Off" xml:space="preserve"><value>Wyłączone</value></data>
+  <data name="Common_Retry.Content" xml:space="preserve"><value>Ponów</value></data>
+  <data name="Error_Default" xml:space="preserve"><value>Coś poszło nie tak</value></data>
+  <data name="Error_Cloudflare" xml:space="preserve"><value>Cloudflare wymaga sprawdzenia w przeglądarce.</value></data>
+  <data name="Error_NoProvider" xml:space="preserve"><value>Brak dostępnego źródła anime.</value></data>
+  <data name="Search_Failed" xml:space="preserve"><value>Wyszukiwanie nie powiodło się.</value></data>
+  <data name="Details_LoadFailed" xml:space="preserve"><value>Nie udało się wczytać odcinków.</value></data>
+  <data name="Audio_Sub" xml:space="preserve"><value>Napisy</value></data>
+  <data name="Audio_Dub" xml:space="preserve"><value>Dubbing</value></data>
+  <data name="Home_Title.Text" xml:space="preserve"><value>Start</value></data>
+  <data name="Home_Empty.Title" xml:space="preserve"><value>Twoja biblioteka jest pusta</value></data>
+  <data name="Home_Empty.Body" xml:space="preserve"><value>Wyszukaj serial i zacznij oglądać. Postępy i ulubione pojawią się tutaj.</value></data>
+  <data name="Home_EmptySearch.Content" xml:space="preserve"><value>Szukaj</value></data>
+  <data name="Home_ContinueHeader.Text" xml:space="preserve"><value>Kontynuuj oglądanie</value></data>
+  <data name="Home_FavoritesHeader.Text" xml:space="preserve"><value>Ulubione</value></data>
+  <data name="Home_RemoveHistory.Text" xml:space="preserve"><value>Usuń z historii</value></data>
+  <data name="Library_EpisodeN" xml:space="preserve"><value>Odcinek {0}</value></data>
+  <data name="Search_Title.Text" xml:space="preserve"><value>Szukaj</value></data>
+  <data name="Search_ModeSub.Content" xml:space="preserve"><value>Napisy</value></data>
+  <data name="Search_ModeDub.Content" xml:space="preserve"><value>Dubbing</value></data>
+  <data name="Search_Verify.Content" xml:space="preserve"><value>Zweryfikuj w przeglądarce</value></data>
+  <data name="Search_Progress.AutomationProperties.Name" xml:space="preserve"><value>Wyszukiwanie</value></data>
+  <data name="Search_NoResults.Title" xml:space="preserve"><value>Brak wyników</value></data>
+  <data name="Search_NoResultsBody" xml:space="preserve"><value>Nic nie znaleziono dla „{0}” w trybie {1}. Spróbuj drugiego trybu lub innego tytułu.</value></data>
+  <data name="Search_Idle.Title" xml:space="preserve"><value>Znajdź swój następny serial</value></data>
+  <data name="Search_Idle.Body" xml:space="preserve"><value>Szukaj po tytule w polu u góry. Ostatnie wyszukiwania pojawią się po kliknięciu pola.</value></data>
+  <data name="Search_Recent.Text" xml:space="preserve"><value>Ostatnie</value></data>
+  <data name="Search_ClearAll.Content" xml:space="preserve"><value>Wyczyść wszystko</value></data>
+  <data name="Search_RemoveRecent.AutomationProperties.Name" xml:space="preserve"><value>Usuń z ostatnich wyszukiwań</value></data>
+  <data name="Search_RemoveRecent.ToolTipService.ToolTip" xml:space="preserve"><value>Usuń z ostatnich wyszukiwań</value></data>
+  <data name="Details_ModeSub.Content" xml:space="preserve"><value>Napisy</value></data>
+  <data name="Details_ModeDub.Content" xml:space="preserve"><value>Dubbing</value></data>
+  <data name="Details_DownloadRange.AutomationProperties.Name" xml:space="preserve"><value>Pobierz odcinki</value></data>
+  <data name="Details_DownloadRange.ToolTipService.ToolTip" xml:space="preserve"><value>Pobierz odcinki</value></data>
+  <data name="Details_Progress.AutomationProperties.Name" xml:space="preserve"><value>Wczytywanie odcinków</value></data>
+  <data name="Details_Empty.Title" xml:space="preserve"><value>Brak odcinków</value></data>
+  <data name="Details_NoEpisodesBody" xml:space="preserve"><value>Nie znaleziono odcinków ({0}).</value></data>
+  <data name="Details_DownloadEpisodes" xml:space="preserve"><value>Pobierz odcinki</value></data>
+  <data name="Details_RemoveFavorite" xml:space="preserve"><value>Usuń z ulubionych</value></data>
+  <data name="Details_AddFavorite" xml:space="preserve"><value>Dodaj do ulubionych</value></data>
+  <data name="Details_EpisodesCount" xml:space="preserve"><value>Odcinki ({0})</value></data>
+  <data name="Details_RangeBody" xml:space="preserve"><value>Wybierz zakres spośród {0} odcinków (według pozycji na liście). Już pobrane odcinki są pomijane.</value></data>
+  <data name="Details_RangeFrom" xml:space="preserve"><value>Od</value></data>
+  <data name="Details_RangeTo" xml:space="preserve"><value>Do</value></data>
+  <data name="Details_SubEpisodes" xml:space="preserve"><value>SUB: {0} odc.</value></data>
+  <data name="Details_DubEpisodes" xml:space="preserve"><value>DUB: {0} odc.</value></data>
+  <data name="Details_ShowLess" xml:space="preserve"><value>Pokaż mniej</value></data>
+  <data name="Details_ReadMore" xml:space="preserve"><value>Czytaj więcej</value></data>
+  <data name="Details_EpisodeN" xml:space="preserve"><value>Odcinek {0}</value></data>
+  <data name="Details_Watched" xml:space="preserve"><value>Obejrzano</value></data>
+  <data name="Details_PercentWatched" xml:space="preserve"><value>Obejrzano {0}%</value></data>
+  <data name="Details_DownloadEpisode" xml:space="preserve"><value>Pobierz odcinek</value></data>
+  <data name="Details_CancelQueued" xml:space="preserve"><value>Anuluj pobieranie w kolejce</value></data>
+  <data name="Details_PauseDownload" xml:space="preserve"><value>Wstrzymaj pobieranie</value></data>
+  <data name="Details_ResumeDownload" xml:space="preserve"><value>Wznów pobieranie</value></data>
+  <data name="Details_Downloaded" xml:space="preserve"><value>Pobrano</value></data>
+  <data name="Details_DownloadFailedRetry" xml:space="preserve"><value>Pobieranie nie powiodło się, ponów</value></data>
+  <data name="Details_Play" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="Details_PlayEp" xml:space="preserve"><value>Odtwórz odc. {0}</value></data>
+  <data name="Details_ContinueEp" xml:space="preserve"><value>Kontynuuj odc. {0}</value></data>
+  <data name="Details_ReplayEp" xml:space="preserve"><value>Odtwórz ponownie odc. {0}</value></data>
+  <data name="Quality_Best" xml:space="preserve"><value>Najlepsza</value></data>
+  <data name="Quality_Worst" xml:space="preserve"><value>Najgorsza</value></data>
+  <data name="Engine_Auto" xml:space="preserve"><value>Automatycznie</value></data>
+  <data name="Engine_Native" xml:space="preserve"><value>Odtwarzacz natywny</value></data>
+  <data name="Engine_Mpv" xml:space="preserve"><value>mpv</value></data>
+  <data name="Skip_Auto" xml:space="preserve"><value>Pomiń automatycznie</value></data>
+  <data name="Skip_Button" xml:space="preserve"><value>Pokaż przycisk</value></data>
+  <data name="Theme_System" xml:space="preserve"><value>Systemowy</value></data>
+  <data name="Theme_Light" xml:space="preserve"><value>Jasny</value></data>
+  <data name="Theme_Dark" xml:space="preserve"><value>Ciemny</value></data>
+  <data name="Strategy_Reliable" xml:space="preserve"><value>Najpewniejsza (zapasowe)</value></data>
+  <data name="Strategy_BestQuality" xml:space="preserve"><value>Najlepsza jakość</value></data>
+  <data name="Language_Auto" xml:space="preserve"><value>Automatycznie</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>Wersja {0}</value></data>
+  <data name="Settings_SkipOffset" xml:space="preserve"><value>Przesunięcie: {0} s</value></data>
+  <data name="Settings_ProvidersLanguage" xml:space="preserve"><value>Włączaj, wyłączaj i zmieniaj kolejność źródeł dla języka: {0}</value></data>
+  <data name="Settings_BackupFileType" xml:space="preserve"><value>Kopia zapasowa animawindows</value></data>
+  <data name="Backup_ExportOk" xml:space="preserve"><value>Kopia zapasowa wyeksportowana</value></data>
+  <data name="Backup_ExportFailed" xml:space="preserve"><value>Eksport nie powiódł się: {0}</value></data>
+  <data name="Backup_ImportOk" xml:space="preserve"><value>Zaimportowane seriale: {0}, wpisy postępu: {1}</value></data>
+  <data name="Backup_ImportFailed" xml:space="preserve"><value>Import nie powiódł się: {0}</value></data>
+  <data name="Backup_ImportAniCliOk" xml:space="preserve"><value>Zaimportowane wpisy z ani-cli: {0}</value></data>
+  <data name="Settings_MoveUp.AutomationProperties.Name" xml:space="preserve"><value>Przesuń w górę</value></data>
+  <data name="Settings_MoveUp.ToolTipService.ToolTip" xml:space="preserve"><value>Przesuń w górę</value></data>
+  <data name="Settings_MoveDown.AutomationProperties.Name" xml:space="preserve"><value>Przesuń w dół</value></data>
+  <data name="Settings_MoveDown.ToolTipService.ToolTip" xml:space="preserve"><value>Przesuń w dół</value></data>
+  <data name="Settings_Title.Text" xml:space="preserve"><value>Ustawienia</value></data>
+  <data name="Downloads_Title.Text" xml:space="preserve"><value>Pobrane</value></data>
+  <data name="Downloads_EmptyTitle.Text" xml:space="preserve"><value>Brak pobranych odcinków</value></data>
+  <data name="Downloads_EmptyBody.Text" xml:space="preserve"><value>Pobierz odcinki ze strony serialu, aby oglądać je offline.</value></data>
+  <data name="Downloads_WaitingForNetwork.Title" xml:space="preserve"><value>Oczekiwanie na sieć bez limitu</value></data>
+  <data name="Downloads_WaitingForNetwork.Message" xml:space="preserve"><value>Pobieranie zostanie wznowione po połączeniu z siecią bez limitu danych.</value></data>
+  <data name="Downloads_ErrorBar.Title" xml:space="preserve"><value>Problem z pobieraniem</value></data>
+  <data name="Downloads_DeleteAll.AutomationProperties.Name" xml:space="preserve"><value>Usuń wszystkie odcinki tego serialu</value></data>
+  <data name="Downloads_DeleteAll.ToolTipService.ToolTip" xml:space="preserve"><value>Usuń wszystkie odcinki tego serialu</value></data>
+  <data name="Downloads_EpisodeFormat" xml:space="preserve"><value>Odcinek {0}</value></data>
+  <data name="Downloads_GroupSummary" xml:space="preserve"><value>Odcinki: {0} - {1}</value></data>
+  <data name="Downloads_StatusQueued" xml:space="preserve"><value>W kolejce</value></data>
+  <data name="Downloads_StatusDownloading" xml:space="preserve"><value>{0} - {1}%</value></data>
+  <data name="Downloads_StatusPaused" xml:space="preserve"><value>Wstrzymano</value></data>
+  <data name="Downloads_StatusPausedReason" xml:space="preserve"><value>Wstrzymano - {0}</value></data>
+  <data name="Downloads_StatusFailed" xml:space="preserve"><value>Niepowodzenie</value></data>
+  <data name="Downloads_StatusFailedReason" xml:space="preserve"><value>Niepowodzenie: {0}</value></data>
+  <data name="Downloads_DeleteTitle" xml:space="preserve"><value>Usunąć pobrany plik?</value></data>
+  <data name="Downloads_DeleteEpisodeMessage" xml:space="preserve"><value>Odcinek {0} zostanie usunięty z tego urządzenia.</value></data>
+  <data name="Downloads_DeleteGroupMessage" xml:space="preserve"><value>Wszystkie pobrane odcinki serialu {0} zostaną usunięte z tego urządzenia.</value></data>
+  <data name="Downloads_DeleteConfirm" xml:space="preserve"><value>Usuń</value></data>
+  <data name="Downloads_Cancel" xml:space="preserve"><value>Anuluj</value></data>
+  <data name="Downloads_ToastDownloading" xml:space="preserve"><value>Pobieranie</value></data>
+  <data name="Downloads_ToastCompleted" xml:space="preserve"><value>Pobieranie zakończone</value></data>
+  <data name="Downloads_ToastFailed" xml:space="preserve"><value>Pobieranie nie powiodło się</value></data>
+  <data name="Downloads_ToastOpen" xml:space="preserve"><value>Otwórz</value></data>
+  <data name="Downloads_ToastRetry" xml:space="preserve"><value>Ponów</value></data>
+  <data name="Health_Title.Text" xml:space="preserve"><value>Stan dostawców</value></data>
+  <data name="Health_Intro.Text" xml:space="preserve"><value>Sprawdza na żywo wyszukiwanie, listę odcinków i strumienie każdego dostawcy.</value></data>
+  <data name="Health_RunAgain.Content" xml:space="preserve"><value>Uruchom ponownie</value></data>
+  <data name="Health_Progress.AutomationProperties.Name" xml:space="preserve"><value>Sprawdzanie dostawców</value></data>
+  <data name="Health_Chain" xml:space="preserve"><value>Język: {0}. Kolejność: {1}</value></data>
+  <data name="Health_StepSearch" xml:space="preserve"><value>Wyszukiwanie</value></data>
+  <data name="Health_StepEpisodes" xml:space="preserve"><value>Odcinki</value></data>
+  <data name="Health_StepStreams" xml:space="preserve"><value>Strumienie</value></data>
+  <data name="Health_Disabled" xml:space="preserve"><value>Wyłączony</value></data>
+  <data name="Health_NotInChain" xml:space="preserve"><value>Poza kolejnością</value></data>
+  <data name="Health_Millis" xml:space="preserve"><value>{0} ms</value></data>
+  <data name="Health_MillisError" xml:space="preserve"><value>{0} ms - {1}</value></data>
+  <data name="Health_StatusOk" xml:space="preserve"><value>OK</value></data>
+  <data name="Health_StatusFailed" xml:space="preserve"><value>Niepowodzenie</value></data>
+  <data name="Health_StatusSkipped" xml:space="preserve"><value>Pominięto</value></data>
+  <data name="Health_StatusPending" xml:space="preserve"><value>W toku</value></data>
+  <data name="Tracking_Connect.Content" xml:space="preserve"><value>Połącz</value></data>
+  <data name="Tracking_Disconnect.Content" xml:space="preserve"><value>Rozłącz</value></data>
+  <data name="Tracking_SyncNow.Header" xml:space="preserve"><value>Synchronizuj teraz</value></data>
+  <data name="Tracking_SyncNowButton.Content" xml:space="preserve"><value>Synchronizuj teraz</value></data>
+  <data name="Tracking_ErrorBar.Title" xml:space="preserve"><value>Problem z synchronizacją</value></data>
+  <data name="Tracking_NotConfigured" xml:space="preserve"><value>Nie skonfigurowano w tej wersji</value></data>
+  <data name="Tracking_NotConnected" xml:space="preserve"><value>Nie połączono</value></data>
+  <data name="Tracking_ConnectedAs" xml:space="preserve"><value>Połączono jako {0}</value></data>
+  <data name="Tracking_Pending" xml:space="preserve"><value>Oczekujące: {0}</value></data>
+  <data name="Tracking_Error" xml:space="preserve"><value>Ostatni błąd: {0}</value></data>
+  <data name="Downloads_Play.Text" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="Downloads_Play.AutomationProperties.Name" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="Downloads_Play.ToolTipService.ToolTip" xml:space="preserve"><value>Odtwórz</value></data>
+  <data name="Downloads_Pause.Text" xml:space="preserve"><value>Wstrzymaj</value></data>
+  <data name="Downloads_Pause.AutomationProperties.Name" xml:space="preserve"><value>Wstrzymaj</value></data>
+  <data name="Downloads_Pause.ToolTipService.ToolTip" xml:space="preserve"><value>Wstrzymaj</value></data>
+  <data name="Downloads_Resume.Text" xml:space="preserve"><value>Wznów</value></data>
+  <data name="Downloads_Resume.AutomationProperties.Name" xml:space="preserve"><value>Wznów</value></data>
+  <data name="Downloads_Resume.ToolTipService.ToolTip" xml:space="preserve"><value>Wznów</value></data>
+  <data name="Downloads_Retry.Text" xml:space="preserve"><value>Ponów</value></data>
+  <data name="Downloads_Retry.AutomationProperties.Name" xml:space="preserve"><value>Ponów</value></data>
+  <data name="Downloads_Retry.ToolTipService.ToolTip" xml:space="preserve"><value>Ponów</value></data>
+  <data name="Downloads_OpenFolder.Text" xml:space="preserve"><value>Otwórz folder</value></data>
+  <data name="Downloads_OpenFolder.AutomationProperties.Name" xml:space="preserve"><value>Otwórz folder</value></data>
+  <data name="Downloads_OpenFolder.ToolTipService.ToolTip" xml:space="preserve"><value>Otwórz folder</value></data>
+  <data name="Downloads_Delete.Text" xml:space="preserve"><value>Usuń</value></data>
+  <data name="Downloads_Delete.AutomationProperties.Name" xml:space="preserve"><value>Usuń</value></data>
+  <data name="Downloads_Delete.ToolTipService.ToolTip" xml:space="preserve"><value>Usuń</value></data>
+  <data name="Settings_Group_Playback.Text" xml:space="preserve"><value>Odtwarzanie</value></data>
+  <data name="Settings_Quality.Header" xml:space="preserve"><value>Preferowana jakość</value></data>
+  <data name="Settings_Quality_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Preferowana jakość</value></data>
+  <data name="Settings_Autoplay.Header" xml:space="preserve"><value>Autoodtwarzanie następnego odcinka</value></data>
+  <data name="Settings_Autoplay.Description" xml:space="preserve"><value>Uruchom następny odcinek po zakończeniu bieżącego</value></data>
+  <data name="Settings_Autoplay_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Autoodtwarzanie następnego odcinka</value></data>
+  <data name="Settings_Prefetch.Header" xml:space="preserve"><value>Wczytuj następny odcinek</value></data>
+  <data name="Settings_Prefetch.Description" xml:space="preserve"><value>Wyszukuje następny odcinek pod koniec bieżącego, by startował szybciej. Zużywa dodatkowy transfer.</value></data>
+  <data name="Settings_Prefetch_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Wczytuj następny odcinek</value></data>
+  <data name="Settings_PrefetchMetered.Header" xml:space="preserve"><value>Wczytywanie w sieci z limitem</value></data>
+  <data name="Settings_PrefetchMetered.Description" xml:space="preserve"><value>Wczytuj także w sieciach z limitem (zużywa transfer)</value></data>
+  <data name="Settings_PrefetchMetered_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Wczytywanie w sieci z limitem</value></data>
+  <data name="Settings_Engine.Header" xml:space="preserve"><value>Silnik odtwarzania</value></data>
+  <data name="Settings_Engine.Description" xml:space="preserve"><value>Automatycznie wybiera natywny odtwarzacz lub mpv dla każdego strumienia</value></data>
+  <data name="Settings_Engine_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Silnik odtwarzania</value></data>
+  <data name="Settings_Audio.Header" xml:space="preserve"><value>Dźwięk</value></data>
+  <data name="Settings_Audio.Description" xml:space="preserve"><value>Odcinki z napisami lub dubbingiem</value></data>
+  <data name="Settings_Audio_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Dźwięk</value></data>
+  <data name="Settings_Group_Subtitles.Text" xml:space="preserve"><value>Napisy</value></data>
+  <data name="Settings_SubtitleLanguage.Header" xml:space="preserve"><value>Język napisów</value></data>
+  <data name="Settings_SubtitleLanguage_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Język napisów</value></data>
+  <data name="Settings_Group_AniSkip.Text" xml:space="preserve"><value>Ani-skip</value></data>
+  <data name="Settings_AniSkip.Header" xml:space="preserve"><value>Pomijaj openingi i endingi</value></data>
+  <data name="Settings_AniSkip.Description" xml:space="preserve"><value>Używa znaczników ani-skip, gdy są dostępne</value></data>
+  <data name="Settings_AniSkip_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Pomijaj openingi i endingi</value></data>
+  <data name="Settings_SkipBehavior.Header" xml:space="preserve"><value>Zachowanie</value></data>
+  <data name="Settings_SkipBehavior_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Zachowanie</value></data>
+  <data name="Settings_AutoSkipIntro.Header" xml:space="preserve"><value>Automatycznie pomijaj czołówkę</value></data>
+  <data name="Settings_AutoSkipIntro.Description" xml:space="preserve"><value>Pomija raz, z możliwością cofnięcia</value></data>
+  <data name="Settings_AutoSkipIntro_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Automatycznie pomijaj czołówkę</value></data>
+  <data name="Settings_AutoSkipOutro.Header" xml:space="preserve"><value>Automatycznie pomijaj zakończenie</value></data>
+  <data name="Settings_AutoSkipOutro.Description" xml:space="preserve"><value>Pomija raz, z możliwością cofnięcia</value></data>
+  <data name="Settings_AutoSkipOutro_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Automatycznie pomijaj zakończenie</value></data>
+  <data name="Settings_SkipOffset_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Przesunięcie pomijania w sekundach</value></data>
+  <data name="Settings_Group_Appearance.Text" xml:space="preserve"><value>Wygląd</value></data>
+  <data name="Settings_Theme.Header" xml:space="preserve"><value>Motyw</value></data>
+  <data name="Settings_Theme.Description" xml:space="preserve"><value>Jasny, ciemny lub zgodny z Windows</value></data>
+  <data name="Settings_Theme_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Motyw</value></data>
+  <data name="Settings_Group_Downloads.Text" xml:space="preserve"><value>Pobrane</value></data>
+  <data name="Settings_WifiOnly.Header" xml:space="preserve"><value>Pobieraj tylko przez Wi-Fi</value></data>
+  <data name="Settings_WifiOnly.Description" xml:space="preserve"><value>Wstrzymaj pobieranie w sieci z limitem</value></data>
+  <data name="Settings_WifiOnly_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Pobieraj tylko przez Wi-Fi</value></data>
+  <data name="Settings_DownloadFolder.Header" xml:space="preserve"><value>Folder pobierania</value></data>
+  <data name="Settings_ChooseFolder_Btn.Content" xml:space="preserve"><value>Wybierz folder</value></data>
+  <data name="Settings_ResetFolder_Btn.Content" xml:space="preserve"><value>Domyślny</value></data>
+  <data name="Settings_Group_Advanced.Text" xml:space="preserve"><value>Zaawansowane</value></data>
+  <data name="Settings_ContentLanguage.Header" xml:space="preserve"><value>Język treści</value></data>
+  <data name="Settings_ContentLanguage.Description" xml:space="preserve"><value>Wybiera używane źródła. Automatycznie podąża za językiem napisów, a gdy napisy są wyłączone - za językiem Windows.</value></data>
+  <data name="Settings_ContentLanguage_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Język treści</value></data>
+  <data name="Settings_Strategy.Header" xml:space="preserve"><value>Strategia źródeł</value></data>
+  <data name="Settings_Strategy_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Strategia źródeł</value></data>
+  <data name="Settings_Providers.Header" xml:space="preserve"><value>Źródła</value></data>
+  <data name="Settings_Health.Header" xml:space="preserve"><value>Stan źródeł</value></data>
+  <data name="Settings_Health.Description" xml:space="preserve"><value>Sprawdź, czy każde źródło działa</value></data>
+  <data name="Settings_CheckUpdates.Header" xml:space="preserve"><value>Sprawdzaj aktualizacje</value></data>
+  <data name="Settings_CheckUpdates.Description" xml:space="preserve"><value>Przy uruchomieniu sprawdzaj w GitHub nowe wydanie.</value></data>
+  <data name="Settings_CheckUpdates_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Sprawdzaj aktualizacje</value></data>
+  <data name="Settings_Prereleases.Header" xml:space="preserve"><value>Uwzględniaj wersje przedpremierowe</value></data>
+  <data name="Settings_Prereleases.Description" xml:space="preserve"><value>Oferuj także wersje alfa i beta.</value></data>
+  <data name="Settings_Prereleases_Ctl.AutomationProperties.Name" xml:space="preserve"><value>Uwzględniaj wersje przedpremierowe</value></data>
+  <data name="Settings_Backup.Header" xml:space="preserve"><value>Kopia zapasowa</value></data>
+  <data name="Settings_Backup.Description" xml:space="preserve"><value>Eksportuj lub importuj bibliotekę, postępy i ustawienia</value></data>
+  <data name="Settings_Export.Header" xml:space="preserve"><value>Eksportuj</value></data>
+  <data name="Settings_Export.Description" xml:space="preserve"><value>Zapisz plik kopii zapasowej</value></data>
+  <data name="Settings_Import.Header" xml:space="preserve"><value>Importuj</value></data>
+  <data name="Settings_Import.Description" xml:space="preserve"><value>Przywróć z pliku kopii zapasowej</value></data>
+  <data name="Settings_ImportAniCli.Header" xml:space="preserve"><value>Importuj historię ani-cli</value></data>
+  <data name="Settings_ImportAniCli.Description" xml:space="preserve"><value>Zaimportuj plik ani-hsts zapisany przez ani-cli</value></data>
+  <data name="Settings_Export_Btn.Content" xml:space="preserve"><value>Eksportuj</value></data>
+  <data name="Settings_Import_Btn.Content" xml:space="preserve"><value>Importuj</value></data>
+  <data name="Settings_ImportAniCli_Btn.Content" xml:space="preserve"><value>Importuj</value></data>
+  <data name="Settings_Group_Tracking.Text" xml:space="preserve"><value>Śledzenie postępów</value></data>
+  <data name="Settings_Group_About.Text" xml:space="preserve"><value>O aplikacji</value></data>
+  <data name="Settings_About.Header" xml:space="preserve"><value>animawindows</value></data>
+  <data name="Settings_UpdateStatus.Header" xml:space="preserve"><value>Status aktualizacji</value></data>
+  <data name="Settings_License.Header" xml:space="preserve"><value>Licencja</value></data>
+  <data name="Settings_License.Description" xml:space="preserve"><value>GNU General Public License v3.0 (GPL-3.0)</value></data>
+  <data name="Settings_Credits.Header" xml:space="preserve"><value>Autorzy</value></data>
+  <data name="Settings_Credits.Description" xml:space="preserve"><value>Port animadroid na Windows, który sam jest natywnym portem ani-cli autorstwa pystardust i współtwórców. Znaczniki pomijania pochodzą z ani-skip i aniskip.com.</value></data>
+  <data name="Settings_Source.Header" xml:space="preserve"><value>Kod źródłowy</value></data>
+  <data name="Settings_Source.Description" xml:space="preserve"><value>Kod źródłowy na GitHubie</value></data>
+  <data name="Settings_CheckNow_Btn.Content" xml:space="preserve"><value>Sprawdź teraz</value></data>
+  <data name="Settings_ReleasePage_Link.Content" xml:space="preserve"><value>Strona wydania</value></data>
+  <data name="Settings_AniCli_Link.Content" xml:space="preserve"><value>ani-cli</value></data>
+  <data name="Settings_AniSkip_Link.Content" xml:space="preserve"><value>ani-skip</value></data>
+  <data name="Settings_Animadroid_Link.Content" xml:space="preserve"><value>animadroid</value></data>
+  <data name="Settings_License_Link.Content" xml:space="preserve"><value>GPL-3.0</value></data>
+  <data name="Settings_Source_Link.Content" xml:space="preserve"><value>GitHub</value></data>
+</root>

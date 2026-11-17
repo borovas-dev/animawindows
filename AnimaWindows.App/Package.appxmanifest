@@ -3,8 +3,10 @@
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  IgnorableNamespaces="uap uap5 desktop rescap">
 
   <Identity
     Name="AnimaWindows"
@@ -14,7 +16,7 @@
   <mp:PhoneIdentity PhoneProductId="a3b1c2d4-5e6f-4a7b-8c9d-0e1f2a3b4c5d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 
   <Properties>
-    <DisplayName>animawindows</DisplayName>
+    <DisplayName>ms-resource:AppDisplayName</DisplayName>
     <PublisherDisplayName>animawindows</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,8 +32,8 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="animawindows"
-        Description="Anime streaming client for Windows"
+        DisplayName="ms-resource:AppDisplayName"
+        Description="ms-resource:AppDescription"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
@@ -41,9 +43,14 @@
       <Extensions>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="animawindows">
-            <uap:DisplayName>animawindows</uap:DisplayName>
+            <uap:DisplayName>ms-resource:AppDisplayName</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
+        <uap5:Extension Category="windows.appExecutionAlias" Executable="$targetnametoken$.exe" EntryPoint="Windows.FullTrustApplication">
+          <uap5:AppExecutionAlias>
+            <desktop:ExecutionAlias Alias="animawindows.exe" />
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
       </Extensions>
     </Application>
   </Applications>
