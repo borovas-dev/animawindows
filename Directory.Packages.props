@@ -7,7 +7,7 @@
     <PackageVersion Include="AngleSharp" Version="1.10.4" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="11.0.0" />
     <!-- WinUI app -->
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.6.5" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.6.6-experimental" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.3.260402-preview2" />
