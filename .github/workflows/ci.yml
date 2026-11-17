@@ -20,11 +20,11 @@ jobs:
           # .NET 11 is GA; this keeps working if a newer preview band is ever pinned in global.json.
           dotnet-quality: ga
       - name: Test Core
-        run: dotnet test tests/AnimaWindows.Core.Tests -c Release --filter "Category!=Live"
+        run: dotnet test --project tests/AnimaWindows.Core.Tests -c Release -- --filter-not-trait "Category=Live"
       - name: Test Providers
-        run: dotnet test tests/AnimaWindows.Providers.Tests -c Release --filter "Category!=Live"
+        run: dotnet test --project tests/AnimaWindows.Providers.Tests -c Release -- --filter-not-trait "Category=Live"
       - name: Test Data
-        run: dotnet test tests/AnimaWindows.Data.Tests -c Release --filter "Category!=Live"
+        run: dotnet test --project tests/AnimaWindows.Data.Tests -c Release -- --filter-not-trait "Category=Live"
 
   app:
     runs-on: windows-latest
