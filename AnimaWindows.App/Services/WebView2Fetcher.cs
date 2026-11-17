@@ -175,17 +175,12 @@ public sealed class WebView2Fetcher
             content.Headers.ContentType = parsed;
         }
 
-        var response = new HttpResponseMessage((HttpStatusCode)(status == 0 ? 502 : status))
+        // RequestUri cannot change after sending; the redirect target is not needed by Shinden.
+        return new HttpResponseMessage((HttpStatusCode)(status == 0 ? 502 : status))
         {
             Content = content,
             RequestMessage = request,
         };
-        if (root.TryGetProperty("u", out var u) && Uri.TryCreate(u.GetString(), UriKind.Absolute, out var finalUri))
-        {
-            request.RequestUri = finalUri;
-        }
-
-        return response;
     }
 
     private static bool IsChallengeTitle(string titleJson) =>
