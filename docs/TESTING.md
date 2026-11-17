@@ -15,11 +15,13 @@ dotnet test --project tests/AnimaWindows.Providers.Tests -- --filter-trait "Cate
 
 ## Installing a CI build
 
-The MSIX is unsigned. On a Windows machine with Developer Mode enabled, download the `animawindows-msix-<platform>` artifact, then from PowerShell in the extracted folder:
+CI signs every `.msixbundle` with the project certificate (see `signing/README.md`) and fails if the signature is missing. Trust the certificate once per machine, in **Local Machine › Trusted People** (the Current User store is not used for package installs), from an elevated PowerShell:
 
 ```powershell
-Add-AppxPackage -Register .\AppxManifest.xml   # from the unpacked layout, or sign the .msix with a test certificate first
+Import-Certificate -FilePath .\animawindows-signing.cer -CertStoreLocation Cert:\LocalMachine\TrustedPeople
 ```
+
+Then double-click the `.msixbundle` from the `animawindows-msix-<platform>` artifact.
 
 ## Manual checklist (not covered by CI)
 
