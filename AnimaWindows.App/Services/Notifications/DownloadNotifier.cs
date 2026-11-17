@@ -327,10 +327,13 @@ internal sealed class DownloadNotifier : IHostedService, IDisposable
 
     private static bool TryKey(IReadOnlyDictionary<string, string> args, out string provider, out string anime, out string episode)
     {
-        provider = anime = episode = string.Empty;
-        return args.TryGetValue(ArgProvider, out provider)
-            && args.TryGetValue(ArgAnime, out anime)
-            && args.TryGetValue(ArgEpisode, out episode);
+        var ok = args.TryGetValue(ArgProvider, out var p)
+            & args.TryGetValue(ArgAnime, out var a)
+            & args.TryGetValue(ArgEpisode, out var e);
+        provider = p ?? string.Empty;
+        anime = a ?? string.Empty;
+        episode = e ?? string.Empty;
+        return ok;
     }
 
     private void ShowWindow()
