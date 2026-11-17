@@ -39,11 +39,24 @@ jobs:
           dotnet-version: 11.0.x
           dotnet-quality: ga
 
-      # ------------------------------------------------------------------
-      # PLACEHOLDER (owned by the playback work package): fetch libmpv for
-      # ${{ matrix.platform }} (libmpv-2.dll) into AnimaWindows.App/Native/<rid>/
-      # before the build so it is packaged into the MSIX. Add the step here.
-      # ------------------------------------------------------------------
+      - name: Fetch libmpv (LGPL build, zhongfly/mpv-winbuild)
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $arch = if ('${{ matrix.platform }}' -eq 'ARM64') { 'aarch64' } else { 'x86_64' }
+          $rid  = if ('${{ matrix.platform }}' -eq 'ARM64') { 'win-arm64' } else { 'win-x64' }
+          $rel  = Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:GH_TOKEN" } https://api.github.com/repos/zhongfly/mpv-winbuild/releases/latest
+          $asset = $rel.assets | Where-Object { $_.name -like "mpv-dev-lgpl-$arch-2*.7z" } | Select-Object -First 1
+          if (-not $asset) { throw "No mpv-dev-lgpl-$arch asset in $($rel.tag_name)" }
+          Write-Host "Using $($asset.name) from $($rel.tag_name)"
+          Invoke-WebRequest $asset.browser_download_url -OutFile mpv-dev.7z
+          7z x mpv-dev.7z -ompv-dev -y | Out-Null
+          $dll = Get-ChildItem mpv-dev -Recurse -Filter libmpv-2.dll | Select-Object -First 1
+          if (-not $dll) { throw "libmpv-2.dll not found in archive" }
+          $dest = "AnimaWindows.App/native/$rid"
+          New-Item -ItemType Directory -Force $dest | Out-Null
+          Copy-Item $dll.FullName $dest
 
       - name: Restore
         run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }}

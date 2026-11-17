@@ -52,4 +52,11 @@
     <AssemblyMetadata Include="AniListClientId" Value="$(AniListClientId)" />
     <AssemblyMetadata Include="MalClientId" Value="$(MalClientId)" />
   </ItemGroup>
+  <!-- libmpv for the mpv fallback engine; fetched by CI (see .github/workflows/ci.yml), optional for local builds. -->
+  <ItemGroup Condition="'$(Platform)'=='x64' And Exists('native\win-x64\libmpv-2.dll')">
+    <Content Include="native\win-x64\libmpv-2.dll" Link="libmpv-2.dll" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Platform)'=='ARM64' And Exists('native\win-arm64\libmpv-2.dll')">
+    <Content Include="native\win-arm64\libmpv-2.dll" Link="libmpv-2.dll" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>
