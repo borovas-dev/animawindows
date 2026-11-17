@@ -176,6 +176,7 @@ jobs:
           -p:AppxPackageSigningEnabled=false
           -p:AppxSymbolPackageEnabled=false
           -p:WindowsAppSDKSelfContained=true
+          -p:AppxBundle=Never
       - name: Check no experimental framework dependency
         shell: pwsh
         run: |
