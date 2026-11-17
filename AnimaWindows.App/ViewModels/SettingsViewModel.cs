@@ -55,22 +55,22 @@ public sealed partial class SettingsViewModel : ObservableObject
         _dispatcher = dispatcher;
         _paths = paths;
 
-        QualityNames = [Strings.Get("Quality_Best"), "1080p", "720p", "480p", "360p", Strings.Get("Quality_Worst")];
-        EngineNames = [Strings.Get("Engine_Auto"), Strings.Get("Engine_Native"), Strings.Get("Engine_Mpv")];
-        AudioNames = [Strings.Get("Audio_Sub"), Strings.Get("Audio_Dub")];
-        SkipBehaviorNames = [Strings.Get("Skip_Auto"), Strings.Get("Skip_Button")];
-        ThemeNames = [Strings.Get("Theme_System"), Strings.Get("Theme_Light"), Strings.Get("Theme_Dark")];
-        StrategyNames = [Strings.Get("Strategy_Reliable"), Strings.Get("Strategy_BestQuality")];
-        SubtitleLanguages = [.. SubtitleCodes.Select(c => new LanguageOption(c, c.Length == 0 ? Strings.Get("Common_Off") : LanguageName(c)))];
+        QualityNames = (string[])[Strings.Get("Quality_Best"), "1080p", "720p", "480p", "360p", Strings.Get("Quality_Worst")];
+        EngineNames = (string[])[Strings.Get("Engine_Auto"), Strings.Get("Engine_Native"), Strings.Get("Engine_Mpv")];
+        AudioNames = (string[])[Strings.Get("Audio_Sub"), Strings.Get("Audio_Dub")];
+        SkipBehaviorNames = (string[])[Strings.Get("Skip_Auto"), Strings.Get("Skip_Button")];
+        ThemeNames = (string[])[Strings.Get("Theme_System"), Strings.Get("Theme_Light"), Strings.Get("Theme_Dark")];
+        StrategyNames = (string[])[Strings.Get("Strategy_Reliable"), Strings.Get("Strategy_BestQuality")];
+        SubtitleLanguages = (LanguageOption[])[.. SubtitleCodes.Select(c => new LanguageOption(c, c.Length == 0 ? Strings.Get("Common_Off") : LanguageName(c)))];
         var contentCodes = _chain.Ids
             .Select(id => _chain.Provider(id))
             .Where(p => p is not null)
             .SelectMany(p => p!.ContentLanguages)
             .Distinct()
             .OrderBy(c => c, StringComparer.Ordinal);
-        ContentLanguages = [new LanguageOption("auto", Strings.Get("Language_Auto")), .. contentCodes.Select(c => new LanguageOption(c, LanguageName(c)))];
-        SubtitleLanguageNames = [.. SubtitleLanguages.Select(l => l.Name)];
-        ContentLanguageNames = [.. ContentLanguages.Select(l => l.Name)];
+        ContentLanguages = (LanguageOption[])[new LanguageOption("auto", Strings.Get("Language_Auto")), .. contentCodes.Select(c => new LanguageOption(c, LanguageName(c)))];
+        SubtitleLanguageNames = (string[])[.. SubtitleLanguages.Select(l => l.Name)];
+        ContentLanguageNames = (string[])[.. ContentLanguages.Select(l => l.Name)];
 
         VersionText = Strings.Format("Settings_Version", AppVersion.Current);
         StatusMessage = "";

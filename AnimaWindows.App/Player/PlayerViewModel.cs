@@ -392,7 +392,7 @@ public sealed partial class PlayerViewModel : ObservableObject, IDisposable
         SetSkipButton(null);
         SetUndo(null);
         SubtitleText = string.Empty;
-        SubtitleOptions = [new SubtitleOption(PlayerStrings.Get("Player_SubtitlesOff", "Off"), null)];
+        SubtitleOptions = (SubtitleOption[])[new SubtitleOption(PlayerStrings.Get("Player_SubtitlesOff", "Off"), null)];
         SelectedSubtitleIndex = 0;
         QualityOptions = [];
         SelectedQualityHeight = null;

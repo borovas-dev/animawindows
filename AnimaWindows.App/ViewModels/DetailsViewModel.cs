@@ -29,7 +29,7 @@ public sealed partial class DetailsViewModel : ObservableObject
     private CancellationTokenSource? _loadCts;
     private string _observedKey = "";
     private List<Episode> _episodes = [];
-    private IReadOnlyList<TranslationMode> _modes = [TranslationMode.Sub, TranslationMode.Dub];
+    private IReadOnlyList<TranslationMode> _modes = (TranslationMode[])[TranslationMode.Sub, TranslationMode.Dub];
     private Dictionary<string, EpisodeProgress> _progress = [];
     private Dictionary<string, DownloadItem> _downloadItems = [];
     private PlayTarget? _target;
@@ -408,7 +408,7 @@ public sealed partial class DetailsViewModel : ObservableObject
     {
         if (anime.SubEpisodes is null && anime.DubEpisodes is null)
         {
-            return [TranslationMode.Sub, TranslationMode.Dub];
+            return (TranslationMode[])[TranslationMode.Sub, TranslationMode.Dub];
         }
 
         var modes = new List<TranslationMode>();
