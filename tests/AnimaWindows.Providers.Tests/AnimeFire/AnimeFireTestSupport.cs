@@ -29,7 +29,7 @@ internal sealed class RoutingHandler : HttpMessageHandler
     }
 
     private static string? Header(HttpRequestMessage request, string name) =>
-        request.Headers.TryGetValues(name, out var values) ? values.FirstOrDefault() : null;
+        request.Headers.NonValidated.TryGetValues(name, out var values) ? values.ToString() : null;
 }
 
 /// <summary>Reads captured fixtures copied to the test output folder.</summary>

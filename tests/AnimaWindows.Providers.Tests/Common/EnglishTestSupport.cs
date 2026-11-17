@@ -41,7 +41,7 @@ internal sealed class EnglishFakeHandler : HttpMessageHandler
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var body = request.Content is null ? null : await request.Content.ReadAsStringAsync(cancellationToken);
-        var headers = request.Headers.ToDictionary(h => h.Key, h => string.Join(",", h.Value), StringComparer.OrdinalIgnoreCase);
+        var headers = request.Headers.NonValidated.ToDictionary(h => h.Key, h => h.Value.ToString(), StringComparer.OrdinalIgnoreCase);
         var recorded = new EnglishRecordedRequest(request.Method.Method, request.RequestUri!, headers, body);
         lock (_gate) _requests.Add(recorded);
         return _respond(recorded);
