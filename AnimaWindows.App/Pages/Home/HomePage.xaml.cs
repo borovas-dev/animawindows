@@ -20,7 +20,7 @@ public sealed partial class HomePage : Page
 
     public HomeViewModel ViewModel { get; }
 
-    public static IReadOnlyList<int> SkeletonItems { get; } = [1, 2, 3, 4, 5, 6, 7, 8];
+    public IReadOnlyList<int> SkeletonItems { get; } = [1, 2, 3, 4, 5, 6, 7, 8];
 
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
