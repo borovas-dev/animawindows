@@ -46,7 +46,7 @@
             <uap:DisplayName>ms-resource:AppDisplayName</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
-        <uap5:Extension Category="windows.appExecutionAlias" Executable="$targetnametoken$.exe" EntryPoint="Windows.FullTrustApplication">
+        <uap5:Extension Category="windows.appExecutionAlias" Executable="AnimaWindows.App.exe" EntryPoint="Windows.FullTrustApplication">
           <uap5:AppExecutionAlias>
             <uap5:ExecutionAlias Alias="animawindows.exe" />
           </uap5:AppExecutionAlias>
