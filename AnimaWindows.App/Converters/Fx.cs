@@ -10,7 +10,9 @@ public static class Fx
     /// <summary>Decoded-size-limited bitmap for a cover URL; null for blank or invalid URLs.</summary>
     public static ImageSource? Image(string? url, int decodeWidth)
     {
-        if (string.IsNullOrWhiteSpace(url) || !Uri.TryCreate(url, UriKind.Absolute, out var uri))
+        // Cover URLs come from scraped providers: only http(s), never file:/UNC (would leak NTLM credentials or read local files).
+        if (string.IsNullOrWhiteSpace(url) || !Uri.TryCreate(url, UriKind.Absolute, out var uri)
+            || (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
         {
             return null;
         }

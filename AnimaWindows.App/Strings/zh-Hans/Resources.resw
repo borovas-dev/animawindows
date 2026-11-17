@@ -286,4 +286,42 @@
   <data name="Settings_Animadroid_Link.Content" xml:space="preserve"><value>animadroid</value></data>
   <data name="Settings_License_Link.Content" xml:space="preserve"><value>GPL-3.0</value></data>
   <data name="Settings_Source_Link.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="Player_Back" xml:space="preserve"><value>返回</value></data>
+  <data name="Player_Previous" xml:space="preserve"><value>上一集</value></data>
+  <data name="Player_PlayPause" xml:space="preserve"><value>播放或暂停</value></data>
+  <data name="Player_Next" xml:space="preserve"><value>下一集</value></data>
+  <data name="Player_Mute" xml:space="preserve"><value>静音</value></data>
+  <data name="Player_Volume" xml:space="preserve"><value>音量</value></data>
+  <data name="Player_Seek" xml:space="preserve"><value>跳转</value></data>
+  <data name="Player_Speed" xml:space="preserve"><value>播放速度</value></data>
+  <data name="Player_Subtitles" xml:space="preserve"><value>字幕</value></data>
+  <data name="Player_Quality" xml:space="preserve"><value>画质</value></data>
+  <data name="Player_Engine" xml:space="preserve"><value>播放引擎</value></data>
+  <data name="Player_CompactOverlay" xml:space="preserve"><value>紧凑悬浮窗</value></data>
+  <data name="Player_Fullscreen" xml:space="preserve"><value>全屏</value></data>
+  <data name="Player_Skip" xml:space="preserve"><value>跳过</value></data>
+  <data name="Player_Retry" xml:space="preserve"><value>重试</value></data>
+  <data name="Player_Undo" xml:space="preserve"><value>撤销</value></data>
+  <data name="Player_EngineAuto" xml:space="preserve"><value>自动</value></data>
+  <data name="Player_EngineNative" xml:space="preserve"><value>Windows 媒体（原生）</value></data>
+  <data name="Player_EngineMpv" xml:space="preserve"><value>mpv</value></data>
+  <data name="Player_SkipOutro" xml:space="preserve"><value>跳过片尾</value></data>
+  <data name="Player_SkipIntro" xml:space="preserve"><value>跳过片头</value></data>
+  <data name="Player_SkippedOutro" xml:space="preserve"><value>已跳过片尾</value></data>
+  <data name="Player_SkippedIntro" xml:space="preserve"><value>已跳过片头</value></data>
+  <data name="Player_ErrorNoEpisodes" xml:space="preserve"><value>没有可播放的内容。</value></data>
+  <data name="Player_SubtitlesOff" xml:space="preserve"><value>关闭</value></data>
+  <data name="Player_Episode" xml:space="preserve"><value>集数</value></data>
+  <data name="Player_ErrorNotDownloaded" xml:space="preserve"><value>此集尚未下载。</value></data>
+  <data name="Player_Offline" xml:space="preserve"><value>离线</value></data>
+  <data name="Player_Source" xml:space="preserve"><value>来源：</value></data>
+  <data name="Player_SourceFallback" xml:space="preserve"><value>（备用）</value></data>
+  <data name="Player_ErrorCloudflare" xml:space="preserve"><value>该来源需要通过 Cloudflare 验证。</value></data>
+  <data name="Player_ErrorNoStream" xml:space="preserve"><value>未找到可播放的视频流。</value></data>
+  <data name="Player_QualityAuto" xml:space="preserve"><value>自动</value></data>
+  <data name="Player_SubtitleTrack" xml:space="preserve"><value>轨道</value></data>
+  <data name="Player_MpvMissing" xml:space="preserve"><value>未找到 libmpv，因此 mpv 不可用。</value></data>
+  <data name="Player_SwitchingToMpv" xml:space="preserve"><value>原生播放失败，正在切换到 mpv。</value></data>
+  <data name="Player_SubtitleFailed" xml:space="preserve"><value>无法加载字幕。</value></data>
+  <data name="Player_ErrorPlayback" xml:space="preserve"><value>播放失败。</value></data>
 </root>

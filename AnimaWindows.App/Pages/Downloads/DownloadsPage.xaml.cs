@@ -51,7 +51,8 @@ public sealed partial class DownloadsPage : Page
                 DefaultButton = ContentDialogButton.Close,
                 XamlRoot = XamlRoot,
             };
-            return await dialog.ShowAsync() == ContentDialogResult.Primary;
+            // Through the shared service: WinUI throws when two ContentDialogs are open on one root (e.g. the Cloudflare check).
+            return await AppServices.Get<IDialogService>().ShowAsync(dialog) == ContentDialogResult.Primary;
         }
         finally
         {

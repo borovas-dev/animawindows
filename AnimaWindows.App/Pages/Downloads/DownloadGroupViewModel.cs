@@ -48,6 +48,7 @@ internal sealed partial class DownloadGroupViewModel : ObservableObject
         {
             _coverUrl = group.CoverUrl;
             Cover = Uri.TryCreate(_coverUrl, UriKind.Absolute, out var uri)
+                    && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
                 ? new BitmapImage(uri) { DecodePixelWidth = 160 }
                 : null;
         }

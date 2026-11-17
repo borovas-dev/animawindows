@@ -105,7 +105,8 @@ public sealed partial class MainWindow : Window
             _ => ElementTheme.Default,
         };
 
-        if (AppWindowTitleBar.IsCustomizationSupported())
+        // Never override the caption-button colours in high contrast: the system supplies accessible ones.
+        if (AppWindowTitleBar.IsCustomizationSupported() && !new Windows.UI.ViewManagement.AccessibilitySettings().HighContrast)
         {
             var bar = AppWindow.TitleBar;
             bar.ButtonForegroundColor = mode switch

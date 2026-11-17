@@ -26,8 +26,21 @@ public sealed class SubtitleLoader : IDisposable
 
     private async Task<string> ReadAsync(string url, IReadOnlyDictionary<string, string> headers, CancellationToken ct)
     {
-        if (Uri.TryCreate(url, UriKind.Absolute, out var local) && local.IsFile)
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var parsed)
+            || (!parsed.IsFile && parsed.Scheme != Uri.UriSchemeHttp && parsed.Scheme != Uri.UriSchemeHttps))
         {
+            throw new InvalidOperationException("Unsupported subtitle location.");
+        }
+
+        if (parsed.IsFile)
+        {
+            var local = parsed;
+            if (local.IsUnc)
+            {
+                // A provider-supplied \\host\share path would make Windows authenticate against a remote machine.
+                throw new InvalidOperationException("Network subtitle paths are not allowed.");
+            }
+
             var bytes = await File.ReadAllBytesAsync(local.LocalPath, ct);
             return Encoding.UTF8.GetString(bytes);
         }

@@ -244,9 +244,20 @@ public sealed partial class SearchViewModel : ObservableObject
             return;
         }
 
-        if (await _solver.SolveAsync(uri))
+        try
         {
-            await RetryAsync();
+            if (await _solver.SolveAsync(uri))
+            {
+                await RetryAsync();
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception e)
+        {
+            // An async command's exception would otherwise surface on the UI thread and end the app.
+            SetError(ErrorInfo.From(e, "Search_Failed"));
         }
     }
 

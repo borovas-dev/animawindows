@@ -228,10 +228,15 @@ public sealed class MpvEngine : IPlaybackEngine, IEmbeddedUiEngine
         var parent = _windowHandle();
         if (parent == nint.Zero) return "No window handle for the mpv video area.";
         var bounds = _surface.CurrentBounds() ?? (0, 0, 640, 360);
-        _child = Win32Interop.CreateWindowEx(
-            0, "Static", string.Empty,
-            Win32Interop.WsChild | Win32Interop.WsVisible | Win32Interop.WsClipSiblings | Win32Interop.WsClipChildren,
-            bounds.Item1, bounds.Item2, bounds.Item3, bounds.Item4, parent, nint.Zero, nint.Zero, nint.Zero);
+        if (_child == nint.Zero)
+        {
+            // Reused across retries: a failed initialisation must not leak one child window per attempt.
+            _child = Win32Interop.CreateWindowEx(
+                0, "Static", string.Empty,
+                Win32Interop.WsChild | Win32Interop.WsVisible | Win32Interop.WsClipSiblings | Win32Interop.WsClipChildren,
+                bounds.Item1, bounds.Item2, bounds.Item3, bounds.Item4, parent, nint.Zero, nint.Zero, nint.Zero);
+        }
+
         if (_child == nint.Zero) return "Could not create the mpv video window.";
 
         var ctx = api.Create();

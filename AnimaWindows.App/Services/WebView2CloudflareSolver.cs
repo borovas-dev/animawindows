@@ -91,8 +91,21 @@ public sealed class WebView2CloudflareSolver : ICloudflareSolver
             if (first == loaded.Task && !show.IsCompleted)
             {
                 await webView.EnsureCoreWebView2Async();
-                webView.CoreWebView2.Settings.UserAgent = NetworkConstants.AniCliUserAgent;
-                webView.CoreWebView2.Navigate(url.AbsoluteUri);
+                var core = webView.CoreWebView2;
+                core.Settings.UserAgent = NetworkConstants.AniCliUserAgent;
+                core.Settings.AreDevToolsEnabled = false;
+                core.Settings.IsStatusBarEnabled = false;
+
+                // Restrict the embedded browser to the site being verified: no popups, no top-level navigation elsewhere.
+                core.NewWindowRequested += (_, args) => args.Handled = true;
+                core.NavigationStarting += (_, args) =>
+                {
+                    if (!IsSameSite(url, args.Uri))
+                    {
+                        args.Cancel = true;
+                    }
+                };
+                core.Navigate(url.AbsoluteUri);
 
                 while (!show.IsCompleted && !cts.IsCancellationRequested)
                 {
@@ -144,6 +157,30 @@ public sealed class WebView2CloudflareSolver : ICloudflareSolver
 
         cancellationToken.ThrowIfCancellationRequested();
         return solved;
+    }
+
+    /// <summary>
+    /// True for http(s) targets on the verified host or a parent/sub domain of it (mirrors redirect between www and apex);
+    /// about:blank is allowed because the challenge page uses it internally.
+    /// </summary>
+    private static bool IsSameSite(Uri site, string target)
+    {
+        if (string.Equals(target, "about:blank", StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        if (!Uri.TryCreate(target, UriKind.Absolute, out var uri)
+            || (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
+        {
+            return false;
+        }
+
+        var a = site.IdnHost;
+        var b = uri.IdnHost;
+        return string.Equals(a, b, StringComparison.OrdinalIgnoreCase)
+               || b.EndsWith("." + a, StringComparison.OrdinalIgnoreCase)
+               || a.EndsWith("." + b, StringComparison.OrdinalIgnoreCase);
     }
 
     private async Task<bool> TryCopyClearanceAsync(CoreWebView2 core, Uri url)

@@ -469,6 +469,14 @@ public sealed partial class PlayerViewModel : ObservableObject, IDisposable
         if (variant is null && set.MasterUrl is null)
             throw new InvalidOperationException(PlayerStrings.Get("Player_ErrorNoStream", "No playable stream was found."));
 
+        if (!_isOffline)
+        {
+            // Stream URLs come from scraped providers: engines must only ever be handed http(s) (no file:, smb:, edl:, ...).
+            var target = variant?.Url ?? set.MasterUrl;
+            if (!IsHttpUrl(target) || (!string.IsNullOrEmpty(set.ExternalAudioUrl) && !IsHttpUrl(set.ExternalAudioUrl)))
+                throw new InvalidOperationException(PlayerStrings.Get("Player_ErrorNoStream", "No playable stream was found."));
+        }
+
         SelectedQualityHeight = explicitHeight;
         _lastKnownPositionMs = startMs;
         if (engine is IEmbeddedUiEngine embedded) embedded.MediaTitle = Title;
@@ -477,6 +485,9 @@ public sealed partial class PlayerViewModel : ObservableObject, IDisposable
         if (!ReferenceEquals(engine, _engine)) return;
         if (engine.State != PlaybackState.Failed) IsLoading = false;
     }
+
+    private static bool IsHttpUrl(string? url) =>
+        Uri.TryCreate(url, UriKind.Absolute, out var uri) && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
 
     private static IReadOnlyList<QualityOption> BuildQualityOptions(StreamSet set)
     {

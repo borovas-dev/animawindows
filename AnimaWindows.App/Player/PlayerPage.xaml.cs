@@ -554,6 +554,13 @@ public sealed partial class PlayerPage : Page
 
     private void OnPreviewKeyDown(object sender, KeyRoutedEventArgs e)
     {
+        // Keyboard users tabbing into the (faded-out) transport bar must see where focus is.
+        if (!_controlsVisible && e.Key is VirtualKey.Tab) RevealControls();
+
+        // Focused controls keep their own keys: Space activates a focused button, arrows move a focused slider.
+        if (e.OriginalSource is ButtonBase && e.Key is VirtualKey.Space or VirtualKey.GamepadA) return;
+        if (e.OriginalSource is Slider && e.Key is VirtualKey.Left or VirtualKey.Right or VirtualKey.Up or VirtualKey.Down) return;
+
         var modified = IsDown(VirtualKey.Control) || IsDown(VirtualKey.Menu) || IsDown(VirtualKey.LeftWindows) || IsDown(VirtualKey.RightWindows);
         if (PlayerKeyMap.Map(e.Key, modified, ViewModel.CanExitFullscreenOrOverlay) is not { } action) return;
         e.Handled = true;

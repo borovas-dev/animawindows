@@ -228,9 +228,19 @@ public sealed partial class DetailsViewModel : ObservableObject
     [RelayCommand]
     private async Task VerifyAsync()
     {
-        if (CloudflareUrl is not null && Uri.TryCreate(CloudflareUrl, UriKind.Absolute, out var uri) && await _solver.SolveAsync(uri))
+        try
         {
-            await LoadAsync();
+            if (CloudflareUrl is not null && Uri.TryCreate(CloudflareUrl, UriKind.Absolute, out var uri) && await _solver.SolveAsync(uri))
+            {
+                await LoadAsync();
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception e)
+        {
+            Fail(e);
         }
     }
 

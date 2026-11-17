@@ -65,6 +65,14 @@ public sealed partial class HomeViewModel : ObservableObject
         catch (OperationCanceledException)
         {
         }
+        catch (Exception e)
+        {
+            // Observed from a fire-and-forget call: log, and stop showing the skeleton forever.
+            System.Diagnostics.Debug.WriteLine($"Home library observation failed: {e.Message}");
+            _continueLoaded = true;
+            _favoritesLoaded = true;
+            RaiseState();
+        }
     }
 
     private async Task ObserveContinueAsync(CancellationToken ct)

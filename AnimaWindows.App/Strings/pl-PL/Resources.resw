@@ -286,4 +286,42 @@
   <data name="Settings_Animadroid_Link.Content" xml:space="preserve"><value>animadroid</value></data>
   <data name="Settings_License_Link.Content" xml:space="preserve"><value>GPL-3.0</value></data>
   <data name="Settings_Source_Link.Content" xml:space="preserve"><value>GitHub</value></data>
+  <data name="Player_Back" xml:space="preserve"><value>Wstecz</value></data>
+  <data name="Player_Previous" xml:space="preserve"><value>Poprzedni odcinek</value></data>
+  <data name="Player_PlayPause" xml:space="preserve"><value>Odtwarzaj lub wstrzymaj</value></data>
+  <data name="Player_Next" xml:space="preserve"><value>Następny odcinek</value></data>
+  <data name="Player_Mute" xml:space="preserve"><value>Wycisz</value></data>
+  <data name="Player_Volume" xml:space="preserve"><value>Głośność</value></data>
+  <data name="Player_Seek" xml:space="preserve"><value>Przewiń</value></data>
+  <data name="Player_Speed" xml:space="preserve"><value>Szybkość odtwarzania</value></data>
+  <data name="Player_Subtitles" xml:space="preserve"><value>Napisy</value></data>
+  <data name="Player_Quality" xml:space="preserve"><value>Jakość</value></data>
+  <data name="Player_Engine" xml:space="preserve"><value>Silnik odtwarzania</value></data>
+  <data name="Player_CompactOverlay" xml:space="preserve"><value>Małe okno na wierzchu</value></data>
+  <data name="Player_Fullscreen" xml:space="preserve"><value>Pełny ekran</value></data>
+  <data name="Player_Skip" xml:space="preserve"><value>Pomiń</value></data>
+  <data name="Player_Retry" xml:space="preserve"><value>Spróbuj ponownie</value></data>
+  <data name="Player_Undo" xml:space="preserve"><value>Cofnij</value></data>
+  <data name="Player_EngineAuto" xml:space="preserve"><value>Automatyczny</value></data>
+  <data name="Player_EngineNative" xml:space="preserve"><value>Windows Media (natywny)</value></data>
+  <data name="Player_EngineMpv" xml:space="preserve"><value>mpv</value></data>
+  <data name="Player_SkipOutro" xml:space="preserve"><value>Pomiń zakończenie</value></data>
+  <data name="Player_SkipIntro" xml:space="preserve"><value>Pomiń intro</value></data>
+  <data name="Player_SkippedOutro" xml:space="preserve"><value>Pominięto zakończenie</value></data>
+  <data name="Player_SkippedIntro" xml:space="preserve"><value>Pominięto intro</value></data>
+  <data name="Player_ErrorNoEpisodes" xml:space="preserve"><value>Nie ma nic do odtworzenia.</value></data>
+  <data name="Player_SubtitlesOff" xml:space="preserve"><value>Wyłączone</value></data>
+  <data name="Player_Episode" xml:space="preserve"><value>Odcinek</value></data>
+  <data name="Player_ErrorNotDownloaded" xml:space="preserve"><value>Ten odcinek nie jest pobrany.</value></data>
+  <data name="Player_Offline" xml:space="preserve"><value>Offline</value></data>
+  <data name="Player_Source" xml:space="preserve"><value>Źródło:</value></data>
+  <data name="Player_SourceFallback" xml:space="preserve"><value>(zapasowe)</value></data>
+  <data name="Player_ErrorCloudflare" xml:space="preserve"><value>Źródło wymaga weryfikacji Cloudflare.</value></data>
+  <data name="Player_ErrorNoStream" xml:space="preserve"><value>Nie znaleziono strumienia do odtworzenia.</value></data>
+  <data name="Player_QualityAuto" xml:space="preserve"><value>Auto</value></data>
+  <data name="Player_SubtitleTrack" xml:space="preserve"><value>Ścieżka</value></data>
+  <data name="Player_MpvMissing" xml:space="preserve"><value>Nie znaleziono libmpv, więc mpv jest niedostępny.</value></data>
+  <data name="Player_SwitchingToMpv" xml:space="preserve"><value>Odtwarzanie natywne nie powiodło się, przełączanie na mpv.</value></data>
+  <data name="Player_SubtitleFailed" xml:space="preserve"><value>Nie można wczytać napisów.</value></data>
+  <data name="Player_ErrorPlayback" xml:space="preserve"><value>Odtwarzanie nie powiodło się.</value></data>
 </root>

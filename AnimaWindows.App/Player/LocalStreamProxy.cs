@@ -197,7 +197,10 @@ public sealed class LocalStreamProxy : IDisposable
     private async Task RouteAsync(NetworkStream stream, ProxyRequest request, CancellationToken ct)
     {
         // DNS-rebinding guard: only serve requests that name the loopback host.
-        if (!request.Headers.TryGetValue("Host", out var host) || !host.StartsWith("127.0.0.1", StringComparison.Ordinal))
+        // Exact match: a prefix test would also accept names such as "127.0.0.1.evil.example".
+        if (!request.Headers.TryGetValue("Host", out var host)
+            || !(host.Equals("127.0.0.1", StringComparison.Ordinal)
+                 || host.Equals("127.0.0.1:" + _port.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal)))
         {
             await WriteSimpleAsync(stream, 403, "Forbidden", ct).ConfigureAwait(false);
             return;

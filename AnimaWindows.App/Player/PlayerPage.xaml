@@ -73,11 +73,11 @@
                 MaxWidth="480"
                 Spacing="12"
                 Padding="24"
-                CornerRadius="8"
+                CornerRadius="{StaticResource OverlayCornerRadius}"
                 Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
                 Visibility="{x:Bind ViewModel.HasError, Mode=OneWay}">
                 <FontIcon Glyph="&#xE783;" FontSize="32" HorizontalAlignment="Center" />
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" />
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" AutomationProperties.LiveSetting="Assertive" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" />
                 <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
                     <Button x:Name="RetryButton" AutomationProperties.AutomationId="Player.Retry" Style="{StaticResource AccentButtonStyle}" Click="OnRetryClick" />
                     <Button x:Name="ErrorBackButton" AutomationProperties.AutomationId="Player.Error.Back" Click="OnBackClick" />
@@ -91,11 +91,11 @@
                 VerticalAlignment="Top"
                 Margin="0,72,0,0"
                 Padding="16,8"
-                CornerRadius="4"
+                CornerRadius="{StaticResource ControlCornerRadius}"
                 IsHitTestVisible="False"
                 Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
                 Visibility="{x:Bind ViewModel.HasNotice, Mode=OneWay}">
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.Notice, Mode=OneWay}" />
+                <TextBlock AutomationProperties.LiveSetting="Polite" Style="{StaticResource BodyTextBlockStyle}" Text="{x:Bind ViewModel.Notice, Mode=OneWay}" />
             </Border>
 
             <!-- Skip intro/outro button and the 5 s undo prompt. -->
@@ -116,7 +116,7 @@
                     x:Name="UndoPanel"
                     HorizontalAlignment="Right"
                     Padding="12,4,4,4"
-                    CornerRadius="4"
+                    CornerRadius="{StaticResource ControlCornerRadius}"
                     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
                     Visibility="{x:Bind ViewModel.IsUndoVisible, Mode=OneWay}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
