@@ -51,6 +51,8 @@ public sealed partial class MainWindow : Window
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
+        AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
+        GlobalSearch.LayoutUpdated += (_, _) => CenterSearchBox();
         AppWindow.Title = "animawindows";
 
         _placement = new WindowPlacement(AppServices.Get<IAppPaths>(), AppWindow, DispatcherQueue);
@@ -214,6 +216,36 @@ public sealed partial class MainWindow : Window
     private void SizeSearchBox(double windowWidth)
     {
         GlobalSearch.Width = Math.Clamp(windowWidth * 0.36, 200, 560);
+    }
+
+    /// <summary>
+    /// The title bar places its content between the title and the caption buttons; shift the box (render transform only,
+    /// no relayout) so it sits on the window's centre line, as long as it does not run into the title or the buttons.
+    /// </summary>
+    private void CenterSearchBox()
+    {
+        if (GlobalSearch.Visibility != Visibility.Visible || GlobalSearch.ActualWidth <= 0 || RootGrid.ActualWidth <= 0)
+        {
+            return;
+        }
+
+        var shift = GlobalSearch.RenderTransform as Microsoft.UI.Xaml.Media.TranslateTransform;
+        if (shift is null)
+        {
+            shift = new Microsoft.UI.Xaml.Media.TranslateTransform();
+            GlobalSearch.RenderTransform = shift;
+        }
+
+        var left = GlobalSearch.TransformToVisual(RootGrid).TransformPoint(default).X - shift.X;
+        const double TitleAreaWidth = 200; // icon, pane toggle and "animawindows"
+        var wanted = (RootGrid.ActualWidth - GlobalSearch.ActualWidth) / 2;
+        var rightLimit = RootGrid.ActualWidth - AppWindow.TitleBar.RightInset / (RootGrid.XamlRoot?.RasterizationScale ?? 1) - GlobalSearch.ActualWidth - 8;
+        var target = Math.Min(Math.Max(wanted, TitleAreaWidth), Math.Max(rightLimit, TitleAreaWidth));
+        var delta = Math.Round(target - left);
+        if (Math.Abs(delta - shift.X) >= 1)
+        {
+            shift.X = delta;
+        }
     }
 
     /// <summary>Opens Search through the navigation pane (same path as the menu item) and focuses the box.</summary>

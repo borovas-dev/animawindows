@@ -9,7 +9,6 @@
 
     <ScrollViewer>
         <StackPanel
-            MaxWidth="{StaticResource SettingsMaxWidth}"
             Padding="{StaticResource PagePadding}"
             Spacing="4">
             <TextBlock x:Uid="Settings_Title" Style="{StaticResource TitleTextBlockStyle}" />

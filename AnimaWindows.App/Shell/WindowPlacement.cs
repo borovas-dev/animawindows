@@ -26,6 +26,10 @@ public sealed class WindowPlacement
     private const int DefaultWidth = 1280;
     private const int DefaultHeight = 800;
 
+    /// <summary>Smaller saved bounds are treated as accidental (e.g. left over from picture-in-picture).</summary>
+    private const int MinRestoreWidth = 800;
+    private const int MinRestoreHeight = 560;
+
     private readonly string _path;
     private readonly AppWindow _window;
     private readonly DispatcherQueueTimer _saveTimer;
@@ -49,7 +53,7 @@ public sealed class WindowPlacement
             if (File.Exists(_path))
             {
                 var loaded = JsonSerializer.Deserialize(File.ReadAllText(_path), WindowPlacementJsonContext.Default.WindowPlacementData);
-                if (loaded is { Width: > 200, Height: > 200 })
+                if (loaded is not null && loaded.Width >= MinRestoreWidth && loaded.Height >= MinRestoreHeight)
                 {
                     _data = loaded;
                     _hasBounds = true;
@@ -104,6 +108,11 @@ public sealed class WindowPlacement
                 _data.Maximized = true;
                 break;
             case OverlappedPresenterState.Restored:
+                if (sender.Size.Width < MinRestoreWidth || sender.Size.Height < MinRestoreHeight)
+                {
+                    return; // keep the last normal-size bounds for the next launch
+                }
+
                 _data.Maximized = false;
                 _data.X = sender.Position.X;
                 _data.Y = sender.Position.Y;

@@ -83,13 +83,37 @@ public sealed class ShellChrome : IShellChrome
         }
     }
 
-    public void EnterCompactOverlay() => _appWindow?.SetPresenter(AppWindowPresenterKind.CompactOverlay);
+    private Windows.Graphics.RectInt32? _boundsBeforeOverlay;
+
+    public void EnterCompactOverlay()
+    {
+        if (_appWindow is null || IsCompactOverlay)
+        {
+            return;
+        }
+
+        if (_appWindow.Presenter is OverlappedPresenter { State: OverlappedPresenterState.Restored })
+        {
+            _boundsBeforeOverlay = new Windows.Graphics.RectInt32(_appWindow.Position.X, _appWindow.Position.Y, _appWindow.Size.Width, _appWindow.Size.Height);
+        }
+
+        var overlay = CompactOverlayPresenter.Create();
+        overlay.InitialSize = CompactOverlaySize.Large;
+        _appWindow.SetPresenter(overlay);
+    }
 
     public void ExitCompactOverlay()
     {
-        if (IsCompactOverlay)
+        if (_appWindow is null || !IsCompactOverlay)
         {
-            _appWindow?.SetPresenter(AppWindowPresenterKind.Default);
+            return;
+        }
+
+        _appWindow.SetPresenter(AppWindowPresenterKind.Default);
+        if (_boundsBeforeOverlay is { } bounds)
+        {
+            _appWindow.MoveAndResize(bounds);
+            _boundsBeforeOverlay = null;
         }
     }
 
