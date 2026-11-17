@@ -86,7 +86,11 @@ internal sealed class FakeNetwork : INetworkCostProvider
 
 internal sealed class TempDir : IDisposable
 {
-    public TempDir() => Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "anima-tests-" + Guid.NewGuid().ToString("N"));
+    public TempDir()
+    {
+        Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "anima-tests-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(Path);
+    }
 
     public string Path { get; }
 
