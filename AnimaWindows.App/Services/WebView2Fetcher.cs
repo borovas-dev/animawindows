@@ -2,7 +2,6 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using AnimaWindows.Core.Abstractions;
 using Microsoft.UI.Dispatching;
 using Microsoft.Web.WebView2.Core;
 
@@ -19,16 +18,11 @@ public sealed class WebView2Fetcher
     private static readonly TimeSpan ChallengeWait = TimeSpan.FromSeconds(20);
 
     private readonly ShellChrome _chrome;
-    private readonly string _userDataFolder;
     private readonly SemaphoreSlim _gate = new(1, 1);
-    private CoreWebView2Controller? _controller;
+    private Microsoft.UI.Xaml.Controls.WebView2? _view;
     private string? _origin;
 
-    public WebView2Fetcher(ShellChrome chrome, IAppPaths paths)
-    {
-        _chrome = chrome;
-        _userDataFolder = Path.Combine(paths.CacheDirectory, "webview-fetch");
-    }
+    public WebView2Fetcher(ShellChrome chrome) => _chrome = chrome;
 
     public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
@@ -74,22 +68,40 @@ public sealed class WebView2Fetcher
         return result ?? throw new HttpRequestException($"WebView2 fetch failed for {uri}");
     }
 
+    /// <summary>
+    /// A regular XAML WebView2, 1x1 px, transparent and not focusable, parked in the window's root grid.
+    /// (A raw CoreWebView2Controller on the WinUI window's HWND fail-fasts the process.)
+    /// </summary>
     private async Task<CoreWebView2> EnsureWebViewAsync()
     {
-        if (_controller is not null)
+        if (_view?.CoreWebView2 is { } existing)
         {
-            return _controller.CoreWebView2;
+            return existing;
         }
 
-        Directory.CreateDirectory(_userDataFolder);
-        var env = await CoreWebView2Environment.CreateWithOptionsAsync("", _userDataFolder, new CoreWebView2EnvironmentOptions());
-        var window = CoreWebView2ControllerWindowReference.CreateFromWindowHandle((ulong)_chrome.WindowHandle);
-        _controller = await env.CreateCoreWebView2ControllerAsync(window);
-        _controller.IsVisible = false;
-        _controller.CoreWebView2.Settings.AreDevToolsEnabled = false;
-        _controller.CoreWebView2.Settings.IsScriptEnabled = true;
-        _controller.CoreWebView2.IsMuted = true;
-        return _controller.CoreWebView2;
+        if (_chrome.Window.Content is not Microsoft.UI.Xaml.Controls.Panel root)
+        {
+            throw new InvalidOperationException("The window content is not a panel.");
+        }
+
+        _view = new Microsoft.UI.Xaml.Controls.WebView2
+        {
+            Width = 1,
+            Height = 1,
+            Opacity = 0,
+            IsHitTestVisible = false,
+            IsTabStop = false,
+            HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Left,
+            VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Top,
+        };
+        Microsoft.UI.Xaml.Automation.AutomationProperties.SetAccessibilityView(_view, Microsoft.UI.Xaml.Automation.Peers.AccessibilityView.Raw);
+        Microsoft.UI.Xaml.Controls.Grid.SetRowSpan(_view, 2);
+        root.Children.Add(_view);
+        await _view.EnsureCoreWebView2Async();
+        var web = _view.CoreWebView2;
+        web.IsMuted = true;
+        web.Settings.AreDevToolsEnabled = false;
+        return web;
     }
 
     private async Task NavigateAsync(CoreWebView2 web, string url, CancellationToken ct)
