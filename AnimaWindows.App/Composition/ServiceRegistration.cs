@@ -105,7 +105,12 @@ public static class ServiceRegistration
             sp.GetRequiredService<ISettingsStore>(),
             ProviderChainOptions.Default,
             sp.GetRequiredService<IProviderAvailability>()));
-        services.AddSingleton<IProviderChain>(sp => sp.GetRequiredService<ProviderChain>());
+        services.AddSingleton<IProviderChain>(sp =>
+        {
+            var chain = sp.GetRequiredService<ProviderChain>();
+            chain.AttemptFailed += (_, e) => AppLog.Write($"Source {e.ProviderId} failed: {e.Error.GetType().Name}: {e.Error.Message}{(e.Error.InnerException is { } inner ? $" ({inner.GetType().Name}: {inner.Message})" : "")}");
+            return chain;
+        });
 
         // AniSkip, updates, health.
         services.AddSingleton(sp => new AniSkipRepository(sp.GetRequiredService<HttpClient>()));

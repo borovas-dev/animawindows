@@ -34,8 +34,18 @@ public sealed class WebView2Fetcher
         await _gate.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
-            var raw = await OnUiAsync(() => FetchOnUiAsync(uri, request.Method.Method, body, contentType, referrer, cancellationToken)).ConfigureAwait(false);
-            return ToResponse(raw, request);
+            try
+            {
+                var raw = await OnUiAsync(() => FetchOnUiAsync(uri, request.Method.Method, body, contentType, referrer, cancellationToken)).ConfigureAwait(false);
+                var response = ToResponse(raw, request);
+                AppLog.Write($"WebView2 {request.Method} {uri} -> {(int)response.StatusCode}");
+                return response;
+            }
+            catch (Exception e) when (e is not OperationCanceledException)
+            {
+                AppLog.Write($"WebView2 {request.Method} {uri} failed: {e.Message}");
+                throw;
+            }
         }
         finally
         {

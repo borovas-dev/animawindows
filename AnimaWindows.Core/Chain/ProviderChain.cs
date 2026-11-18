@@ -145,12 +145,16 @@ public sealed class ProviderChain : IProviderChain
             next++;
             if (r.Error is null) return r.Value!;
             failures.Add(r.Error);
+            AttemptFailed?.Invoke(this, new ProviderAttemptFailedEventArgs(candidates[next - 1].Provider.Id, r.Error));
         }
 
         throw PickFailure(failures);
     }
 
     private sealed record Candidate(IAnimeProvider Provider, Anime Anime, bool IsFallback);
+
+    /// <summary>Raised (any thread) when one provider's stream resolution fails, before the chain tries the next one.</summary>
+    public event EventHandler<ProviderAttemptFailedEventArgs>? AttemptFailed;
 
     private List<Candidate> Candidates(Anime anime, AppSettings s)
     {
@@ -326,4 +330,11 @@ public sealed class ProviderChain : IProviderChain
             return g.Head with { Alternates = alts };
         }).ToList();
     }
+}
+
+public sealed class ProviderAttemptFailedEventArgs(string providerId, Exception error) : EventArgs
+{
+    public string ProviderId { get; } = providerId;
+
+    public Exception Error { get; } = error;
 }
