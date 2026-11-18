@@ -58,6 +58,15 @@ jobs:
           New-Item -ItemType Directory -Force $dest | Out-Null
           Copy-Item $dll.FullName $dest
 
+      - name: Stamp package version
+        shell: pwsh
+        run: |
+          $path = 'AnimaWindows.App/Package.appxmanifest'
+          [xml]$m = Get-Content $path -Raw
+          $m.Package.Identity.Version = "0.1.${{ github.run_number }}.0"
+          $m.Save((Resolve-Path $path))
+          Write-Host "Version $($m.Package.Identity.Version)"
+
       - name: Restore
         run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }} -p:WindowsAppSDKSelfContained=true
       - name: Build MSIX
@@ -165,6 +174,15 @@ jobs:
           $m.Package.Identity.Publisher = 'CN=F1DA27C4-A9D4-4721-AC60-FE545585BDF8'
           $m.Package.Properties.PublisherDisplayName = 'borovas-dev'
           $m.Save((Resolve-Path $path))
+
+      - name: Stamp package version
+        shell: pwsh
+        run: |
+          $path = 'AnimaWindows.App/Package.appxmanifest'
+          [xml]$m = Get-Content $path -Raw
+          $m.Package.Identity.Version = "0.1.${{ github.run_number }}.0"
+          $m.Save((Resolve-Path $path))
+          Write-Host "Version $($m.Package.Identity.Version)"
 
       - name: Restore
         run: dotnet restore AnimaWindows.App/AnimaWindows.App.csproj -p:Platform=${{ matrix.platform }} -p:WindowsAppSDKSelfContained=true
