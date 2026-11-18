@@ -90,7 +90,7 @@ public sealed class WebView2Fetcher
         var headers = referrer is null ? "" : "Referer: " + referrer + "\r\n";
         var request = web.Environment.CreateWebResourceRequest(uri.AbsoluteUri, "GET", null, headers);
         var status = await NavigateAsync(web, () => web.NavigateWithWebResourceRequest(request), ct).ConfigureAwait(true);
-        var html = await web.ExecuteScriptAsync("document.documentElement.outerHTML").ConfigureAwait(true);
+        var html = await web.ExecuteScriptAsync("document.documentElement.outerHTML");
         var text = JsonDocument.Parse(html).RootElement.GetString() ?? "";
         return "{\"ok\":true,\"s\":" + status + ",\"c\":\"text/html; charset=utf-8\",\"t\":" + Js(text) + "}";
     }
