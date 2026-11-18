@@ -75,7 +75,30 @@ public sealed class WebView2Fetcher
             result = await EvaluateFetchAsync(web, uri, method, body, contentType, referrer).ConfigureAwait(true);
         }
 
+        // Some pages (shinden.pl episode pages) answer fetch() with 403 and are only served to a real page load.
+        if (method == "GET" && (result is null || StatusOf(result) == 403))
+        {
+            result = await LoadPageAsync(web, uri, referrer, ct).ConfigureAwait(true);
+        }
+
         return result ?? throw new HttpRequestException($"WebView2 fetch failed for {uri}");
+    }
+
+    /// <summary>Navigates the hidden view to <paramref name="uri"/> as a top-level page load and returns its HTML as an envelope.</summary>
+    private async Task<string> LoadPageAsync(CoreWebView2 web, Uri uri, string? referrer, CancellationToken ct)
+    {
+        var headers = referrer is null ? "" : "Referer: " + referrer + "\r\n";
+        var request = web.Environment.CreateWebResourceRequest(uri.AbsoluteUri, "GET", null, headers);
+        var status = await NavigateAsync(web, () => web.NavigateWithWebResourceRequest(request), ct).ConfigureAwait(true);
+        var html = await web.ExecuteScriptAsync("document.documentElement.outerHTML").ConfigureAwait(true);
+        var text = JsonDocument.Parse(html).RootElement.GetString() ?? "";
+        return "{\"ok\":true,\"s\":" + status + ",\"c\":\"text/html; charset=utf-8\",\"t\":" + Js(text) + "}";
+    }
+
+    private static int StatusOf(string envelope)
+    {
+        using var doc = JsonDocument.Parse(envelope);
+        return doc.RootElement.TryGetProperty("s", out var s) ? s.GetInt32() : 0;
     }
 
     /// <summary>
@@ -114,17 +137,23 @@ public sealed class WebView2Fetcher
         return web;
     }
 
-    private async Task NavigateAsync(CoreWebView2 web, string url, CancellationToken ct)
+    private Task<int> NavigateAsync(CoreWebView2 web, string url, CancellationToken ct) =>
+        NavigateAsync(web, () => web.Navigate(url), ct);
+
+    /// <summary>Starts a navigation, waits for it (and any Cloudflare JS challenge) to finish; returns the HTTP status.</summary>
+    private async Task<int> NavigateAsync(CoreWebView2 web, Action start, CancellationToken ct)
     {
-        var done = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        void OnCompleted(CoreWebView2 sender, CoreWebView2NavigationCompletedEventArgs args) => done.TrySetResult();
+        var done = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        void OnCompleted(CoreWebView2 sender, CoreWebView2NavigationCompletedEventArgs args) =>
+            done.TrySetResult(args.HttpStatusCode != 0 ? args.HttpStatusCode : args.IsSuccess ? 200 : 502);
         web.NavigationCompleted += OnCompleted;
+        int status;
         try
         {
-            web.Navigate(url);
+            start();
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(NavigationTimeout);
-            await done.Task.WaitAsync(timeout.Token).ConfigureAwait(true);
+            status = await done.Task.WaitAsync(timeout.Token).ConfigureAwait(true);
         }
         finally
         {
@@ -133,12 +162,15 @@ public sealed class WebView2Fetcher
 
         // A Cloudflare JS challenge solves itself in a real browser; wait for it to hand over to the site.
         var until = DateTime.UtcNow + ChallengeWait;
+        var challenged = false;
         while (DateTime.UtcNow < until && IsChallengeTitle(await web.ExecuteScriptAsync("document.title")))
         {
+            challenged = true;
             await Task.Delay(500, ct).ConfigureAwait(true);
         }
 
         _origin = new Uri(web.Source).GetLeftPart(UriPartial.Authority);
+        return challenged ? 200 : status;
     }
 
     /// <summary>Runs fetch() in the page. Returns the JSON envelope, or null when the browser refused the request (CORS / network).</summary>
