@@ -177,10 +177,8 @@ public sealed class WebView2Fetcher
     private static async Task<string?> EvaluateFetchAsync(CoreWebView2 web, Uri uri, string method, string? body, string? contentType, string? referrer)
     {
         var init = new StringBuilder("{credentials:'include',redirect:'follow',method:").Append(Js(method));
-        if (referrer is not null)
-        {
-            init.Append(",referrer:").Append(Js(referrer));
-        }
+        // No explicit referrer: the browser sends the page it is on, as the site's own scripts do (api4.shinden.pl
+        // rejects player_load with the bare site root as referrer).
 
         if (body is not null)
         {
