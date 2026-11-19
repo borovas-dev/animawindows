@@ -285,6 +285,28 @@ public sealed class BrowserRoutingHandler(WebView2Fetcher fetcher, HttpClient fa
     {
         var host = request.RequestUri?.Host ?? "";
         var viaBrowser = domains.Any(d => host.Equals(d, StringComparison.OrdinalIgnoreCase) || host.EndsWith("." + d, StringComparison.OrdinalIgnoreCase));
-        return viaBrowser ? fetcher.SendAsync(request, cancellationToken) : fallback.SendAsync(request, cancellationToken);
+        return viaBrowser ? fetcher.SendAsync(request, cancellationToken) : SendViaFallbackAsync(request, cancellationToken);
+    }
+
+    /// <summary>An HttpClient will not send a message that another client already sent, so hand it a copy.</summary>
+    private async Task<HttpResponseMessage> SendViaFallbackAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        var copy = new HttpRequestMessage(request.Method, request.RequestUri) { Version = request.Version, VersionPolicy = request.VersionPolicy };
+        foreach (var header in request.Headers)
+        {
+            copy.Headers.TryAddWithoutValidation(header.Key, header.Value);
+        }
+
+        if (request.Content is not null)
+        {
+            var bytes = await request.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
+            copy.Content = new ByteArrayContent(bytes);
+            foreach (var header in request.Content.Headers)
+            {
+                copy.Content.Headers.TryAddWithoutValidation(header.Key, header.Value);
+            }
+        }
+
+        return await fallback.SendAsync(copy, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
     }
 }
