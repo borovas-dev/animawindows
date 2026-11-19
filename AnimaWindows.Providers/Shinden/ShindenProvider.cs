@@ -133,6 +133,7 @@ public sealed class ShindenProvider : IAnimeProvider
     {
         var page = await _http.GetStringAsync($"{baseUrl}/episode/{anime.Id}/view/{episode.Id}", $"{baseUrl}/", cancellationToken: ct).ConfigureAwait(false);
         var players = ShindenParsers.ParsePlayers(page);
+        var auth = ShindenParsers.ParseAuth(page) ?? GuestAuth;
         var candidates = ShindenSelection.Rank(players, mode);
         if (candidates.Count == 0)
         {
@@ -160,7 +161,7 @@ public sealed class ShindenProvider : IAnimeProvider
             PlayerShow show;
             try
             {
-                show = await ResolveShowAsync(baseUrl, p.OnlineId, ct).ConfigureAwait(false);
+                show = await ResolveShowAsync(baseUrl, p.OnlineId, auth, ct).ConfigureAwait(false);
             }
             catch (ProviderException e)
             {
@@ -206,14 +207,15 @@ public sealed class ShindenProvider : IAnimeProvider
                     break;
             }
         }
-        throw new ProviderException($"No playable Shinden source for episode {episode.Number}: {string.Join("; ", skipped)}");
+        var tokenSource = ReferenceEquals(auth, GuestAuth) ? "built-in guest token" : "page token";
+        throw new ProviderException($"No playable Shinden source for episode {episode.Number} ({tokenSource}): {string.Join("; ", skipped)}");
     }
 
     /// <summary><c>player_load</c> then, after the antibot pause, <c>player_show</c>; mirrors the reference tool's two-step protocol.</summary>
-    private async Task<PlayerShow> ResolveShowAsync(string baseUrl, string onlineId, CancellationToken ct)
+    private async Task<PlayerShow> ResolveShowAsync(string baseUrl, string onlineId, string authToken, CancellationToken ct)
     {
         var api = Api();
-        var auth = $"auth={GuestAuth}";
+        var auth = $"auth={authToken}";
         await _http.GetStringAsync($"{api}/xhr/{onlineId}/player_load?{auth}", $"{baseUrl}/", cancellationToken: ct).ConfigureAwait(false);
         await _delay(_antibotDelay, ct).ConfigureAwait(false);
         return ShindenParsers.ParsePlayerShow(

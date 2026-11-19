@@ -271,4 +271,17 @@ internal static partial class ShindenParsers
     }
 
     public static bool IsValidId(string idSlug) => ValidId().IsMatch(idSlug);
+
+    private static readonly System.Text.RegularExpressions.Regex AuthPattern = new(
+        @"_Storage\.basic\s*=\s*['""]([^'""]+)['""]", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
+    /// <summary>
+    /// The per-visitor API token the episode page sets for its own player (<c>_Storage.basic = '...'</c>), URL-encoded for a
+    /// query string; null when absent. The hard-coded guest token expires, this one is always current.
+    /// </summary>
+    public static string? ParseAuth(string html)
+    {
+        var m = AuthPattern.Match(html);
+        return m.Success ? Uri.EscapeDataString(Uri.UnescapeDataString(m.Groups[1].Value)) : null;
+    }
 }

@@ -166,4 +166,14 @@ public class ShindenParsersTests
         Assert.Null(HostRegistry.ExternalReason("Sibnet"));
         Assert.Null(HostRegistry.ExternalReason("Cda"));
     }
+
+    [Fact]
+    public void ParseAuth_reads_page_token_and_url_encodes_it()
+    {
+        const string html = "<script>var _Storage = {};\n_Storage.basic = 'X2d1ZXN0XzowLDUsMjEwMDAwMDAsMjU1LDEyMzQ1Njc4OTA=';\n</script>";
+        Assert.Equal("X2d1ZXN0XzowLDUsMjEwMDAwMDAsMjU1LDEyMzQ1Njc4OTA%3D", ShindenParsers.ParseAuth(html));
+    }
+
+    [Fact]
+    public void ParseAuth_returns_null_without_token() => Assert.Null(ShindenParsers.ParseAuth("<html></html>"));
 }
