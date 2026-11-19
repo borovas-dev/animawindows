@@ -92,6 +92,11 @@ public sealed class WebView2Fetcher
         var status = await NavigateAsync(web, () => web.NavigateWithWebResourceRequest(request), ct).ConfigureAwait(true);
         var html = await web.ExecuteScriptAsync("document.documentElement.outerHTML");
         var text = JsonDocument.Parse(html).RootElement.GetString() ?? "";
+        // TEMP diagnostics: where does the page keep its API token?
+        var probe = await web.ExecuteScriptAsync(
+            "(()=>{const o={};try{o.storage=typeof _Storage!=='undefined'?JSON.stringify(_Storage).slice(0,600):null}catch(e){o.storage=String(e)}" +
+            "const h=document.documentElement.outerHTML;const re=/.{0,100}(auth|basic|api4|xhr).{0,140}/gi;o.hits=(h.match(re)||[]).slice(0,12);return JSON.stringify(o)})()");
+        AppLog.Write("Page probe " + uri + ": " + probe);
         return "{\"ok\":true,\"s\":" + status + ",\"c\":\"text/html; charset=utf-8\",\"t\":" + Js(text) + "}";
     }
 
