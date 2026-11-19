@@ -178,7 +178,7 @@ public class ShindenProviderTests
             new FakeProviderConfig(() => new ProviderRemoteConfig { BaseUrls = [Origin], Params = new Dictionary<string, string> { ["apiUrl"] = Origin } }),
             delay: (_, _) => Task.CompletedTask);
         var e = await Assert.ThrowsAsync<ProviderException>(() => p.StreamsAsync(TheAnime, new Episode("1", "1"), TranslationMode.Sub));
-        Assert.StartsWith("No playable Shinden source for episode 1: ", e.Message);
+        Assert.StartsWith("No playable Shinden source for episode 1 (built-in guest token): ", e.Message);
         Assert.Contains("Mega: MEGA is end-to-end encrypted", e.Message);
         Assert.Equal(3, handler.Seen.Count(s => s.Contains("/player_show", StringComparison.Ordinal)));
         Assert.Contains("not tried (attempt limit)", e.Message);
