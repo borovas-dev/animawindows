@@ -273,15 +273,29 @@ internal static partial class ShindenParsers
     public static bool IsValidId(string idSlug) => ValidId().IsMatch(idSlug);
 
     private static readonly System.Text.RegularExpressions.Regex AuthPattern = new(
-        @"_Storage\.basic\s*=\s*['""]([^'""]+)['""]", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+        @"data-player-auth\s*=\s*[""']([^""']+)[""']", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
+    private static readonly System.Text.RegularExpressions.Regex XhrPattern = new(
+        @"_Storage\.XHRService\s*=\s*['""]([^'""]+)['""]", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
 
     /// <summary>
-    /// The per-visitor API token the episode page sets for its own player (<c>_Storage.basic = '...'</c>), URL-encoded for a
-    /// query string; null when absent. The hard-coded guest token expires, this one is always current.
+    /// The visitor's player token from the episode page (<c>data-player-auth="..."</c>), URL-encoded for a query string;
+    /// null when absent. The hard-coded guest token expires, this one is current.
     /// </summary>
     public static string? ParseAuth(string html)
     {
         var m = AuthPattern.Match(html);
-        return m.Success ? Uri.EscapeDataString(Uri.UnescapeDataString(m.Groups[1].Value)) : null;
+        return m.Success ? Uri.EscapeDataString(Uri.UnescapeDataString(System.Net.WebUtility.HtmlDecode(m.Groups[1].Value))) : null;
+    }
+
+    /// <summary>The player XHR endpoint the page uses (<c>_Storage.XHRService = '//shinden.pl/xhr'</c>) as an absolute URL, or null.</summary>
+    public static string? ParseXhrService(string html, string baseUrl)
+    {
+        var m = XhrPattern.Match(html);
+        if (!m.Success) return null;
+        var v = m.Groups[1].Value.TrimEnd('/');
+        if (v.StartsWith("//", StringComparison.Ordinal)) return new Uri(baseUrl).Scheme + ":" + v;
+        if (v.StartsWith('/')) return baseUrl.TrimEnd('/') + v;
+        return v;
     }
 }
