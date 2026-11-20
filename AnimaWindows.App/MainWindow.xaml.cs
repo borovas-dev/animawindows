@@ -226,6 +226,8 @@ public sealed partial class MainWindow : Window
     /// The title bar places its content between the title and the caption buttons; shift the box (render transform only,
     /// no relayout) so it sits on the window's centre line, as long as it does not run into the title or the buttons.
     /// </summary>
+    private bool _treeLogged;
+
     private void CenterSearchBox()
     {
         if (GlobalSearch.Visibility != Visibility.Visible || GlobalSearch.ActualWidth <= 0 || RootGrid.ActualWidth <= 0)
@@ -241,6 +243,22 @@ public sealed partial class MainWindow : Window
         }
 
         var left = GlobalSearch.TransformToVisual(RootGrid).TransformPoint(default).X - shift.X;
+
+        if (!_treeLogged && RootGrid.ActualWidth > 0)
+        {
+            _treeLogged = true;
+            DependencyObject? n = GlobalSearch;
+            for (var i = 0; i < 8 && n is not null; i++)
+            {
+                if (n is FrameworkElement f)
+                {
+                    var x = f.TransformToVisual(RootGrid).TransformPoint(default).X;
+                    AnimaWindows.App.Services.AppLog.Write($"tree[{i}] {f.GetType().Name} name={f.Name} x={x:0} w={f.ActualWidth:0} ha={f.HorizontalAlignment} root={RootGrid.ActualWidth:0}");
+                }
+
+                n = Microsoft.UI.Xaml.Media.VisualTreeHelper.GetParent(n);
+            }
+        }
 
         // The title bar clips its content to the slot between the title and the caption buttons: never be wider than
         // that slot, and never move outside it, or the box gets cut off ("rch anime" in narrow windows).
