@@ -256,8 +256,8 @@ public sealed partial class MainWindow : Window
             }
 
             var centred = (RootGrid.ActualWidth - GlobalSearch.ActualWidth) / 2;
-            var target = Math.Clamp(centred, slotLeft + 4, Math.Max(slotLeft + 4, slotRight - GlobalSearch.ActualWidth - 4));
-            var move = Math.Round(target - left);
+            var slotTarget = Math.Clamp(centred, slotLeft + 4, Math.Max(slotLeft + 4, slotRight - GlobalSearch.ActualWidth - 4));
+            var move = Math.Round(slotTarget - left);
             if (Math.Abs(move - shift.X) >= 1)
             {
                 shift.X = move;
