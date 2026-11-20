@@ -71,6 +71,15 @@ public sealed partial class PlayerPage : Page
 
     public PlayerViewModel ViewModel { get; }
 
+    /// <summary>The bar sits in the title-bar area: keep the source label clear of the window's caption buttons.</summary>
+    private void OnControlsTopSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        var chrome = AppServices.Get<ShellChrome>();
+        var scale = XamlRoot?.RasterizationScale ?? 1;
+        var inset = chrome.IsAttached ? chrome.AppWindow.TitleBar.RightInset / scale : 0;
+        ControlsTopBar.Padding = new Thickness(12, 8, 12 + inset, 8);
+    }
+
     // ---- navigation / lifetime ----
 
     protected override void OnNavigatedTo(NavigationEventArgs e)

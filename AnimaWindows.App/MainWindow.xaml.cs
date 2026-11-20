@@ -215,7 +215,11 @@ public sealed partial class MainWindow : Window
     /// <summary>Search box takes about a third of the window, within Fluent's 320-560 px range for a title-bar search.</summary>
     private void SizeSearchBox(double windowWidth)
     {
-        GlobalSearch.Width = Math.Clamp(windowWidth * 0.36, 200, 560);
+        // CenterSearchBox refines this to the title bar's content slot once it is laid out.
+        if (double.IsNaN(GlobalSearch.Width))
+        {
+            GlobalSearch.Width = Math.Clamp(windowWidth * 0.36, 200, 560);
+        }
     }
 
     /// <summary>
@@ -237,6 +241,31 @@ public sealed partial class MainWindow : Window
         }
 
         var left = GlobalSearch.TransformToVisual(RootGrid).TransformPoint(default).X - shift.X;
+
+        // The title bar clips its content to the slot between the title and the caption buttons: never be wider than
+        // that slot, and never move outside it, or the box gets cut off ("rch anime" in narrow windows).
+        if (Microsoft.UI.Xaml.Media.VisualTreeHelper.GetParent(GlobalSearch) is FrameworkElement slot && slot.ActualWidth > 0)
+        {
+            var slotLeft = slot.TransformToVisual(RootGrid).TransformPoint(default).X;
+            var slotRight = slotLeft + slot.ActualWidth;
+            var fit = Math.Max(120, Math.Min(Math.Clamp(RootGrid.ActualWidth * 0.36, 200, 560), slot.ActualWidth - 8));
+            if (fit > 0 && Math.Abs(GlobalSearch.Width - fit) >= 1)
+            {
+                GlobalSearch.Width = fit; // relayout; SizeChanged brings us back here
+                return;
+            }
+
+            var centred = (RootGrid.ActualWidth - GlobalSearch.ActualWidth) / 2;
+            var target = Math.Clamp(centred, slotLeft + 4, Math.Max(slotLeft + 4, slotRight - GlobalSearch.ActualWidth - 4));
+            var move = Math.Round(target - left);
+            if (Math.Abs(move - shift.X) >= 1)
+            {
+                shift.X = move;
+            }
+
+            return;
+        }
+
         const double TitleAreaWidth = 200; // icon, pane toggle and "animawindows"
         var wanted = (RootGrid.ActualWidth - GlobalSearch.ActualWidth) / 2;
         var rightLimit = RootGrid.ActualWidth - AppWindow.TitleBar.RightInset / (RootGrid.XamlRoot?.RasterizationScale ?? 1) - GlobalSearch.ActualWidth - 8;

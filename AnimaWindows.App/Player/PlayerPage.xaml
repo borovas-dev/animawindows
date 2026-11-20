@@ -137,9 +137,9 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Grid x:Name="ControlsTop" Grid.Row="0" PointerEntered="OnControlsPointerEntered" PointerExited="OnControlsPointerExited">
+                <Grid x:Name="ControlsTop" Grid.Row="0" PointerEntered="OnControlsPointerEntered" PointerExited="OnControlsPointerExited" SizeChanged="OnControlsTopSizeChanged">
                     <Rectangle Fill="{ThemeResource SolidBackgroundFillColorBaseBrush}" Opacity="0.7" />
-                    <Grid Padding="12,8" ColumnSpacing="8">
+                    <Grid x:Name="ControlsTopBar" Padding="12,8" ColumnSpacing="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />

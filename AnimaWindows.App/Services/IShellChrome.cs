@@ -99,7 +99,14 @@ public sealed class ShellChrome : IShellChrome
 
         var overlay = CompactOverlayPresenter.Create();
         overlay.InitialSize = CompactOverlaySize.Large;
+        _appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Standard;
         _appWindow.SetPresenter(overlay);
+
+        // "Large" is still only about 500 px wide; ask for a third of the screen at 16:9 (Windows may cap it).
+        var work = DisplayArea.GetFromWindowId(_appWindow.Id, DisplayAreaFallback.Nearest).WorkArea;
+        var width = Math.Max(_appWindow.Size.Width, work.Width / 3);
+        var height = width * 9 / 16 + (_appWindow.Size.Height - _appWindow.ClientSize.Height) + _appWindow.TitleBar.Height;
+        _appWindow.Resize(new Windows.Graphics.SizeInt32(width, height));
     }
 
     public void ExitCompactOverlay()
@@ -110,6 +117,7 @@ public sealed class ShellChrome : IShellChrome
         }
 
         _appWindow.SetPresenter(AppWindowPresenterKind.Default);
+        _appWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
         if (_boundsBeforeOverlay is { } bounds)
         {
             _appWindow.MoveAndResize(bounds);
