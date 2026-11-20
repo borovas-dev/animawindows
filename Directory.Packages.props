@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Platform-free libraries -->
-    <PackageVersion Include="AngleSharp" Version="1.10.4" />
+    <PackageVersion Include="AngleSharp" Version="1.10.5" />
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="11.0.0" />
     <!-- WinUI app -->
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.7.0" />
