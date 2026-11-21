@@ -8,7 +8,7 @@
     <PackageVersion Include="Microsoft.Data.Sqlite" Version="11.0.0" />
     <!-- WinUI app -->
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="2.7.0" />
-    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.4314.35" />
+    <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.4370.26" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.3.260402-preview2" />
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.3.260402-preview2" />
