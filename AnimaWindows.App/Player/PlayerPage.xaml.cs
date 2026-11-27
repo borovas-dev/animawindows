@@ -71,6 +71,20 @@ public sealed partial class PlayerPage : Page
 
     public PlayerViewModel ViewModel { get; }
 
+    /// <summary>
+    /// Picture-in-picture is a few hundred pixels wide: keep only seek, play/pause and the button that returns to the full
+    /// player. The top bar goes too; the window's own caption strip carries the close button.
+    /// </summary>
+    private void ApplyCompactLayout(bool compact)
+    {
+        var full = compact ? Visibility.Collapsed : Visibility.Visible;
+        ControlsTop.Visibility = full;
+        foreach (var element in new FrameworkElement[] { PreviousButton, NextButton, MuteButton, VolumeSlider, SpeedButton, SubtitlesButton, QualityButton, EngineButton, FullscreenButton })
+        {
+            element.Visibility = full;
+        }
+    }
+
     /// <summary>The bar sits in the title-bar area: keep the source label clear of the window's caption buttons.</summary>
     private void OnControlsTopSizeChanged(object sender, SizeChangedEventArgs e)
     {
@@ -133,6 +147,9 @@ public sealed partial class PlayerPage : Page
     {
         switch (e.PropertyName)
         {
+            case nameof(PlayerViewModel.IsCompactOverlay):
+                ApplyCompactLayout(ViewModel.IsCompactOverlay);
+                break;
             case nameof(PlayerViewModel.PositionSeconds):
                 if (!_scrubbing)
                 {

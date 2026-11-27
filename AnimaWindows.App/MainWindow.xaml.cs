@@ -126,8 +126,10 @@ public sealed partial class MainWindow : Window
     {
         var immersive = _chrome.IsImmersive;
         var overlay = _chrome.IsCompactOverlay;
-        var hideTitleBar = !overlay && (immersive || _chrome.IsFullScreen);
+        // In picture-in-picture the window is small: no app title bar, only the system caption strip (drag + close).
+        var hideTitleBar = overlay || immersive || _chrome.IsFullScreen;
         AppTitleBar.Visibility = hideTitleBar ? Visibility.Collapsed : Visibility.Visible;
+        SetTitleBar(overlay ? null : AppTitleBar);
         GlobalSearch.Visibility = overlay || immersive ? Visibility.Collapsed : Visibility.Visible;
         AppTitleBar.IsPaneToggleButtonVisible = !overlay && !immersive;
         AppTitleBar.IsBackButtonVisible = !overlay && !immersive && ContentFrame.CanGoBack;
