@@ -267,7 +267,10 @@ public sealed partial class MainWindow : Window
         {
             var slotLeft = slot.TransformToVisual(RootGrid).TransformPoint(default).X;
             var slotRight = slotLeft + slot.ActualWidth;
-            var fit = Math.Max(120, Math.Min(Math.Clamp(RootGrid.ActualWidth * 0.36, 200, 560), slot.ActualWidth - 8));
+            var wantedWidth = Math.Clamp(RootGrid.ActualWidth * 0.36, 200, 560);
+            var centre = RootGrid.ActualWidth / 2;
+            var centredRoom = 2 * Math.Min(centre - slotLeft, slotRight - centre) - 8; // widest box that can sit on the centre line
+            var fit = Math.Max(120, centredRoom >= 200 ? Math.Min(wantedWidth, centredRoom) : Math.Min(wantedWidth, slot.ActualWidth - 8));
             if (fit > 0 && Math.Abs(GlobalSearch.Width - fit) >= 1)
             {
                 GlobalSearch.Width = fit; // relayout; SizeChanged brings us back here
@@ -363,6 +366,7 @@ public sealed partial class MainWindow : Window
             args.Handled = true;
         };
         RootGrid.KeyboardAccelerators.Add(accelerator);
+        RootGrid.KeyboardAcceleratorPlacementMode = KeyboardAcceleratorPlacementMode.Hidden; // no "Ctrl+F" tooltip over the whole window
     }
 
     private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
