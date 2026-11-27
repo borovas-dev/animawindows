@@ -68,7 +68,7 @@
                 AutomationProperties.AutomationId="SearchResultsGrid"
                 IsItemInvokedEnabled="True"
                 ItemInvoked="OnResultInvoked"
-                ItemsSource="{x:Bind ViewModel.Results}"
+                ItemsSource="{x:Bind ViewModel.Results, Mode=OneWay}"
                 SelectionMode="None"
                 Visibility="{x:Bind conv:Fx.Visible(ViewModel.HasResults), Mode=OneWay}">
                 <ItemsView.Layout>

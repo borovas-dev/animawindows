@@ -61,6 +61,7 @@ public sealed partial class SearchViewModel : ObservableObject
         _solver = solver;
         _dispatcher = dispatcher;
         _navigation = navigation;
+        Results = [];
         _syncingMode = true;
         ModeIndex = settings.Current.Mode == TranslationMode.Dub ? 1 : 0;
         _syncingMode = false;
@@ -73,7 +74,12 @@ public sealed partial class SearchViewModel : ObservableObject
         Recents.CollectionChanged += (_, _) => OnPropertyChanged(nameof(HasRecents));
     }
 
-    public ObservableCollection<Anime> Results { get; } = [];
+    /// <summary>
+    /// Replaced as a whole, never edited in place: changing the list an ItemsView shows while it is mid-update (e.g. from
+    /// the Sub/Dub toggle's own change notification) made WinUI's ItemsView crash with an access violation.
+    /// </summary>
+    [ObservableProperty]
+    public partial IReadOnlyList<Anime> Results { get; set; }
 
     public ObservableCollection<string> Recents { get; } = [];
 
@@ -116,7 +122,9 @@ public sealed partial class SearchViewModel : ObservableObject
         _ = _settings.UpdateAsync(s => s with { Mode = mode });
         if (!string.IsNullOrWhiteSpace(Query) && State != SearchState.Idle)
         {
-            _ = RunSearchAsync(Query.Trim());
+            // Not from inside the toggle's change notification: let the binding update finish first.
+            var q = Query.Trim();
+            _dispatcher.TryEnqueue(() => _ = RunSearchAsync(q));
         }
     }
 
@@ -174,7 +182,7 @@ public sealed partial class SearchViewModel : ObservableObject
         var cts = _cts = new CancellationTokenSource();
         var ct = cts.Token;
         State = SearchState.Loading;
-        Results.Clear();
+        Results = [];
         try
         {
             var settings = _settings.Current;
@@ -191,15 +199,7 @@ public sealed partial class SearchViewModel : ObservableObject
                 return;
             }
 
-            foreach (var anime in found)
-            {
-                if (mode == TranslationMode.Dub && !IsDubVisible(anime))
-                {
-                    continue;
-                }
-
-                Results.Add(anime);
-            }
+            Results = mode == TranslationMode.Dub ? found.Where(IsDubVisible).ToList() : found.ToList();
 
             State = SearchState.Success;
             RaiseDerived();
