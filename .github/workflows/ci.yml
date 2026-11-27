@@ -46,9 +46,11 @@ jobs:
         run: |
           $arch = if ('${{ matrix.platform }}' -eq 'ARM64') { 'aarch64' } else { 'x86_64' }
           $rid  = if ('${{ matrix.platform }}' -eq 'ARM64') { 'win-arm64' } else { 'win-x64' }
-          $rel  = Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:GH_TOKEN" } https://api.github.com/repos/zhongfly/mpv-winbuild/releases/latest
-          $asset = $rel.assets | Where-Object { $_.name -like "mpv-dev-lgpl-$arch-2*.7z" } | Select-Object -First 1
-          if (-not $asset) { throw "No mpv-dev-lgpl-$arch asset in $($rel.tag_name)" }
+          # Daily releases sometimes ship without one architecture: take the newest that has ours.
+          $rels = Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:GH_TOKEN" } "https://api.github.com/repos/zhongfly/mpv-winbuild/releases?per_page=10"
+          $rel = $null; $asset = $null
+          foreach ($r in $rels) { $asset = $r.assets | Where-Object { $_.name -like "mpv-dev-lgpl-$arch-2*.7z" } | Select-Object -First 1; if ($asset) { $rel = $r; break } }
+          if (-not $asset) { throw "No mpv-dev-lgpl-$arch asset in the last 10 releases" }
           Write-Host "Using $($asset.name) from $($rel.tag_name)"
           Invoke-WebRequest $asset.browser_download_url -OutFile mpv-dev.7z
           7z x mpv-dev.7z -ompv-dev -y | Out-Null
@@ -154,9 +156,11 @@ jobs:
         run: |
           $arch = if ('${{ matrix.platform }}' -eq 'ARM64') { 'aarch64' } else { 'x86_64' }
           $rid  = if ('${{ matrix.platform }}' -eq 'ARM64') { 'win-arm64' } else { 'win-x64' }
-          $rel  = Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:GH_TOKEN" } https://api.github.com/repos/zhongfly/mpv-winbuild/releases/latest
-          $asset = $rel.assets | Where-Object { $_.name -like "mpv-dev-lgpl-$arch-2*.7z" } | Select-Object -First 1
-          if (-not $asset) { throw "No mpv-dev-lgpl-$arch asset in $($rel.tag_name)" }
+          # Daily releases sometimes ship without one architecture: take the newest that has ours.
+          $rels = Invoke-RestMethod -Headers @{ Authorization = "Bearer $env:GH_TOKEN" } "https://api.github.com/repos/zhongfly/mpv-winbuild/releases?per_page=10"
+          $rel = $null; $asset = $null
+          foreach ($r in $rels) { $asset = $r.assets | Where-Object { $_.name -like "mpv-dev-lgpl-$arch-2*.7z" } | Select-Object -First 1; if ($asset) { $rel = $r; break } }
+          if (-not $asset) { throw "No mpv-dev-lgpl-$arch asset in the last 10 releases" }
           Invoke-WebRequest $asset.browser_download_url -OutFile mpv-dev.7z
           7z x mpv-dev.7z -ompv-dev -y | Out-Null
           $dll = Get-ChildItem mpv-dev -Recurse -Filter libmpv-2.dll | Select-Object -First 1
