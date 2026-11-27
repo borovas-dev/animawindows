@@ -387,11 +387,25 @@ public sealed class MpvEngine : IPlaybackEngine, IEmbeddedUiEngine
 
     // ---- event loop (background thread) ----
 
+    private bool _destroyOnExit;
+
     private void EventLoop()
     {
         var api = _api;
         var ctx = _ctx;
         if (api is null) return;
+        try
+        {
+            RunEventLoop(api, ctx);
+        }
+        finally
+        {
+            if (Volatile.Read(ref _destroyOnExit)) api.TerminateDestroy(ctx);
+        }
+    }
+
+    private void RunEventLoop(MpvApi api, nint ctx)
+    {
         while (!_disposed)
         {
             nint ev;
@@ -557,22 +571,26 @@ public sealed class MpvEngine : IPlaybackEngine, IEmbeddedUiEngine
 
         if (ctx != nint.Zero && api is not null)
         {
+            lock (_gate)
+            {
+                _ctx = nint.Zero; // Command/SetProperty stop touching the handle from here on
+            }
+
+            var exited = true;
             try
             {
                 api.Wakeup(ctx);
-                _thread?.Join(TimeSpan.FromSeconds(2));
+                exited = _thread?.Join(TimeSpan.FromSeconds(2)) ?? true;
             }
             catch (Exception)
             {
                 // Best effort: the library is being torn down anyway.
             }
 
-            lock (_gate)
-            {
-                _ctx = nint.Zero;
-            }
-
-            api.TerminateDestroy(ctx);
+            // mpv_terminate_destroy must not run while another thread is inside mpv_wait_event on the same handle
+            // (use-after-free). If the event thread is still busy, it destroys the handle itself when it leaves.
+            if (exited) api.TerminateDestroy(ctx);
+            else Volatile.Write(ref _destroyOnExit, true);
         }
 
         if (_child != nint.Zero)
